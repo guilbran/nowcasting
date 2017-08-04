@@ -1,9 +1,9 @@
 Package: nowcasting
 Type: Package
 Title: What the package does (short line)
-Version: 1.0
+Version: 0.0.73
 Date: 2017-08-04
 Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
