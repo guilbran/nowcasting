@@ -1,3 +1,6 @@
+#' @title Balanced pannel
+#' @description Create a balanced pannel for data. Select variables, and transform time series to its stationary representation
+
 arrumarVintage <- function(base = NULL, legenda = NULL){
   
   # base: data.frame da base de dados lida .csv
