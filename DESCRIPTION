@@ -1,9 +1,9 @@
 Package: nowcasting
 Type: Package
-Title: What the package does (short line): This package provides tools for performe nowcasting annalysis.
+Title: What the package does (short line): This package provides tools to performe nowcasting annalysis.
 Version: 0.0.73
 Date: 2017-08-04
 Author: Daiane Mattos <daiane.mattos@fgv.br> and Guilherme Branco <guilherme.branco@fgv.br>
 Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License: 3.4.1
