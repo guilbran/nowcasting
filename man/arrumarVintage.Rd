@@ -10,8 +10,14 @@ arrumarVintage(base = NULL, legenda = NULL)
 \item{base.}{\code{data.frame} da base de dados que representa a vintage de interesse. Na primeira coluna um vetor de datas e nas demais colunas as variáveis que compõe o vetor.}
 
 \item{legenda.}{\code{data.frame} contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
-o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf}.}
+o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf} seguindo a especificação:
+#' Transformação 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
+#' Transformação 2 \deqn{latex2}{X_t - X_{t-1}} 
+#' Transformação 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 }
 \description{
-Create a balanced pannel for data. Select variables, and transform time series to its stationary representation
+Essa função transforma as séries temporais brutas em séries temporais estacionárias de acordo
+com a especificação entregue pelo usuário. Em seguida as variáveis mensais são agrupadas para representarem quantidades trimestrais.
+Na sequência as séries que contenham ao menos 1/3 de \code{NA} são excluídas.
+Por fim os missings e outliers são corrigidos com a função \code{outliers_correction}
 }

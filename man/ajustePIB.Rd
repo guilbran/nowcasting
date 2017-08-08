@@ -7,5 +7,5 @@
 ajustePIB(x)
 }
 \description{
-DGP seasonal ajustment, set as SARIMA\(0,1,1\)\(0,1,1\)
+GDP seasonal ajustment. We use the univariate model SARIMA\(0,1,1\)\(0,1,1\) to specify the index variable
 }
