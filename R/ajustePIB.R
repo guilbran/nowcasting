@@ -1,5 +1,6 @@
 #' @title  Seasonal ajustment
 #' @description DGP seasonal ajustment, set as SARIMA\(0,1,1\)\(0,1,1\) 
+#' @importFrom seasonal seas
 
 # Função que faz o ajuste sazonal do PIB
 

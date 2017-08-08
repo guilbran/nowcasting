@@ -1,3 +1,16 @@
+#' @param xsmooth_future
+#' @param Vsmooth_future
+#' @param xfilt
+#' @param Vfilt
+#' @param Vfilt_future
+#' @param VVfilt_future
+#' @param A
+#' @param Q
+#' @param B
+#' @param u
+#' @import matlab
+
+
 smooth_update <- function(xsmooth_future, Vsmooth_future, xfilt, Vfilt,  Vfilt_future, VVfilt_future, A, Q, B, u){
   
   # xsmooth_future = xsmooth[,t+1]

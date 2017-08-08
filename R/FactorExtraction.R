@@ -1,3 +1,18 @@
+#' @param x
+#' @param q
+#' @param r
+#' @param p
+#' @param A
+#' @param C
+#' @param Q
+#' @param R
+#' @param initx
+#' @param initV
+#' @param ss
+#' @param MM
+#' @param n.prevs
+
+
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 
                              A = NULL,C = NULL,Q = NULL,R = NULL,
                              initx = NULL, initV = NULL,

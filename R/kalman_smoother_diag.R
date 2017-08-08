@@ -1,3 +1,13 @@
+#' @param y
+#' @param A
+#' @param C
+#' @param Q
+#' @param R
+#' @param init_x
+#' @param init_V
+#' @param varagin
+#' @import matlab
+
 kalman_smoother_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   
   # y = t(xx);

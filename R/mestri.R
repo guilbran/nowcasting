@@ -1,3 +1,5 @@
+#' @param x
+
 # função que pega uma série mensal e transforma em trimestral selecionando o 
 # último mês de cada trimestre como o valor do trimestre
 

@@ -1,3 +1,8 @@
+#' @param x
+#' @param q
+#' @param r
+#' @param p
+#' @import matlab
 
 # Função para estimar os parâmetros do modelo de fator dinâmico via PCA
 

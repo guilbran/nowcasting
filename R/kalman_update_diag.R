@@ -1,3 +1,13 @@
+#' @param A
+#' @param C
+#' @param Q
+#' @param R
+#' @param y
+#' @param x
+#' @param V
+#' @param varagin
+#' @import matlab
+
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){
   
   # A = A[,,m]

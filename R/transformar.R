@@ -1,3 +1,5 @@
+#' @param series
+
 transformar <- function(series){#, transf){ #, remove.outlier = T, medias_moveis = F, reducao = F){
   
   # ajuste <- function(x){ 

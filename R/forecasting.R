@@ -1,3 +1,6 @@
+#' @param y
+#' @param x
+
 
 forecasting <- function(y,x){
   

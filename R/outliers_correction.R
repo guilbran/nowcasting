@@ -1,3 +1,7 @@
+#' @param x
+#' @param k_ma
+#' @import matlab
+
 outliers_correction <- function(x, k_ma = 3){
   # x é um série temporal
   

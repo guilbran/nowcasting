@@ -2,8 +2,13 @@ Package: nowcasting
 Type: Package
 Title: What the package does (short line): This package provides tools to performe nowcasting annalysis.
 Version: 0.0.73
+Depends: R (>= 3.4.0)
 Date: 2017-08-04
 Author: Daiane Mattos <daiane.mattos@fgv.br> and Guilherme Branco <guilherme.branco@fgv.br>
 Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
 Description: More about what it does (maybe more than one line)
-License: 3.4.1
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
+NeedsCompilation: no

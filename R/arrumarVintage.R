@@ -1,5 +1,9 @@
 #' @title Balanced pannel
 #' @description Create a balanced pannel for data. Select variables, and transform time series to its stationary representation
+#' @param base. The vintage
+#' @param legenda. The  legends
+#' @importFrom zoo as.Date
+#' 
 
 arrumarVintage <- function(base = NULL, legenda = NULL){
   
