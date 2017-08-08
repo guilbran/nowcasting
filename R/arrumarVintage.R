@@ -2,7 +2,8 @@
 #' @description Create a balanced pannel for data. Select variables, and transform time series to its stationary representation
 #' @param base. \code{data.frame} da base de dados que representa a vintage de interesse. Na primeira coluna um vetor de datas e nas demais colunas as variáveis que compõe o vetor.
 #' @param legenda. \code{data.frame} contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
-#' o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf}.
+#' o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf} seguindo a especificação:
+#' #' Transformação 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
 #' @import zoo
 #' @import stats
 
