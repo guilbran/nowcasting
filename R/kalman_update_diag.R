@@ -1,11 +1,13 @@
-#' @param A
-#' @param C
-#' @param Q
-#' @param R
-#' @param y
-#' @param x
-#' @param V
-#' @param varagin
+#' @title Kalman update diagonal
+#' @description Kalman update diagonal
+#' @param A. none
+#' @param C. none
+#' @param Q. none
+#' @param R. none
+#' @param y. none
+#' @param x. none
+#' @param V. none
+#' @param varagin. none
 #' @import matlab
 
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){

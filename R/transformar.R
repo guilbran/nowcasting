@@ -1,4 +1,6 @@
-#' @param series
+#' @title Transforms
+#' @description This function transforms the series to induce stationarity.
+#' @param series. none
 
 transformar <- function(series){#, transf){ #, remove.outlier = T, medias_moveis = F, reducao = F){
   

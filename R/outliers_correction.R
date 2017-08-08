@@ -1,5 +1,7 @@
-#' @param x
-#' @param k_ma
+#' @title Outliers Correction
+#' @description It corrects outliers
+#' @param x. none
+#' @param k_ma. none
 #' @import matlab
 
 outliers_correction <- function(x, k_ma = 3){

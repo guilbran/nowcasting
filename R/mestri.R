@@ -1,4 +1,6 @@
-#' @param x
+#' @title Mês para trimestre
+#' @description It transforsms a monthly time series in a quarterly.
+#' @param x. none
 
 # função que pega uma série mensal e transforma em trimestral selecionando o 
 # último mês de cada trimestre como o valor do trimestre

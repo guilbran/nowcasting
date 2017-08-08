@@ -1,16 +1,18 @@
-#' @param x
-#' @param q
-#' @param r
-#' @param p
-#' @param A
-#' @param C
-#' @param Q
-#' @param R
-#' @param initx
-#' @param initV
-#' @param ss
-#' @param MM
-#' @param n.prevs
+#' @title Factor Extraction
+#' @description Extract factors from a data set of time series.
+#' @param x. none
+#' @param q. none
+#' @param r. none
+#' @param p. none
+#' @param A. none
+#' @param C. none
+#' @param Q. none
+#' @param R. none
+#' @param initx. none
+#' @param initV. none
+#' @param ss. none
+#' @param MM. none
+#' @param n.prevs. none
 
 
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 

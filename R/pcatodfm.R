@@ -1,7 +1,9 @@
-#' @param x
-#' @param q
-#' @param r
-#' @param p
+#' @title Principal Components to Dynamic Factor Model
+#' @description This function estimates the first stage in Giannone et al. \(2008\) model.
+#' @param x. none
+#' @param q. none
+#' @param r. none
+#' @param p. none
 #' @import matlab
 
 # Função para estimar os parâmetros do modelo de fator dinâmico via PCA

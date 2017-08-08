@@ -1,11 +1,13 @@
-#' @param y
-#' @param A
-#' @param C
-#' @param Q
-#' @param R
-#' @param init_x
-#' @param init_V
-#' @param varagin
+#' @title Kalman Filter Diagonal
+#' @description Kalman Filter Diagonal
+#' @param y. none
+#' @param A. none
+#' @param C. none
+#' @param Q. none
+#' @param R. none
+#' @param init_x. none
+#' @param init_V. none
+#' @param varagin. none
 
 kalman_filter_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   

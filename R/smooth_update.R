@@ -1,13 +1,15 @@
-#' @param xsmooth_future
-#' @param Vsmooth_future
-#' @param xfilt
-#' @param Vfilt
-#' @param Vfilt_future
-#' @param VVfilt_future
-#' @param A
-#' @param Q
-#' @param B
-#' @param u
+#' @title Smooth update
+#' @description Smoothe update
+#' @param xsmooth_future. none
+#' @param Vsmooth_future. none
+#' @param xfilt. none
+#' @param Vfilt. none
+#' @param Vfilt_future. none
+#' @param VVfilt_future. none
+#' @param A. none
+#' @param Q. none
+#' @param B. none
+#' @param u. none
 #' @import matlab
 
 
