@@ -7,10 +7,10 @@
 arrumarVintage(base = NULL, legenda = NULL)
 }
 \arguments{
-\item{base.}{data.frame da base de dados que representa a vintage de interesse. Na primeira coluna um vetor de datas e nas demais colunas as variáveis que compõe o vetor.}
+\item{base.}{\code{data.frame} da base de dados que representa a vintage de interesse. Na primeira coluna um vetor de datas e nas demais colunas as variáveis que compõe o vetor.}
 
-\item{legenda.}{data.frame contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
-o mesmo do data.frame base utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \texttt{transf}.}
+\item{legenda.}{\code{data.frame} contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
+o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf}.}
 }
 \description{
 Create a balanced pannel for data. Select variables, and transform time series to its stationary representation
