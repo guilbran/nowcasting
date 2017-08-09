@@ -13,7 +13,7 @@ base_extraction(series_code)
 A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 }
 \description{
-Crio uma matriz de series temporais \code{mts} utilizadas para calcular o fator comum.
+Create a time series matrix \code{mts} used to estimate the commmon factors.
 }
 \seealso{
 \code{\link[BETS]{BETS.get}}

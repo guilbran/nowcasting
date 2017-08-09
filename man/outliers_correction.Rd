@@ -7,11 +7,12 @@
 outliers_correction(x, k_ma = 3)
 }
 \arguments{
-\item{x.}{Um objeto \code{ts} que se deseja aplicar a transformação de substituição de outliers e missings.}
+\item{x.}{A \code{ts} to be adjusted.}
 
-\item{k_ma.}{Ordem da média móvel utilizada para substituição das variáveis}
+\item{k_ma.}{Moving average order.}
 }
 \description{
-Essa função opera em dois estágios. Inicialmente substitui os missings e outliers pela mediana da série.
-Os outliers são definidos como as observações que distão da mediana mais de 4 vezes o IQR. No segundo estágio é feita uma média móvel de ordem \code{k_ma}, os valores iniciais de missings e outliers são substituídos pelo resultado dessa média móvel.
+This function operates in two stages. First, it substitutes missings and outliers for the median
+Outliers are definited as observations that its distance from median is more than 4 times the IQR (Interquartile Range).
+Second, a \code{k_ma} moving average is filtered in each serie, and its values are used to replace outliers and missings in the original data set.
 }

@@ -8,26 +8,26 @@ smooth_update(xsmooth_future, Vsmooth_future, xfilt, Vfilt, Vfilt_future,
   VVfilt_future, A, Q, B, u)
 }
 \arguments{
-\item{xsmooth_future.}{none}
+\item{xsmooth_future.}{xxx}
 
-\item{Vsmooth_future.}{none}
+\item{Vsmooth_future.}{xxx}
 
-\item{xfilt.}{none}
+\item{xfilt.}{xxx}
 
-\item{Vfilt.}{none}
+\item{Vfilt.}{xxx}
 
-\item{Vfilt_future.}{none}
+\item{Vfilt_future.}{xxx}
 
-\item{VVfilt_future.}{none}
+\item{VVfilt_future.}{xxx}
 
-\item{A.}{none}
+\item{A.}{Matrix that update factors with VAR}
 
-\item{Q.}{none}
+\item{Q.}{Error variance in factor update.}
 
-\item{B.}{none}
+\item{B.}{xxx}
 
-\item{u.}{none}
+\item{u.}{xxx}
 }
 \description{
-Smoothe update
+Smooth update
 }

@@ -1,13 +1,11 @@
 #' @title Principal Components to Dynamic Factor Model
-#' @description This function estimates the first stage in Giannone et al. (2008) model.
-#' @param x. base de dados em formato ts
-#' @param q. o número de choques nos fatores
-#' @param r. a quantidade de fatores
-#' @param p. o grau do polinômio autorregressivo
+#' @description Estimates the first stage for dynamic factors on \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676}.
+#' @param x. The \code{ts} used to extract the dynamic factors. 
+#' @param q. Number of shocks in factors.
+#' @param r. Number of factors.
+#' @param p. Degree of autoregressive polynomial
 #' @import matlab
 #' @import corpcor
-
-# Função para estimar os parâmetros do modelo de fator dinâmico via PCA
 
 
 pcatodfm <- function(x, q, r, p){

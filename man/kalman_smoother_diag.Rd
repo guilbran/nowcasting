@@ -7,21 +7,21 @@
 kalman_smoother_diag(y, A, C, Q, R, init_x, init_V, varagin)
 }
 \arguments{
-\item{y.}{none}
+\item{y.}{xxx}
 
-\item{A.}{none}
+\item{A.}{Matrix that update factors with VAR}
 
-\item{C.}{none}
+\item{C.}{Matrix that combine factors to explain the transformed data.}
 
-\item{Q.}{none}
+\item{Q.}{Error variance in factor update.}
 
-\item{R.}{none}
+\item{R.}{Error variance in explain data from factors}
 
-\item{init_x.}{none}
+\item{init_x.}{xxx}
 
-\item{init_V.}{none}
+\item{init_V.}{xxx}
 
-\item{varagin.}{none}
+\item{varagin.}{xxx}
 }
 \description{
 Kalman Smoother Diagonal

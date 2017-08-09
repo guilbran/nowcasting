@@ -4,9 +4,12 @@ Title: Tools to performe nowcasting annalysis, and create pseudo Real-Time data 
 Version: 0.0.74
 Depends: R (>= 3.4.0)
 Date: 2017-08-04
-Author: Daiane Mattos <daiane.mattos@fgv.br> and Guilherme Branco <guilherme.branco@fgv.br>
-Maintainer: Guilherme Branco <guilherme.branco@fgv.br>
-Description: More about what it does (maybe more than one line)
+Authors@R: c( person("Daiane", "Mattos", email = "daiane.mattos@fgv.br",role=c("aut")),
+              person("Guilherme","Branco Gomes",email = "guilherme.branco@fgv.br",role=c("aut")),
+              person("Pedro","Costa Ferreira",email = "pedro.guilherme@fgv.br",role=c("aut","cre"))
+              )
+Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
+Description: Methods and tools for nowcasting Brazilian economic time series. It allows: extract information in real time, creating a real time data base; estimate relationship between macroeconomic variables via estimation of dynamic factors; forecast time series in previous periods of reference; forecast time series in the current period of reference (nowcasting); recreate a data base simulating the information avaiable in the past for evaluating nowcasting and forecasting models
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

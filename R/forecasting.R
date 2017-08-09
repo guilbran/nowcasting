@@ -1,7 +1,7 @@
 #' @title Forecasting
-#' @description Faz previsão de variável trimestral a partir de variáveis mensais. Aqui utilizamos os fatores como variáveis mensais.
-#' @param y. Variável de interesse, trimestre
-#' @param x. Variáveis mensais usadas para fazer a previsão
+#' @description Forecast quarterly series from monthly series.
+#' @param y. Dependent variable.
+#' @param x. Independent variable.
 
 
 forecasting <- function(y,x){

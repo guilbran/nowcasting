@@ -7,14 +7,14 @@
 pcatodfm(x, q, r, p)
 }
 \arguments{
-\item{x.}{base de dados em formato ts}
+\item{x.}{The \code{ts} used to extract the dynamic factors.}
 
-\item{q.}{o número de choques nos fatores}
+\item{q.}{Number of shocks in factors.}
 
-\item{r.}{a quantidade de fatores}
+\item{r.}{Number of factors.}
 
-\item{p.}{o grau do polinômio autorregressivo}
+\item{p.}{Degree of autoregressive polynomial}
 }
 \description{
-This function estimates the first stage in Giannone et al. (2008) model.
+Estimates the first stage for dynamic factors on \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676}.
 }

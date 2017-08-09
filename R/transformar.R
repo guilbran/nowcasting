@@ -1,4 +1,4 @@
-#' @title Transforms
+#' @title ????
 #' @description This function transforms the series to induce stationarity.
 #' @param series. none
 

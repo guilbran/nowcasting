@@ -1,12 +1,16 @@
 #' @title Nowcasting of a quarterly time serie using a dynamic factor.
 
-#' @description Essa função calcula uma estimativa para uma variável trimestral (tipicamente o PIB), baseado em um modelo de fatores dinâmicos, seguindo a estimação proposta
-#' em Giannone et al. (2008).
-
+#' @description Estimate nowcasting and foreacasting for a quarterly time serie. The method is based on 
+#' \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 #' @param y. Quarterly time-series 
-#' @param vintage. A time series matrix (mts) representing the vintage of interest.
+#' @param base. A time series matrix (mts) representing the vintage of interest.
 #' @param legenda. \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
-#' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument.
+#' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
+#' The transformation is specified as follow:
+#' # trans 0, the original serie is preserved.
+#' # trans 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
+#' # trans 2 \deqn{latex2}{X_t - X_{t-1}}
+#' # trans 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
 #' @param q. Dynamic rank. Number of error terms. If not specified q = 2.
 #' @param r. Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p. AR order of factors. If not specified p = 1.

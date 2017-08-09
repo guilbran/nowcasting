@@ -1,14 +1,16 @@
 #' @title Balanced pannel
-#' @description Essa função transforma as séries temporais brutas em séries temporais estacionárias de acordo
-#' com a especificação entregue pelo usuário. Em seguida as variáveis mensais são agrupadas para representarem quantidades trimestrais.
-#' Na sequência as séries que contenham ao menos 1/3 de \code{NA} são excluídas.
-#' Por fim os missings e outliers são corrigidos com a função \code{outliers_correction}
-#' @param base. \code{data.frame} da base de dados que representa a vintage de interesse. Na primeira coluna um vetor de datas e nas demais colunas as variáveis que compõe o vetor.
-#' @param legenda. \code{data.frame} contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
-#' o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf} seguindo a especificação:
-#' #' Transformação 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
-#' #' Transformação 2 \deqn{latex2}{X_t - X_{t-1}}
-#' #' Transformação 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
+#' @description This function transforms the original time series to its stationary representation following
+#' the user specification. The monthly variables are agregated to represent quarterly quantities.
+#' The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
+#' In the end the missings and outliers are corrected.
+#' @param base. A time series matrix (mts) representing the vintage of interest.
+#' @param legenda. \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+#' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
+#' The transformation is specified as follow:
+#' # trans 0, the original serie is preserved.
+#' # trans 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
+#' # trans 2 \deqn{latex2}{X_t - X_{t-1}}
+#' # trans 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
 #' @import zoo
 #' @import stats
 

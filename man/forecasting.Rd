@@ -7,10 +7,10 @@
 forecasting(y, x)
 }
 \arguments{
-\item{y.}{Variável de interesse, trimestre}
+\item{y.}{Dependent variable.}
 
-\item{x.}{Variáveis mensais usadas para fazer a previsão}
+\item{x.}{Independent variable.}
 }
 \description{
-Faz previsão de variável trimestral a partir de variáveis mensais. Aqui utilizamos os fatores como variáveis mensais.
+Forecast quarterly series from monthly series.
 }

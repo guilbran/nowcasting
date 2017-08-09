@@ -2,7 +2,7 @@
 % Please edit documentation in R/transformar.R
 \name{transformar}
 \alias{transformar}
-\title{Transforms}
+\title{????}
 \usage{
 transformar(series)
 }

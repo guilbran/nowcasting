@@ -1,13 +1,13 @@
 #' @title Kalman Smoother Diagonal
 #' @description Kalman Smoother Diagonal
-#' @param y. none
-#' @param A. none
-#' @param C. none
-#' @param Q. none
-#' @param R. none
-#' @param init_x. none
-#' @param init_V. none
-#' @param varagin. none
+#' @param y. xxx
+#' @param A. Matrix that update factors with VAR
+#' @param C. Matrix that combine factors to explain the transformed data.
+#' @param Q. Error variance in factor update.
+#' @param R. Error variance in explain data from factors
+#' @param init_x. xxx
+#' @param init_V. xxx
+#' @param varagin. xxx
 #' @import matlab
 
 kalman_smoother_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
