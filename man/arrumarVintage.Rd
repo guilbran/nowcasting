@@ -12,7 +12,7 @@ arrumarVintage(base = NULL, legenda = NULL)
 \item{legenda.}{\code{data.frame} contendo uma legenda de qual a transformação necessária para induzir a estacionaridade. O nome das variáveis deve ser 
 o mesmo do \code{data.frame} utilizado no primeiro argumento. A transformação utilizada deve ser indicada em uma coluna com o nome de \code{transf} seguindo a especificação:
 #' Transformação 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
-#' Transformação 2 \deqn{latex2}{X_t - X_{t-1}} 
+#' Transformação 2 \deqn{latex2}{X_t - X_{t-1}}
 #' Transformação 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 }
 \description{
