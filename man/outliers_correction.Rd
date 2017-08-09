@@ -9,7 +9,7 @@ outliers_correction(x, k_ma = 3)
 \arguments{
 \item{x.}{Um objeto \code{ts} que se deseja aplicar a transformação de substituição de outliers e missings.}
 
-\item{k_ma.}{Ordem da média móvel utilizada para substituição das variávesi}
+\item{k_ma.}{Ordem da média móvel utilizada para substituição das variáveis}
 }
 \description{
 Essa função opera em dois estágios. Inicialmente substitui os missings e outliers pela mediana da série.

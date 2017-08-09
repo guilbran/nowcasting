@@ -20,5 +20,6 @@ nowcasting(y, vintage, legenda, q = 2, r = 2, p = 1)
 \item{p.}{AR order of factors. If not specified p = 1.}
 }
 \description{
-This is a R translation of MATLAB code presented in the following paper: Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.
+Essa função calcula uma estimativa para uma variável trimestral \(tipicamente o PIB\), baseado em um modelo de fatores dinâmicos, seguindo a estimação proposta
+em Giannone et al. \(2008\).
 }

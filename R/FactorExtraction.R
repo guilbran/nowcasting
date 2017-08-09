@@ -1,18 +1,18 @@
 #' @title Factor Extraction
 #' @description Extract factors from a data set of time series.
-#' @param x. none
-#' @param q. none
-#' @param r. none
-#' @param p. none
-#' @param A. none
-#' @param C. none
-#' @param Q. none
-#' @param R. none
-#' @param initx. none
-#' @param initV. none
-#' @param ss. none
-#' @param MM. none
-#' @param n.prevs. none
+#' @param x. Vintage transformada pela função \code{arrumarVintage}
+#' @param q. Dynamic rank. Number of error terms. If not specified q = 2.
+#' @param r. Static rank \(r>=q\), i.e. number of factors. If not specified r = 2.
+#' @param p. AR order of factors. If not specified p = 1.
+#' @param A. Matrix that update factors with VAR
+#' @param C. Matrix that combine factors to explain the transformed data.
+#' @param Q. Error variance in factor update.
+#' @param R. Error variance in explain data from factors
+#' @param initx. Initial condition of factor in Kalman filter estimation.
+#' @param initV. Initial condition of factor variance
+#' @param ss. Standard deviation in transformed data.
+#' @param MM. Mean in transformed data.
+#' @param n.prevs. Number of quarter previsions ahead.
 
 
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 

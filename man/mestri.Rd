@@ -2,12 +2,15 @@
 % Please edit documentation in R/mestri.R
 \name{mestri}
 \alias{mestri}
-\title{Mês para trimestre}
+\title{Month to quarter agregation}
 \usage{
 mestri(x)
 }
 \arguments{
-\item{x.}{none}
+\item{x.}{Variable in month frequency}
+}
+\value{
+The correpondent quarterly transformation or agregation.
 }
 \description{
 It transforsms a monthly time series in a quarterly.

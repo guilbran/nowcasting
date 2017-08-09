@@ -7,13 +7,13 @@
 pcatodfm(x, q, r, p)
 }
 \arguments{
-\item{x.}{none}
+\item{x.}{base de dados em formato ts}
 
-\item{q.}{none}
+\item{q.}{o número de choques nos fatores}
 
-\item{r.}{none}
+\item{r.}{a quantidade de fatores}
 
-\item{p.}{none}
+\item{p.}{o grau do polinômio autorregressivo}
 }
 \description{
 This function estimates the first stage in Giannone et al. \(2008\) model.

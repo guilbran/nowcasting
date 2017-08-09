@@ -9,31 +9,31 @@ FactorExtraction(x = NULL, q = NULL, r = NULL, p = NULL, A = NULL,
   ss = NULL, MM = NULL, n.prevs = NULL)
 }
 \arguments{
-\item{x.}{none}
+\item{x.}{Vintage transformada pela função \code{arrumarVintage}}
 
-\item{q.}{none}
+\item{q.}{Dynamic rank. Number of error terms. If not specified q = 2.}
 
-\item{r.}{none}
+\item{r.}{Static rank \(r>=q\), i.e. number of factors. If not specified r = 2.}
 
-\item{p.}{none}
+\item{p.}{AR order of factors. If not specified p = 1.}
 
-\item{A.}{none}
+\item{A.}{Matrix that update factors with VAR}
 
-\item{C.}{none}
+\item{C.}{Matrix that combine factors to explain the transformed data.}
 
-\item{Q.}{none}
+\item{Q.}{Error variance in factor update.}
 
-\item{R.}{none}
+\item{R.}{Error variance in explain data from factors}
 
-\item{initx.}{none}
+\item{initx.}{Initial condition of factor in Kalman filter estimation.}
 
-\item{initV.}{none}
+\item{initV.}{Initial condition of factor variance}
 
-\item{ss.}{none}
+\item{ss.}{Standard deviation in transformed data.}
 
-\item{MM.}{none}
+\item{MM.}{Mean in transformed data.}
 
-\item{n.prevs.}{none}
+\item{n.prevs.}{Number of quarter previsions ahead.}
 }
 \description{
 Extract factors from a data set of time series.

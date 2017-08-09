@@ -1,6 +1,7 @@
-#' @title Mês para trimestre
+#' @title Month to quarter agregation
 #' @description It transforsms a monthly time series in a quarterly.
-#' @param x. none
+#' @param x. Variable in month frequency
+#' @return The correpondent quarterly transformation or agregation.
 
 # função que pega uma série mensal e transforma em trimestral selecionando o 
 # último mês de cada trimestre como o valor do trimestre
