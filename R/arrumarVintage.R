@@ -12,6 +12,7 @@
 #' @import zoo
 #' @import stats
 
+
 arrumarVintage <- function(base = NULL, legenda = NULL){
   
   # base: data.frame da base de dados lida .csv

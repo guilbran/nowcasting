@@ -2,7 +2,7 @@
 #' @description Extract factors from a data set of time series.
 #' @param x. Vintage transformada pela função \code{arrumarVintage}
 #' @param q. Dynamic rank. Number of error terms. If not specified q = 2.
-#' @param r. Static rank \(r>=q\), i.e. number of factors. If not specified r = 2.
+#' @param r. Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p. AR order of factors. If not specified p = 1.
 #' @param A. Matrix that update factors with VAR
 #' @param C. Matrix that combine factors to explain the transformed data.
@@ -13,6 +13,7 @@
 #' @param ss. Standard deviation in transformed data.
 #' @param MM. Mean in transformed data.
 #' @param n.prevs. Number of quarter previsions ahead.
+
 
 
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mestri.R
 \name{mestri}
 \alias{mestri}
-\title{Month to quarter agregation}
+\title{Monthly to quarterly agregation}
 \usage{
 mestri(x)
 }

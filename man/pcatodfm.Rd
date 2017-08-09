@@ -16,5 +16,5 @@ pcatodfm(x, q, r, p)
 \item{p.}{o grau do polinômio autorregressivo}
 }
 \description{
-This function estimates the first stage in Giannone et al. \(2008\) model.
+This function estimates the first stage in Giannone et al. (2008) model.
 }

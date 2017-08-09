@@ -13,7 +13,7 @@ FactorExtraction(x = NULL, q = NULL, r = NULL, p = NULL, A = NULL,
 
 \item{q.}{Dynamic rank. Number of error terms. If not specified q = 2.}
 
-\item{r.}{Static rank \(r>=q\), i.e. number of factors. If not specified r = 2.}
+\item{r.}{Static rank (r>=q), i.e. number of factors. If not specified r = 2.}
 
 \item{p.}{AR order of factors. If not specified p = 1.}
 

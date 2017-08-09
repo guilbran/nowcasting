@@ -1,10 +1,11 @@
 #' @title Principal Components to Dynamic Factor Model
-#' @description This function estimates the first stage in Giannone et al. \(2008\) model.
+#' @description This function estimates the first stage in Giannone et al. (2008) model.
 #' @param x. base de dados em formato ts
 #' @param q. o número de choques nos fatores
 #' @param r. a quantidade de fatores
 #' @param p. o grau do polinômio autorregressivo
 #' @import matlab
+#' @import corpcor
 
 # Função para estimar os parâmetros do modelo de fator dinâmico via PCA
 
@@ -118,7 +119,7 @@ pcatodfm <- function(x, q, r, p){
     }
     
     initx <- t(Z[1,]) 
-    initV <- reshape(pseudoinverse(eye(size(kronecker(A,A),1))- kronecker(A,A)) %*% matrix(Q, ncol = 1), r*p, r*p)
+    initV <- matlab::reshape(pseudoinverse(eye(size(kronecker(A,A),1))- kronecker(A,A)) %*% matrix(Q, ncol = 1), r*p, r*p)
     
   }else{
     

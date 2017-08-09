@@ -14,13 +14,13 @@ forecasting <- function(y,x){
                                              substr(x[nrow(x),1],6,7))), freq = 12)
   
   fatoresTRI <- mestri(fatoresTS)
-  
+
   retpib <- diff(log(pib),4) # variação trimestre contra mesmo trimestre do ano anterior
   retpib2 <- diff(retpib) # diferença de ordem 1
   
   # estimação do modelo de regressão
   dados <- cbind(retpib2, fatoresTRI)
-  colnames(dados) <- c("Y", paste0("X",1:ncol(fatoresTRI)))
+  colnames(dados) <- c("Y", paste0("X",1:ncol(data.frame(fatoresTRI))))
   reg <- lm(Y ~ ., data = na.omit(data.frame(dados)))
   fit <- ts(fitted(reg), end = end(na.omit(dados)), freq = 4)
   
@@ -28,6 +28,7 @@ forecasting <- function(y,x){
   
   # previsão
   newbase <- data.frame(dados[(Qmax-4):Qmax,-1])
+  colnames(newbase) <- paste0("X",1:ncol(data.frame(fatoresTRI)))
   prev <- ts(predict(object = reg, newdata = newbase), start = start(tail(dados,5)), freq = 4) 
   
   # unir fit e previsão
