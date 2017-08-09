@@ -22,8 +22,8 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   
   # séries, legenda e tranformação
   DATA <- data.frame(base)
-  # dates <- data.frame(data = zoo::as.Date(base))
-  dates<-data.frame(data = zoo::as.Date(base[,1]),'%d/%m/%Y')
+  dates <- data.frame(data = zoo::as.Date(base))
+  # dates<-data.frame(data = zoo::as.Date(base[,1]),'%d/%m/%Y')
   TransfCode <- legenda[,"transf"]
   
   # transformar os dados
