@@ -21,8 +21,22 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   # séries, legenda e tranformação
   DATA <- data.frame(base)
   dates <- data.frame(data = zoo::as.Date(base))
-  TransfCode <- legenda[,"transf"]
   
+  if (is.data.frame(legenda)){
+    if ('name' %in% colnames(legenda) & 'transf' %in% colnames(legenda)){
+      TransfCode <- legenda[,"transf"]
+    } else if (!('name' %in% colnames(legenda))){
+      warning('There is no column called name')
+    }else if (!('transf' %in% colnames(legenda))){
+      warning('There is no column called transf')
+    }else
+      warning('The data.frame must have a column called name and a column called transf')
+  } else if (is.vector(legenda)){
+    legenda<-data.frame(name = colnames(base),transf = legenda)
+    TransfCode <- legenda[,"transf"]
+  } else 
+    warning('legenda must be a vector or a data.fram')
+
   # transformar os dados
   X <- matrix(NA, nrow = nrow(DATA), ncol = ncol(DATA))
   colnames(X) <- colnames(DATA)

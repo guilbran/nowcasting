@@ -2,10 +2,10 @@
 
 export(base_extraction)
 export(nowcasting)
-import(BETS)
 import(corpcor)
 import(matlab)
 import(seasonal)
 import(stats)
 import(xts)
 import(zoo)
+importFrom(BETS,BETS.get)

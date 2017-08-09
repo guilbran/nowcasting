@@ -9,6 +9,12 @@ base_extraction(series_code)
 \arguments{
 \item{series_code.}{Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.}
 }
+\value{
+A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
+}
 \description{
 Crio uma matriz de series temporais \code{mts} utilizadas para calcular o fator comum.
+}
+\seealso{
+\code{\link[BETS]{BETS.get}}
 }

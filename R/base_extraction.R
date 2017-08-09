@@ -4,8 +4,10 @@
 
 #' @param series_code. Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
 #' @import xts
-#' @import BETS
+#' @importFrom  BETS BETS.get
 #' @import zoo
+#' @return A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
+#' @seealso \code{\link[BETS]{BETS.get}}
 #' @export
 
 
@@ -59,7 +61,8 @@ basemonth[is.na(basemonth)]<-NA
 # basemonth<-basemonth1
 
 # write.csv2(basemonth,paste0('./base_dados/base_mes_',Sys.Date(),'.csv'),na = '')
-
+year<-as.numeric(substr(row.names(basemonth)[1],1,4))
+month<-as.numeric(substr(row.names(basemonth)[1],6,7))
 mybase<-ts(basemonth,start=c(year,month),freq=12)
 return(mybase)
 
