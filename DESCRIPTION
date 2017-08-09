@@ -5,11 +5,11 @@ Version: 0.0.74
 Depends: R (>= 3.4.0)
 Date: 2017-08-04
 Author: Daiane Mattos <daiane.mattos@fgv.br> and Guilherme Branco <guilherme.branco@fgv.br>
-Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
+Maintainer: Guilherme Branco <guilherme.branco@fgv.br>
 Description: More about what it does (maybe more than one line)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Imports: matlab, stringr, seasonal, stats, corpcor, zoo
+Imports: matlab, stringr, seasonal, stats, corpcor, zoo, xts, BETS

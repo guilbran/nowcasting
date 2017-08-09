@@ -18,13 +18,9 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   # base: data.frame da base de dados lida .csv
   # legenda: data.frame da legenda lida em .xlsx
   
-  # base <- read.csv2("base_mes_2017-07-19.csv", header = T, stringsAsFactors = F)
-  # legenda <- data.frame(read_excel("07-24-legendas.xlsx"))
-  
   # séries, legenda e tranformação
   DATA <- data.frame(base)
   dates <- data.frame(data = zoo::as.Date(base))
-  # dates<-data.frame(data = zoo::as.Date(base[,1]),'%d/%m/%Y')
   TransfCode <- legenda[,"transf"]
   
   # transformar os dados
