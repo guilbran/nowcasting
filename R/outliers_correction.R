@@ -2,8 +2,8 @@
 #' @description This function operates in two stages. First, it substitutes missings and outliers for the median
 #' Outliers are definited as observations that its distance from median is more than 4 times the IQR (Interquartile Range).
 #' Second, a \code{k_ma} moving average is filtered in each serie, and its values are used to replace outliers and missings in the original data set.
-#' @param x. A \code{ts} to be adjusted.
-#' @param k_ma. Moving average order.
+#' @param x A \code{ts} to be adjusted.
+#' @param k_ma Moving average order.
 #' @import matlab
 
 outliers_correction <- function(x, k_ma = 3){

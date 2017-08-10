@@ -7,7 +7,7 @@
 mestri(x)
 }
 \arguments{
-\item{x.}{Variable in month frequency}
+\item{x}{Variable in month frequency}
 }
 \value{
 The correpondent quarterly transformation or agregation.

@@ -3,8 +3,8 @@
 #' the user specification. The monthly variables are agregated to represent quarterly quantities.
 #' The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
 #' In the end the missings and outliers are corrected.
-#' @param base. A time series matrix (mts) representing the vintage of interest.
-#' @param legenda. \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+#' @param base A time series matrix (mts) representing the vintage of interest.
+#' @param legenda \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 #' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 #' The transformation is specified as follow:
 #' # trans 0, the original serie is preserved.

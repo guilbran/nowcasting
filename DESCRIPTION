@@ -1,6 +1,6 @@
 Package: nowcasting
 Type: Package
-Title: Tools to performe nowcasting annalysis, and create pseudo Real-Time data basis.
+Title: Tools to perform nowcasting analysis and create Real-Time data basis
 Version: 0.0.74
 Depends: R (>= 3.4.0)
 Date: 2017-08-04
@@ -9,10 +9,10 @@ Authors@R: c( person("Daiane", "Mattos", email = "daiane.mattos@fgv.br",role=c("
               person("Pedro","Costa Ferreira",email = "pedro.guilherme@fgv.br",role=c("aut","cre"))
               )
 Maintainer: Pedro Costa Ferreira <pedro.guilherme@fgv.br>
-Description: Methods and tools for nowcasting Brazilian economic time series. It allows: extract information in real time, creating a real time data base; estimate relationship between macroeconomic variables via estimation of dynamic factors; forecast time series in previous periods of reference; forecast time series in the current period of reference (nowcasting); recreate a data base simulating the information avaiable in the past for evaluating nowcasting and forecasting models
+Description: Methods and tools for nowcasting Brazilian economic time series. It allows extract information in real time, creating a real time data base; estimate relationship between macroeconomic variables via estimation of dynamic factors; forecast time series in previous periods of reference; forecast time series in the current period of reference (nowcasting); recreate a data base simulating the information avaiable in the past for evaluating nowcasting and forecasting models.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Imports: matlab, stringr, seasonal, corpcor, zoo, xts
+Imports: BETS, matlab, stringr, seasonal, corpcor, zoo, xts

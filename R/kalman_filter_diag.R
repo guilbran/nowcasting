@@ -1,13 +1,13 @@
 #' @title Kalman Filter Diagonal
 #' @description Kalman Filter Diagonal
-#' @param y. xxx
-#' @param A. Matrix that update factors with VAR
-#' @param C. Matrix that combine factors to explain the transformed data.
-#' @param Q. Error variance in factor update.
-#' @param R. Error variance in explain data from factors
-#' @param init_x. xxx
-#' @param init_V. xxx
-#' @param varagin. xxx
+#' @param y xxx
+#' @param A Matrix that update factors with VAR
+#' @param C Matrix that combine factors to explain the transformed data.
+#' @param Q Error variance in factor update.
+#' @param R Error variance in explain data from factors
+#' @param init_x xxx
+#' @param init_V xxx
+#' @param varagin xxx
 
 kalman_filter_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   
@@ -83,19 +83,19 @@ kalman_filter_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
       i <- ndx[t];
       # copy over all elements; only some will get updated
       x[,t] <- prevx;
-      prevP <- inv(prevV);
+      prevP <- solve(prevV);
       prevPsmall <- prevP[i,i]
-      prevVsmall <- inv(prevPsmall)
+      prevVsmall <- solve(prevPsmall)
       
-      resul <- kalman_update_diag(A[i,i,m], C[,i,m], Q[i,i,m], R[,,m], y[,t], prevx[i], prevVsmall, 'initial', initial, 'u', u[,t], 'B', B[i,,m])
+      resul <- kalman_update_diag(A[i,i,m], C[,i,m], Q[i,i,m], R[,,m], y[,t], prevx[i], prevVsmall, list('initial', initial, 'u', u[,t], 'B', B[i,,m]))
       x[i,t] <- resul[[1]]
       smallV <- resul[[5]]
       LL[t] <- resul[[3]]
-      VV[i,i,t] <- result[[4]]
+      VV[i,i,t] <- resul[[4]]
       
-      smallP <- inv(smallV)
+      smallP <- solve(smallV)
       prevP[i,i] <- smallP
-      V[,,t] <- inv(prevP)
+      V[,,t] <- solve(prevP)
     }
 
   loglik <- loglik + LL[t]

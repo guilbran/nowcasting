@@ -1,13 +1,13 @@
 #' @title Kalman update diagonal
 #' @description Kalman update diagonal
-#' @param A. Matrix that update factors with VAR
-#' @param C. Matrix that combine factors to explain the transformed data.
-#' @param Q. Error variance in factor update.
-#' @param R. Error variance in explain data from factors
-#' @param y. xxx
-#' @param x. xxx
-#' @param V. xxx
-#' @param varagin. xxx
+#' @param A Matrix that update factors with VAR
+#' @param C Matrix that combine factors to explain the transformed data.
+#' @param Q Error variance in factor update.
+#' @param R Error variance in explain data from factors
+#' @param y xxx
+#' @param x xxx
+#' @param V xxx
+#' @param varagin xxx
 #' @import matlab
 
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){

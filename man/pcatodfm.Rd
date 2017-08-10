@@ -7,13 +7,13 @@
 pcatodfm(x, q, r, p)
 }
 \arguments{
-\item{x.}{The \code{ts} used to extract the dynamic factors.}
+\item{x}{The \code{ts} used to extract the dynamic factors.}
 
-\item{q.}{Number of shocks in factors.}
+\item{q}{Number of shocks in factors.}
 
-\item{r.}{Number of factors.}
+\item{r}{Number of factors.}
 
-\item{p.}{Degree of autoregressive polynomial}
+\item{p}{Degree of autoregressive polynomial}
 }
 \description{
 Estimates the first stage for dynamic factors on \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676}.

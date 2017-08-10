@@ -2,9 +2,12 @@
 % Please edit documentation in R/ajustePIB.R
 \name{ajustePIB}
 \alias{ajustePIB}
-\title{Seasonal ajustment}
+\title{Seasonal adjustment}
 \usage{
 ajustePIB(x)
+}
+\arguments{
+\item{x}{Time series to be adjusted}
 }
 \description{
 GDP seasonal ajustment. We use the univariate model SARIMA(0,1,1)(0,1,1) to specify the index variable

@@ -7,13 +7,21 @@
 base_extraction(series_code)
 }
 \arguments{
-\item{series_code.}{Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.}
+\item{series_code}{Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.}
 }
 \value{
 A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 }
 \description{
 Create a time series matrix \code{mts} used to estimate the commmon factors.
+}
+\examples{
+# Creating real time data base with the series: 
+# Vehicles production (1373);
+# Credit Sales Indes (1453);
+# Retail sales (1455);
+# Industrial production, general index (21859).
+mybase<-base_extraction(c(1373,1453,1455,21859))
 }
 \seealso{
 \code{\link[BETS]{BETS.get}}

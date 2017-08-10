@@ -7,9 +7,9 @@
 outliers_correction(x, k_ma = 3)
 }
 \arguments{
-\item{x.}{A \code{ts} to be adjusted.}
+\item{x}{A \code{ts} to be adjusted.}
 
-\item{k_ma.}{Moving average order.}
+\item{k_ma}{Moving average order.}
 }
 \description{
 This function operates in two stages. First, it substitutes missings and outliers for the median

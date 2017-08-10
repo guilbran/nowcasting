@@ -7,9 +7,9 @@
 forecasting(y, x)
 }
 \arguments{
-\item{y.}{Dependent variable.}
+\item{y}{Dependent variable.}
 
-\item{x.}{Independent variable.}
+\item{x}{Independent variable.}
 }
 \description{
 Forecast quarterly series from monthly series.

@@ -7,9 +7,9 @@
 arrumarVintage(base = NULL, legenda = NULL)
 }
 \arguments{
-\item{base.}{A time series matrix (mts) representing the vintage of interest.}
+\item{base}{A time series matrix (mts) representing the vintage of interest.}
 
-\item{legenda.}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+\item{legenda}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 The transformation is specified as follow:
 # trans 0, the original serie is preserved.

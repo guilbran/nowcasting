@@ -1,6 +1,6 @@
 #' @title Monthly to quarterly agregation
 #' @description It transforsms a monthly time series in a quarterly.
-#' @param x. Variable in month frequency
+#' @param x Variable in month frequency
 #' @return The correpondent quarterly transformation or agregation.
 
 
@@ -14,6 +14,6 @@ mestri <- function(x){
   ultimo_tri <- meses %in% c("03","06","09","12")
   tri <- which(c("03","06","09","12") == meses[which(ultimo_tri)[1]])
   # x.tri <- ts(x[ultimo_tri,], start = c(ano_inicial,tri), freq = 4)
-  x.tri <- ts(data.frame(x)[ultimo_tri,], start = c(ano_inicial,tri), freq = 4)
+  x.tri <- ts(data.frame(x)[ultimo_tri,], start = c(ano_inicial,tri), frequency = 4)
   x.tri
 }

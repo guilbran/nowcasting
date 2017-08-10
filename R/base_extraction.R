@@ -1,11 +1,19 @@
 #' @title Extract time series and create a base
 
 #' @description Create a time series matrix \code{mts} used to estimate the commmon factors.
-#' @param series_code. Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
+#' @param series_code Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
 #' @import xts
 #' @importFrom  BETS BETS.get
+#' @importFrom stats ts
 #' @import zoo
 #' @return A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
+#' @examples 
+#' # Creating real time data base with the series: 
+#' # Vehicles production (1373);
+#' # Credit Sales Indes (1453);
+#' # Retail sales (1455);
+#' # Industrial production, general index (21859).
+#' mybase<-base_extraction(c(1373,1453,1455,21859))
 #' @seealso \code{\link[BETS]{BETS.get}}
 #' @export
 
@@ -62,7 +70,7 @@ basemonth[is.na(basemonth)]<-NA
 # write.csv2(basemonth,paste0('./base_dados/base_mes_',Sys.Date(),'.csv'),na = '')
 year<-as.numeric(substr(row.names(basemonth)[1],1,4))
 month<-as.numeric(substr(row.names(basemonth)[1],6,7))
-mybase<-ts(basemonth,start=c(year,month),freq=12)
+mybase<-stats::ts(basemonth,start=c(year,month),freq=12)
 return(mybase)
 
 }

@@ -7,21 +7,21 @@
 kalman_update_diag(A, C, Q, R, y, x, V, varagin)
 }
 \arguments{
-\item{A.}{Matrix that update factors with VAR}
+\item{A}{Matrix that update factors with VAR}
 
-\item{C.}{Matrix that combine factors to explain the transformed data.}
+\item{C}{Matrix that combine factors to explain the transformed data.}
 
-\item{Q.}{Error variance in factor update.}
+\item{Q}{Error variance in factor update.}
 
-\item{R.}{Error variance in explain data from factors}
+\item{R}{Error variance in explain data from factors}
 
-\item{y.}{xxx}
+\item{y}{xxx}
 
-\item{x.}{xxx}
+\item{x}{xxx}
 
-\item{V.}{xxx}
+\item{V}{xxx}
 
-\item{varagin.}{xxx}
+\item{varagin}{xxx}
 }
 \description{
 Kalman update diagonal

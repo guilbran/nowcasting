@@ -1,15 +1,15 @@
 #' @title Smooth update
 #' @description Smooth update
-#' @param xsmooth_future. xxx
-#' @param Vsmooth_future. xxx
-#' @param xfilt. xxx
-#' @param Vfilt. xxx
-#' @param Vfilt_future. xxx
-#' @param VVfilt_future. xxx
-#' @param A. Matrix that update factors with VAR
-#' @param Q. Error variance in factor update.
-#' @param B. xxx
-#' @param u. xxx
+#' @param xsmooth_future xxx
+#' @param Vsmooth_future xxx
+#' @param xfilt xxx
+#' @param Vfilt xxx
+#' @param Vfilt_future xxx
+#' @param VVfilt_future xxx
+#' @param A Matrix that update factors with VAR
+#' @param Q Error variance in factor update.
+#' @param B xxx
+#' @param u xxx
 #' @import matlab
 
 
