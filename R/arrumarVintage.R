@@ -12,7 +12,8 @@
 #' # trans 2 \deqn{latex2}{X_t - X_{t-1}}
 #' # trans 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
 #' @import zoo
-#' @import stats
+#' @importFrom stats filter
+
 
 
 arrumarVintage <- function(base = NULL, legenda = NULL){
