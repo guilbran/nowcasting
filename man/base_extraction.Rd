@@ -18,7 +18,7 @@ Create a time series matrix \code{mts} used to estimate the commmon factors.
 \examples{
 # Creating real time data base with the series: 
 # Vehicles production (1373);
-# Credit Sales Indes (1453);
+# Credit Sales Index (1453);
 # Retail sales (1455);
 # Industrial production, general index (21859).
 mybase<-base_extraction(c(1373,1453,1455,21859))
