@@ -37,6 +37,7 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 }
 \examples{
+\dontrun{ 
 # GDP index at market prices
 pib<-BETS::BETS.get(22099)
 
@@ -49,7 +50,7 @@ mybase<-base_extraction(c(1373,1453,1455,21859))
 
 # Estimate the nowcasting based on dynamic factors extracted from mybase:
 now<-nowcast(y = pib,vintage = mybase,legend = c(3,3,3,3),q = 1,r = 1,p = 1)
-ts.plot(now$prev,col=1:3)
+ts.plot(now$prev,col=1:3)}
 }
 \seealso{
 \code{\link[nowcasting]{base_extraction}}

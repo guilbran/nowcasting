@@ -8,12 +8,13 @@
 #' @import zoo
 #' @return A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 #' @examples 
+#' \dontrun{
 #' # Creating real time data base with the series: 
 #' # Vehicles production (1373);
 #' # Credit Sales Index (1453);
 #' # Retail sales (1455);
 #' # Industrial production, general index (21859).
-#' mybase<-base_extraction(c(1373,1453,1455,21859))
+#' mybase<-base_extraction(c(1373,1453,1455,21859))}
 #' @seealso \code{\link[BETS]{BETS.get}}
 #' @export
 

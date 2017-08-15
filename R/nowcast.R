@@ -19,7 +19,8 @@
 #' @return A \code{list} containing two \code{data.frame}:
 #' \code{prev} contains the original serie, the estimation in the sample, the estimation out of the sample;
 #' \code{fatores} contains the common factors of vintage data set.
-#' @examples 
+#' @examples
+#' \dontrun{ 
 #' # GDP index at market prices
 #' pib<-BETS::BETS.get(22099)
 #' 
@@ -32,7 +33,7 @@
 #' 
 #' # Estimate the nowcasting based on dynamic factors extracted from mybase:
 #' now<-nowcast(y = pib,vintage = mybase,legend = c(3,3,3,3),q = 1,r = 1,p = 1)
-#' ts.plot(now$prev,col=1:3)
+#' ts.plot(now$prev,col=1:3)}
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 
