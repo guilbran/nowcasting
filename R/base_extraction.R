@@ -3,7 +3,6 @@
 #' @description Create a time series matrix \code{mts} used to estimate the commmon factors.
 #' @param series_code Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
 #' @import xts
-#' @importFrom  BETS BETS.get
 #' @importFrom stats ts
 #' @import zoo
 #' @return A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
@@ -15,14 +14,13 @@
 #' # Retail sales (1455);
 #' # Industrial production, general index (21859).
 #' mybase<-base_extraction(c(1373,1453,1455,21859))}
-#' @seealso \code{\link[BETS]{BETS.get}}
 #' @export
 
 
 base_extraction<-function(series_code){
 
 # Seleção da série de dados
-# Abaixo a lista com os códigos das variáveis tanto no Bacen quanto no BETS
+# Abaixo a lista com os códigos das variáveis tanto no Bacen
 codigos<-series_code
 
 datas<-seq(as.Date("1994-07-01"),Sys.Date(),by="days") # vetor de datas desde 1994-07-01 até a data atual
@@ -31,18 +29,18 @@ start.time<-Sys.time()
 for (i in 1:length(codigos)){
 serie <-{}
 serie_aux<-{}
-serie<-BETS.get(codigos[i],data.frame = TRUE)     # trago a série em formato de data.frame
+serie<-get.series.bacen(codigos[i])     # trago a série em formato de data.frame
   for (jdatas in 1:length(datas)){                # séries diárias, mensais e trimestrais no mesmo data.frame
-    ind <- which(serie[,1]==datas[jdatas])
+    ind <- which(as.Date(serie$DF[,1],"%d/%m/%Y")==datas[jdatas])
     if (length(ind) == 0){
       serie_aux[jdatas] <- NA
     } else {
-      serie_aux[jdatas]<- serie[ind,2]
+      serie_aux[jdatas]<- serie$DF[ind,2]
     }
   }
   base<-cbind(base,serie_aux)
   names(base)[i+1]<-paste0('serie',codigos[i])
-  print(i)
+  print(paste(i,'from',length(codigos),'series extracted'))
 }
 
 # Transformação da base para mensal ----
