@@ -15,3 +15,7 @@ The correpondent quarterly transformation or agregation.
 \description{
 It transforsms a monthly time series in a quarterly.
 }
+\examples{
+# GDP index at market prices at quarterly frequency
+pib<-mestri(lag(base_extraction(22099),-2))
+}

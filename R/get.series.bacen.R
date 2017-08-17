@@ -1,14 +1,15 @@
-#' A function to extract BACEN series using their API
+#' @title Get series Bacen
+#' @description A function to extract BACEN series using their API
 #' @param x Bacen series numbers. Either an integer or a numeric vector.
 #' @param from A string specifying where the series shall start.
 #' @param to A string specifying where the series shall end.
-#' @param save A string specifying if data should be saved in csv or xlsx format. 
 #' Defaults to not saving.
 #' @keywords bacen
 #' @author Fernando Teixeira \email{fernando.teixeira@fgv.br} and Jonatha Azevedo 
 #' \email{jonatha.costa@fgv.br}
-#' @import RCurl httr
-
+#' @import RCurl
+#' @import httr
+#' @export
 
 get.series.bacen<- function(x, from = "", to = ""){
   
@@ -81,7 +82,7 @@ get.series.bacen<- function(x, from = "", to = ""){
                    inputs[i], 
                    '/dados?formato=csv&dataInicial=', data_init, '&dataFinal=',
                    data_end)
-        dados = GET(k)
+        dados = httr::GET(k)
         aux = content(dados,'raw')
         aux2=rawToChar(aux)
         

@@ -16,14 +16,22 @@ A \code{mts} in the same specification required in argument \code{base} of funct
 Create a time series matrix \code{mts} used to estimate the commmon factors.
 }
 \examples{
+# Extracting GDP serie at real-time from Central Bank of Brasil data base
+gdp<-base_extraction(22099)
 \dontrun{
+# Creating real time data base with the series: 
+# Vehicles production (1373);
+# Industrial production, general index (21859).
+mybase<-base_extraction(c(1373,21859))
+
 # Creating real time data base with the series: 
 # Vehicles production (1373);
 # Credit Sales Index (1453);
 # Retail sales (1455);
 # Industrial production, general index (21859).
 mybase<-base_extraction(c(1373,1453,1455,21859))}
+
 }
-\seealso{
-\code{\link[BETS]{BETS.get}}
+\references{
+Central Bank of Brazil
 }

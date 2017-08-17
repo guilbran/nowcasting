@@ -117,7 +117,7 @@ pcatodfm <- function(x, q, r, p){
     }
     
     initx <- t(Z[1,]) 
-    initV <- matlab::reshape(pseudoinverse(eye(size(kronecker(A,A),1))- kronecker(A,A)) %*% matrix(Q, ncol = 1), r*p, r*p)
+    initV <- matlab::reshape(corpcor::pseudoinverse(eye(size(kronecker(A,A),1))- kronecker(A,A)) %*% matrix(Q, ncol = 1), r*p, r*p)
     
   }else{
     

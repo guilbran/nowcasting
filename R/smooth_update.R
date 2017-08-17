@@ -11,6 +11,7 @@
 #' @param B xxx
 #' @param u xxx
 #' @import matlab
+#' @import corpcor
 
 
 smooth_update <- function(xsmooth_future, Vsmooth_future, xfilt, Vfilt,  Vfilt_future, VVfilt_future, A, Q, B, u){
@@ -35,12 +36,12 @@ smooth_update <- function(xsmooth_future, Vsmooth_future, xfilt, Vfilt,  Vfilt_f
   }
   
   Vpred <- A %*% Vfilt %*% t(A) + Q # Vpred = Cov[X(t+1) | t]
-  J <- Vfilt %*% t(A) %*% pseudoinverse(Vpred) # smoother gain matrix
+  J <- Vfilt %*% t(A) %*% corpcor::pseudoinverse(Vpred) # smoother gain matrix
   xsmooth <- xfilt + J %*% (xsmooth_future - xpred)
   Vsmooth <- Vfilt + J %*% (Vsmooth_future - Vpred) %*% t(J)
   
   if(is.matrix(Vfilt_future)){
-    VVsmooth_future <- VVfilt_future + (Vsmooth_future - Vfilt_future) %*% pseudoinverse(Vfilt_future) %*% VVfilt_future
+    VVsmooth_future <- VVfilt_future + (Vsmooth_future - Vfilt_future) %*% corpcor::pseudoinverse(Vfilt_future) %*% VVfilt_future
   }else{
     VVsmooth_future <- VVfilt_future + (Vsmooth_future - Vfilt_future) %*% 1/Vfilt_future %*% VVfilt_future
     

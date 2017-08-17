@@ -7,13 +7,23 @@
 #' @import zoo
 #' @return A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 #' @examples 
+#' # Extracting GDP serie at real-time from Central Bank of Brasil data base
+#' gdp<-base_extraction(22099)
 #' \dontrun{
+#' # Creating real time data base with the series: 
+#' # Vehicles production (1373);
+#' # Industrial production, general index (21859).
+#' mybase<-base_extraction(c(1373,21859))
+#' 
 #' # Creating real time data base with the series: 
 #' # Vehicles production (1373);
 #' # Credit Sales Index (1453);
 #' # Retail sales (1455);
 #' # Industrial production, general index (21859).
 #' mybase<-base_extraction(c(1373,1453,1455,21859))}
+#' 
+#' @references Central Bank of Brazil
+#' 
 #' @export
 
 
@@ -40,7 +50,7 @@ serie<-get.series.bacen(codigos[i])     # trago a série em formato de data.fram
   }
   base<-cbind(base,serie_aux)
   names(base)[i+1]<-paste0('serie',codigos[i])
-  print(paste(i,'from',length(codigos),'series extracted'))
+  message(paste(i,'from',length(codigos),'series extracted'))
 }
 
 # Transformação da base para mensal ----
@@ -70,7 +80,7 @@ basemonth[is.na(basemonth)]<-NA
 year<-as.numeric(substr(row.names(basemonth)[1],1,4))
 month<-as.numeric(substr(row.names(basemonth)[1],6,7))
 mybase<-stats::ts(basemonth,start=c(year,month),freq=12)
-return(mybase)
+return(invisible(mybase))
 
 }
 

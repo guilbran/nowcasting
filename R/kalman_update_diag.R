@@ -9,6 +9,7 @@
 #' @param V xxx
 #' @param varagin xxx
 #' @import matlab
+#' @import corpcor
 
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){
   
@@ -64,7 +65,7 @@ kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){
   
   S <- C %*% Vpred %*% t(C) + R
   GG <- t(C) %*% diag(1/diag(R)) %*% C
-  Sinv <- diag(1/diag(R)) - diag(1/diag(R)) %*% C %*% pseudoinverse(eye(ss) + Vpred %*% GG) %*% Vpred %*% t(C) %*% diag(1/diag(R)) # works only with R diagonal
+  Sinv <- diag(1/diag(R)) - diag(1/diag(R)) %*% C %*% corpcor::pseudoinverse(eye(ss) + Vpred %*% GG) %*% Vpred %*% t(C) %*% diag(1/diag(R)) # works only with R diagonal
   
   # Sinv = inv(S)
   

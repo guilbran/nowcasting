@@ -2,8 +2,7 @@
 #' @description Forecast quarterly series from monthly series.
 #' @param y Dependent variable.
 #' @param x Independent variable.
-#' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts
-#' @importFrom utils tail
+#' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
 
 forecasting <- function(y,x){
   
@@ -32,7 +31,14 @@ forecasting <- function(y,x){
   # previsão
   newbase <- data.frame(dados[(Qmax-4):Qmax,-1])
   colnames(newbase) <- paste0("X",1:ncol(data.frame(fatoresTRI)))
-  prev <- stats::ts(predict(object = reg, newdata = newbase), start = start(tail(dados,5)), frequency = 4) 
+  
+  ## função auxiliar
+  tail.ts <- function(data,n) {
+    data <- as.ts(data)
+    window(data,start=tsp(data)[2]-(n-1)/frequency(data))
+  }
+  
+  prev <- stats::ts(predict(object = reg, newdata = newbase), start = start(tail.ts(dados,5)), frequency = 4) 
   
   # unir fit e previsão
   dados_pib <- cbind(pib, log(pib), retpib2, fit, prev, NA)
