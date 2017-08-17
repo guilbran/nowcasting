@@ -9,6 +9,8 @@
 #' @examples 
 #' # Extracting GDP serie at real-time from Central Bank of Brasil data base
 #' gdp<-base_extraction(22099)
+#' 
+#' 
 #' \dontrun{
 #' # Creating real time data base with the series: 
 #' # Vehicles production (1373);

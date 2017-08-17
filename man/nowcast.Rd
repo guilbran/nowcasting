@@ -37,43 +37,56 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 }
 \examples{
-\dontrun{ 
 # GDP index at market prices at quarterly frequency
 pib<-mestri(lag(base_extraction(22099),-2))
 
-# Creating real time data base with the series: 
-# Vehicles production (1373);
-# Credit Sales Index (1453);
-mybase<-base_extraction(c(1373,1453))
-
-# Estimate the nowcasting based on dynamic factors extracted from mybase:
+# Estimate the nowcasting based on dynamic factors extracted from vintage:
 # 1 dynamic factor
 # 1 static factor
 # 1 autoregressive lag
-now<-nowcast(y = pib,vintage = mybase,legend = c(3,3),q = 1,r = 1,p = 1)
+now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 1,p = 1)
+# nowcasting results
+now$prev
+# factor estimation
+now$fatores
 
-# Creating real time data base with the series: 
-# Vehicles production (1373);
-# Credit Sales Index (1453);
-# Retail sales (1455);
-# Industrial production, general index (21859).
-mybase<-base_extraction(c(1373,1453,1455,21859))
-
-
-# Estimate the nowcasting based on dynamic factors extracted from mybase:
-# 1 dynamic factor
-# 1 static factor
-# 1 autoregressive lag
-now<-nowcast(y = pib,vintage = mybase,legend = c(3,3,3,3),q = 1,r = 1,p = 1)
-ts.plot(now$prev,col=1:3)
-
-# Estimate the nowcasting based on dynamic factors extracted from mybase:
+# Estimate the nowcasting based on dynamic factors extracted from vintage:
 # 1 dynamic factor
 # 1 static factor
 # 2 autoregressive lag
+now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 1,p = 2)
+# nowcasting results
+now$prev
+# factor estimation
+now$fatores
+
+# Estimate the nowcasting based on dynamic factors extracted from vintage:
+# 1 dynamic factor
+# 2 static factor
+# 1 autoregressive lag
 # induce stationarity in first diference (transf = 2)
-now<-nowcast(y = pib,vintage = mybase,legend = c(2,2,2,2),q = 1,r = 1,p = 2)
-ts.plot(now$prev,col=1:3) }
+now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 2,p = 1)
+ts.plot(now$prev,col=1:3)
+# nowcasting results
+now$prev
+# factor estimation
+now$fatores
+
+
+\dontrun{
+# GDP index at market prices
+pib<-mestri(lag(base_extraction(22099),-2))
+
+# Creating real time data base with the series:
+# Exchange rate - Free - United States dollar (1);
+# Interest rate - CDI (12);
+# Vehicles production (1373);
+# Credit Sales Index (1453);
+# Retail sales (1455);
+# Current economic conditions index (4394);
+# Industrial production, general index (21859).
+mybase<-base_extraction(c(1453,1455,4394,21859))
+}
 }
 \seealso{
 \code{\link[nowcasting]{base_extraction}}
