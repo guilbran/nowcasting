@@ -72,6 +72,17 @@ now$prev
 # factor estimation
 now$fatores
 
+# Estimate the nowcasting based on dynamic factors extracted from vintage:
+# 2 dynamic factor
+# 2 static factor
+# 1 autoregressive lag
+# induce stationarity in first diference (transf = 2)
+now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 2,r = 2,p = 1)
+ts.plot(now$prev,col=1:3)
+# nowcasting results
+now$prev
+# factor estimation
+now$fatores
 
 \dontrun{
 # GDP index at market prices

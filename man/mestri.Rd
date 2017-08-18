@@ -18,4 +18,14 @@ It transforsms a monthly time series in a quarterly.
 \examples{
 # GDP index at market prices at quarterly frequency
 pib<-mestri(lag(base_extraction(22099),-2))
+
+# Industrial production selecting only last month
+prod_ind<-mestri(base_extraction(21859))
+
+# Selecting only last month of matrix time series vintage:
+mestri_vintage<-mestri(vintage)
+
+# Selecting only last month of first two columns of matrix time series vintage:
+mestri_vintage<-mestri(vintage[,1:2])
+
 }

@@ -10,12 +10,23 @@
 #' # Extracting GDP serie at real-time from Central Bank of Brasil data base
 #' gdp<-base_extraction(22099)
 #' 
+#' # Extracting Vehicles production (1373) serie at real-time from Central Bank of Brasil data base
+#' vei_prod<-base_extraction(1373)
+#' 
 #' 
 #' \dontrun{
+#' # Industrial production (21859) serie at real-time from Central Bank of Brasil data base
+#' ind_prod<-base_extraction(21859)
+#' 
 #' # Creating real time data base with the series: 
 #' # Vehicles production (1373);
 #' # Industrial production, general index (21859).
 #' mybase<-base_extraction(c(1373,21859))
+#' 
+#' # Creating real time data base with the series: 
+#' # Exchange rate - Free - United States dollar (1);
+#' #  Interest rate - CDI (12).
+#' mybase<-base_extraction(c(1,12))
 #' 
 #' # Creating real time data base with the series: 
 #' # Vehicles production (1373);

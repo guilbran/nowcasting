@@ -9,7 +9,7 @@
 #' \email{jonatha.costa@fgv.br}
 #' @import RCurl
 #' @import httr
-#' @export
+
 
 get.series.bacen<- function(x, from = "", to = ""){
   
