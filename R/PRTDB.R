@@ -25,5 +25,3 @@ PRTDB<-function(mts,delay,today = Sys.Date()){
   
   return(mts_new)
 }
-
-
