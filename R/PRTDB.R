@@ -21,5 +21,9 @@ PRTDB<-function(mts,delay,today = Sys.Date()){
       mts_new[release[[i]]>today,i] <- NA
       }
   
+  mts_new <- ts(mts_new[!as.Date(mts_new)>today,],start=start(mts_new),frequency = frequency(mts_new))
+  
   return(mts_new)
 }
+
+
