@@ -8,6 +8,7 @@
 #' @param init_x xxx
 #' @param init_V xxx
 #' @param varagin xxx
+#' @export
 
 kalman_filter_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   

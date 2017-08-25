@@ -10,6 +10,7 @@
 #' @param varagin xxx
 #' @import matlab
 #' @import corpcor
+#' @export
 
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){
   

@@ -13,6 +13,7 @@
 #' @param ss Standard deviation in transformed data.
 #' @param MM Mean in transformed data.
 #' @param n.prevs Number of quarter previsions ahead.
+#' @export
 
 
 

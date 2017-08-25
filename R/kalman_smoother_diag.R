@@ -9,6 +9,7 @@
 #' @param init_V xxx
 #' @param varagin xxx
 #' @import matlab
+#' @export
 
 kalman_smoother_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   

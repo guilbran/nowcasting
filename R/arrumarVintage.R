@@ -13,6 +13,7 @@
 #' # trans 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
 #' @import zoo
 #' @importFrom stats filter
+#' @export
 
 
 

@@ -5,6 +5,7 @@
 #' @param x A \code{ts} to be adjusted.
 #' @param k_ma Moving average order.
 #' @import matlab
+#' @export
 
 outliers_correction <- function(x, k_ma = 3){
   # x é um série temporal

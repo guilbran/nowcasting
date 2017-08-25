@@ -12,6 +12,7 @@
 #' @param u xxx
 #' @import matlab
 #' @import corpcor
+#' @export
 
 
 smooth_update <- function(xsmooth_future, Vsmooth_future, xfilt, Vfilt,  Vfilt_future, VVfilt_future, A, Q, B, u){

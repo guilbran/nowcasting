@@ -6,6 +6,7 @@
 #' @param p Degree of autoregressive polynomial
 #' @import matlab
 #' @import corpcor
+#' @export
 
 
 pcatodfm <- function(x, q, r, p){
