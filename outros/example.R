@@ -7,9 +7,6 @@ pib<-base_extraction(22099)
 
 # Sequência com sextas feiras
 datas <- seq(as.Date('2011-01-07'),as.Date('2017-03-10'),by='week')
-datas <- seq(as.Date('2013-12-06'),as.Date('2017-03-10'),by='week')
-
-
 
 now<-{}
 a<-Sys.time()
@@ -40,6 +37,12 @@ i <- 152
 base1<-PRTDB(base,legendas$V2,datas[i])
 pib1<-mestri(PRTDB(lag(pib,-2),60,datas[i]))
 try(now[[i]]<-nowcast(pib1,base1,rep(3,dim(base1)[2]),2,2,1))
+
+
+
+
+
+
 
 
 
