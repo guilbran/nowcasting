@@ -39,7 +39,7 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
     legenda<-data.frame(name = colnames(base),transf = legenda)
     TransfCode <- legenda[,"transf"]
   } else 
-    warning('legenda must be a vector or a data.fram')
+    warning('legenda must be a vector or a data.frame')
 
   # transformar os dados
   X <- matrix(NA, nrow = nrow(DATA), ncol = ncol(DATA))
