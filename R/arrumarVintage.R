@@ -102,17 +102,30 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   x <- X[, which(SerOk)]
   
   # redefinir o tamanho do painel
+  if (sum(SerOk)==1){
+    t<-length(x)
+    N<-1
+  } else if (sum(SerOk>1)){
   t <- nrow(x)
   N <- ncol(x)
+  }
   
   # substituir missings e outliers 
   xc <- x*NA
+  if (sum(SerOk)==1){
+    xc<-outliers_correction(x)
+  } else if (sum(SerOk>1)){
   for(i in 1:N){
     xc[,i] <- outliers_correction(x[,i])
   }
+  }
   
-  # nao substituir nas ultimas 12 linhas
+  # nao substituir nas ultimas 12 linhas (por que as informações recentes são NA pelo timeless)
+  if (sum(SerOk)==1){
+  x[1:(length(x)-12)] <- xc[1:(length(x)-12)] 
+  } else if (sum(SerOk>1)){
   x[1:(nrow(x)-12),] <- xc[1:(nrow(x)-12),]
+  }
   x <- data.frame(data = dates, x) 
   xx <- data.frame(matrix(NA, nrow = 12, ncol = N + 1))
   colnames(xx) <- colnames(x)
@@ -124,4 +137,5 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   
   # retornar vintage transformada
   return(x)
-}
+  }
+  
