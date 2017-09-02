@@ -55,7 +55,7 @@ pcatodfm <- function(x, q, r, p){
   
   # autovalores e autovetores
   a <- eigen(cov(x))
-  d <- diag(a$values[1:r])
+  d <- a$values[1:r]
   v <- a$vectors[,1:r]
   
   # estimativa dos fatores comuns

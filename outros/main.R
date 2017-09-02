@@ -4,9 +4,31 @@ setwd('C:/Users/guilherme.branco/Desktop/RTDB')
 library(devtools)
 install_github('guilbran/nowcasting',force=T)
 
+library(lubridate)
 library(nowcasting)
 library(zoo)
 library(xts)
+
+vintage
+# Extrair a base
+base<-base_extraction(c(1455,21859))
+base<-window(base,start=c(2001,12),frequency=12)
+
+# Criar o painel balanceado (substitui outliers,excluir séries, subst outliers, estacionariza, transforma em trimestral)
+base1<-arrumarVintage(base,c(3,3))
+
+# Encontrar os fatores dinâmicos
+f<-FactorExtraction(x = base1,q = 1,r = 1,p = 1)
+
+
+
+arrumarVintage(vintage,rep(3,dim(vintage)[2]))
+arrumarVintage(vintage[,1:2],c(3,3))
+arrumarVintage(vintage[,1],c(3))
+
+arrumarVintage(base,c(3,3,3))
+
+colSums(is.na(base))/dim(base)[1]
 
 # ler a base com as legendas
 legendas<-readxl::read_excel('atraso_na_divulgação.xlsx',sheet = 2,col_names = F)
@@ -15,6 +37,18 @@ legendas<-readxl::read_excel('atraso_na_divulgação.xlsx',sheet = 2,col_names =
 # extrair informação do Bacen
 base<-base_extraction(legendas$X__1)
 pib<-base_extraction(22099)
+
+a<-mestri(lag(pib,-2))
+
+frequency(a)
+
+
+
+arrumarVintage(base = base,legenda = c(3,3))
+arrumarVintage(base = pib,legenda = 3)
+
+nowcast(diff(pib),base,c(3,3))
+
 
 # Sequência com sextas feiras
 datas <- seq(as.Date('2011-01-07'),as.Date('2017-03-10'),by='week')

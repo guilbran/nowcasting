@@ -36,8 +36,14 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
     }else
       warning('The data.frame must have a column called name and a column called transf')
   } else if (is.vector(legenda)){
-    legenda<-data.frame(name = colnames(base),transf = legenda)
-    TransfCode <- legenda[,"transf"]
+    
+      if (is.null(dim(base))){
+        legenda<-data.frame(name = 'base',transf = legenda)
+        TransfCode <- legenda
+      } else if (!is.null(dim(base))){
+        legenda<-data.frame(name = colnames(base),transf = legenda)
+        TransfCode <- legenda[,"transf"]
+      }
   } else 
     warning('legenda must be a vector or a data.frame')
 
@@ -75,19 +81,19 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   # transformação de diferença mensal/variação em trimestral
   X_temp <- data.frame(stats::filter(X, c(1,2,3,2,1), sides = 1))
   
-  # remover dados que se perderam após transformação trimestral
-  X <- X_temp [5:nrow(X_temp),]
+  # remover dados que se perderam(?) após transformação trimestral
+  X <- data.frame(X_temp [5:nrow(X_temp),])
   rownames(X) <- 1:nrow(X)
   dates <- data.frame(data = dates[5:nrow(X_temp),])
   time <- time[5:nrow(X_temp),]
   
   # fazer a amostra iniciar sempre no primeiro mês do trimestre
   if(time[1,2] %% 3 == 2){ # se a amostra começa no segundo mês do trimestre
-    X <- X[3:nrow(X),]
+    X <- data.frame(X[3:nrow(X),])
     dates <- data.frame(data = as.character(dates[3:nrow(dates),]))
     time <- time[3:nrow(time),]
   }else if(time[1,2] %% 3 == 0){ # se a amostra começa no último mês do trimestre
-    X <-  X[2:nrow(X),]
+    X <-  data.frame(X[2:nrow(X),])
     dates <- data.frame(data = as.character(dates[2:nrow(dates),]))
     time <- time[2:nrow(time),]
   }
@@ -100,6 +106,10 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   # usar apenas as séries com menos de 1/3 de missings
   SerOk <- colSums(is.na(X)) < t/3
   x <- X[, which(SerOk)]
+  
+  if (sum(!SerOk)>0){
+  warning(paste(sum(!SerOk),'serie(s) ruled out due to lack in observations (more than 1/3 is NA).'))
+  }
   
   # redefinir o tamanho do painel
   if (sum(SerOk)==1){
@@ -126,6 +136,7 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   } else if (sum(SerOk>1)){
   x[1:(nrow(x)-12),] <- xc[1:(nrow(x)-12),]
   }
+  
   x <- data.frame(data = dates, x) 
   xx <- data.frame(matrix(NA, nrow = 12, ncol = N + 1))
   colnames(xx) <- colnames(x)
