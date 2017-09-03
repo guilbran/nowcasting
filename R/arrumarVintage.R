@@ -133,7 +133,7 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   # nao substituir nas ultimas 12 linhas (por que as informações recentes são NA pelo timeless)
   if (sum(SerOk)==1){
   x[1:(length(x)-12)] <- xc[1:(length(x)-12)] 
-  } else if (sum(SerOk>1)){
+  } else if (sum(SerOk)>1){
   x[1:(nrow(x)-12),] <- xc[1:(nrow(x)-12),]
   }
   
