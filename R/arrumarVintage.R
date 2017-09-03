@@ -124,7 +124,7 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   xc <- x*NA
   if (sum(SerOk)==1){
     xc<-outliers_correction(x)
-  } else if (sum(SerOk>1)){
+  } else if (sum(SerOk)>1){
   for(i in 1:N){
     xc[,i] <- outliers_correction(x[,i])
   }
