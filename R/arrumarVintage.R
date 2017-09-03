@@ -115,7 +115,7 @@ arrumarVintage <- function(base = NULL, legenda = NULL){
   if (sum(SerOk)==1){
     t<-length(x)
     N<-1
-  } else if (sum(SerOk>1)){
+  } else if (sum(SerOk)>1){
   t <- nrow(x)
   N <- ncol(x)
   }
