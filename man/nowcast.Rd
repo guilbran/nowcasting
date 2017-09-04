@@ -4,12 +4,12 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, vintage, legend, q = 2, r = 2, p = 1)
+nowcast(y, regressors, legend, q = 2, r = 2, p = 1)
 }
 \arguments{
-\item{y}{Quarterly time-series}
+\item{y}{Stationary quarterly time-series}
 
-\item{vintage}{A time series matrix (mts) representing the vintage of interest.}
+\item{regressors}{A time series matrix (\code{mts}) representing the regressors of interest.}
 
 \item{legend}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 

@@ -35,7 +35,7 @@ pcatodfm <- function(x, q, r, p){
   N <- ncol(x)
   
   # restrição
-  if(r < q){ stop("q precisa ser menor ou igual a r") }
+  if(r < q){ stop("q must be less than or equal to r") }
   
   # nlag 
   nlag <- p - 1
@@ -55,6 +55,7 @@ pcatodfm <- function(x, q, r, p){
   
   # autovalores e autovetores
   a <- eigen(cov(x))
+  a1 <- a    # save eigen
   d <- a$values[1:r]
   v <- a$vectors[,1:r]
   
@@ -133,6 +134,6 @@ pcatodfm <- function(x, q, r, p){
     C <- as.matrix(v)
   }
   
-  list(A = A, C = C, Q = Q, R = R, initx = initx, initV = initV)
+  list(A = A, C = C, Q = Q, R = R, initx = initx, initV = initV, eigen = a1)
 }
 

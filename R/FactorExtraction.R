@@ -52,26 +52,23 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   coluna1 <- x[,1]
   x <- x[,-1]
   
-  # tamanho da base
+  # Base dimension
   TT <- nrow(x)
   N <- ncol(x)
   
-  # Construir o painel balanceado (sem missings) Z a partir de x (base de entrada)
-  # ignorar séries com mais de 1/3 de missings
-  
+  # Number of missings - Here the missings are only new information
   n.missings <- colSums(is.na(x))
   m <- max(n.missings)
   
-  # cálculo do número de argumentos fornecidos
+  # Number of arguments inputed
   n.arg <- sum(c(!is.null(x),!is.null(q),!is.null(r),!is.null(p),
                  !is.null(A),!is.null(C),!is.null(Q),!is.null(R),
                  !is.null(initx), !is.null(initV), 
                  !is.null(ss), !is.null(MM)))
   
-  if(n.arg < 5){ # estimar os parâmetros se eles não são fornecidos
+  if(n.arg < 5){ # Estimate parameters if they are not inputed
     
-    # padronizar a série balanceada para estimar os parâmetros no primeiro estágio (via PCA)
-    z <- x[1:(TT - m),]
+    z <- x[1:(TT - m),]      # ONLY complete information for PCA
     s <- apply(z, MARGIN = 2, FUN = sd)
     M <- apply(z, MARGIN = 2, FUN = mean)
     
@@ -88,10 +85,11 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
     R <- parametros$R
     initx <- parametros$initx
     initV <- parametros$initV
+    a <- parametros$eigen
     #print(A)
   }else{
     
-    # se os parâmetros são fornecidos, basta padronizar
+    # If parameters are inputed only need to standardize
     
     for(i in 1:N){
       x[,i] <- (x[,i] - MM[i])/ss[i]
@@ -100,7 +98,7 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
     
   }
   
-  # parâmetros pro modelo em espaço de estados
+  # Parameters for state space model
   
   AA <- array(A, dim = c(nrow(A), ncol(A), TT))
   QQ <- array(Q, dim = c(nrow(Q), ncol(Q), TT))
@@ -115,9 +113,9 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   }
   
   xx <- x
-  xx[is.na(x)] <- 0 # atribuir valor arbitrário para missing
+  xx[is.na(x)] <- 0 # Arbitrary value for missing
   
-  # FUNÇÃO KALMAN SMOOTHER DIAG
+  # KALMAN SMOOTHER DIAG
   
   resul <- kalman_smoother_diag(t(xx), AA, CC, QQ, RR, initx, initV, list('model',1:TT))
   
@@ -133,5 +131,7 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   nomes_colunas <- c("data", paste0("Fator",1:ncol(fatores)))
   fator_final <- data.frame(coluna1, fatores)
   colnames(fator_final) <- nomes_colunas
+  
   fator_final
+  list(fator_final = fator_final,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
 }

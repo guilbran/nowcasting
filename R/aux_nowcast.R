@@ -1,18 +1,18 @@
-#' @title Forecasting
+#' @title Auxiliar function for nowcast
 #' @description Forecast quarterly series from monthly series.
 #' @param y Dependent variable.
 #' @param x Independent variable.
 #' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
 #' @export
 
-forecasting <- function(y,x){
+aux_nowcast <- function(y,x){
   
   # y: ts (trimestral)
   # x: fatores (mensais - output da função FactorExtraction)
   
   pib<-y
   
-  # tranformar fatores mensais em trimestrais
+  # tranformar fatores mensais em trimestrais, selecionando o último fator
   fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
                                              substr(x[nrow(x),1],6,7))), frequency = 12)
   

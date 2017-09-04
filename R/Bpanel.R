@@ -17,7 +17,7 @@
 
 
 
-arrumarVintage <- function(base = NULL, legenda = NULL){
+Bpanel <- function(base = NULL, legenda = NULL){
   
   # base: data.frame da base de dados lida .csv
   # legenda: data.frame da legenda lida em .xlsx

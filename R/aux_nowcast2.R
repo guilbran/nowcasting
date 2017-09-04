@@ -1,0 +1,47 @@
+#' @title Auxiliar function for nowcast
+#' @description Forecast quarterly series from monthly series.
+#' @param y Dependent variable.
+#' @param x Independent variable.
+#' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
+#' @export
+
+aux_nowcast2 <- function(y,x){
+  
+  # y: ts (trimestral)
+  # x: fatores (mensais - output da função FactorExtraction)
+  
+  # tranformar fatores mensais em trimestrais, selecionando o último fator
+  fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
+                                                    substr(x[nrow(x),1],6,7))), frequency = 12)
+  
+  fatoresTRI <- mestri(fatoresTS)
+  
+
+  # estimação do modelo de regressão
+  dados <- cbind(y, fatoresTRI)
+  colnames(dados) <- c("Y", paste0("X",1:ncol(data.frame(fatoresTRI))))
+  reg <- stats::lm(Y ~ ., data = na.omit(data.frame(dados)))
+  fit <- stats::ts(fitted(reg), end = end(na.omit(dados)), frequency = 4)
+  
+  Qmax <- max(which(is.na(dados[,1])))
+  
+  # previsão
+  newbase <- data.frame(dados[(Qmax-4):Qmax,-1])
+  colnames(newbase) <- paste0("X",1:ncol(data.frame(fatoresTRI)))
+  
+  ## função auxiliar
+  tail.ts <- function(data,n) {
+    data <- as.ts(data)
+    window(data,start=tsp(data)[2]-(n-1)/frequency(data))
+  }
+  
+  prev <- stats::ts(predict(object = reg, newdata = newbase), start = start(tail.ts(dados,5)), frequency = 4) 
+  
+  dados_pib<-cbind(y,fit,prev)
+
+  colnames(dados_pib) <- c("y", "in","out")
+  
+  # RETORNAR PREVISÃO DENTRO E FORA DA AMOSTRA
+  list(main = dados_pib,reg = reg)
+}
+

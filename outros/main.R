@@ -15,12 +15,27 @@ base<-base_extraction(c(1455,21859))
 base<-window(base,start=c(2001,12),frequency=12)
 
 # Criar o painel balanceado (substitui outliers,excluir séries, subst outliers, estacionariza, transforma em trimestral)
+base0<-PRTDB(base,c(15,0),as.Date('2017-07-05'))
+base01<-arrumarVintage(base0,c(3,3))
 base1<-arrumarVintage(base,c(3,3))
 
 # Encontrar os fatores dinâmicos
-f<-FactorExtraction(x = base1,q = 1,r = 1,p = 1)
+f<-FactorExtraction(x = Bpanel(vintage,rep(3,dim(vintage)[2])),q = 2,r = 2,p = 1)
+
+now <- nowcast(y = mestri(lag(pib,-2)),regressors = vintage,legend = rep(3,dim(vintage)[2]),q = 2,r = 3,p = 1)
+
+now2<- nowcast(y = diff(diff(mestri(lag(pib,-2)),4))
+               ,regressors = vintage,legend = rep(3,dim(vintage)[2])
+               ,q = 2,r = 2,p = 1)
+
+summary(now2$reg)
+ts.plot(now2$main,col=1:3)
+now2$main
 
 
+now$fatores$eigen$values/sum(now$fatores$eigen$values)
+
+plot(now$fatores$eigen$values/sum(now$fatores$eigen$values))
 
 arrumarVintage(vintage,rep(3,dim(vintage)[2]))
 arrumarVintage(vintage[,1:2],c(3,3))

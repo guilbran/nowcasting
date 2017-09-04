@@ -2,8 +2,8 @@
 
 #' @description Estimate nowcasting and foreacasting for a quarterly time serie. The method is based on 
 #' \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
-#' @param y Quarterly time-series 
-#' @param vintage A time series matrix (mts) representing the vintage of interest.
+#' @param y Stationary quarterly time-series 
+#' @param regressors A time series matrix (\code{mts}) representing the regressors of interest.
 #' @param legend \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 #' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 #' The transformation is specified as follow:
@@ -86,15 +86,17 @@
 #' @export
 
 
-nowcast <- function(y, vintage, legend, q = 2, r = 2, p = 1){
+nowcast <- function(y, regressors, legend, q = 2, r = 2, p = 1){
   
-  vintageTRANSF <- arrumarVintage(vintage, legend)
+  vintageTRANSF <- Bpanel(vintage, legend)
   
-  fatores <- FactorExtraction(vintageTRANSF, q = q, r = r, p = p)
+  fatores0 <- FactorExtraction(vintageTRANSF, q = q, r = r, p = p)
   
-  prev <- forecasting(y,fatores)
+  fatores <- fatores0$fator_final
   
-  return(list(prev = prev, fatores = fatores))
+  prev <- aux_nowcast2(y,fatores)
+  
+  return(list(main = prev$main, reg = prev$reg, factors = fatores0))
   
 }
 
