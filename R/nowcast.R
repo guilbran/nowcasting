@@ -88,18 +88,14 @@
 
 nowcast <- function(y, regressors, legend, q = 2, r = 2, p = 1){
   
-  vintageTRANSF <- Bpanel(vintage, legend)
-  
+  vintageTRANSF <- Bpanel(regressors, legend)
+
   fatores0 <- FactorExtraction(vintageTRANSF, q = q, r = r, p = p)
   
   fatores <- fatores0$fator_final
   
-  prev <- aux_nowcast2(y,fatores)
+  prev <- aux_nowcast2(mestri(y),fatores)
   
   return(list(main = prev$main, reg = prev$reg, factors = fatores0))
   
 }
-
-
-
-

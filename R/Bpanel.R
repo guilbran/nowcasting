@@ -36,12 +36,12 @@ Bpanel <- function(base = NULL, legenda = NULL){
     }else
       warning('The data.frame must have a column called name and a column called transf')
   } else if (is.vector(legenda)){
-    
       if (is.null(dim(base))){
         legenda<-data.frame(name = 'base',transf = legenda)
         TransfCode <- legenda
       } else if (!is.null(dim(base))){
-        legenda<-data.frame(name = colnames(base),transf = legenda)
+        # legenda<-data.frame(name = colnames(base),transf = legenda)
+        legenda<-data.frame(name = names(DATA),transf = legenda)
         TransfCode <- legenda[,"transf"]
       }
   } else 
@@ -80,6 +80,7 @@ Bpanel <- function(base = NULL, legenda = NULL){
   
   # transformação de diferença mensal/variação em trimestral
   X_temp <- data.frame(stats::filter(X, c(1,2,3,2,1), sides = 1))
+  X_temp[,which(legenda$transf==0)] <- X[,which(legenda$transf==0)]
   
   # remover dados que se perderam(?) após transformação trimestral
   X <- data.frame(X_temp [5:nrow(X_temp),])

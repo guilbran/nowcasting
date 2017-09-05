@@ -15,7 +15,17 @@ outliers_correction <- function(x, k_ma = 3){
   
   # outlier são as obs que ultrapassam 4* distância interquartilica
   outlier <- abs(x - median(x, na.rm = T)) > 4*abs(quantile(x, probs = 0.25, na.rm = T) -  quantile(x, probs = 0.75, na.rm = T)) & !missing
+  TT <- length(x)
   
+  round2 = function(x, n) {
+    posneg = sign(x)
+    z = abs(x)*10^n
+    z = z + 0.5
+    z = trunc(z)
+    z = z/10^n
+    z*posneg
+  }
+  # outlier <- abs(x - median(x, na.rm = T)) > 4*abs(x[round2(TT*1/4,0)] -  x[round2(TT*3/4,0)]) & !missing
   Z <- x
 
   # substituir outliers e missings pela mediana
