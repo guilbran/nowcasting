@@ -93,7 +93,7 @@ nowcast <- function(y, regressors, legend, q = 2, r = 2, p = 1){
   
   fatores <- fatores0$fator_final
   
-  prev <- aux_nowcast(monqua(y),fatores)
+  prev <- bridge(monqua(y),fatores)
   
   return(list(main = prev$main, reg = prev$reg, factors = fatores0))
   

@@ -1,11 +1,11 @@
-#' @title Auxiliar function for nowcast
-#' @description Forecast quarterly series from monthly series.
+#' @title Bridge Equation
+#' @description Bridge equation, estimate quarterly series from monthly series.
 #' @param y Dependent variable.
 #' @param x Independent variable.
 #' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
 #' @export
 
-aux_nowcast <- function(y,x){
+bridge <- function(y,x){
   
   # y: ts (trimestral)
   # x: fatores (mensais - output da função FactorExtraction)
