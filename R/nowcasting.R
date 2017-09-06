@@ -1,4 +1,4 @@
-#' @title nowcasting and create Real-Time data basis
+#' @title Nowcasting Analysis and Create Real-Time Data Basis
 #'
 #' @description teste
 #'
@@ -7,7 +7,7 @@
 #' 
 #' @author Daiane Mattos \email{daiane.mattos@fgv.br},
 #'         Guilherme Branco \email{guilherme.branco@fgv.br},
-#'         Pedro Costa Ferreira \email{pedro.guilherme@fgv.br}, 
+#'         Pedro Costa Ferreira \email{pedro.guilherme@fgv.br}
 #'         
 #'         
 #'
