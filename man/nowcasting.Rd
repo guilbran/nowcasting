@@ -6,7 +6,11 @@
 \alias{nowcasting-package}
 \title{Nowcasting Analysis and Create Real-Time Data Basis}
 \description{
-teste
+The purpose of this package is to disseminate to the community of \code{R} users the statistical tools and techniques of 'nowcast' already known in the academic literature. One can find in this package a simple and practical way to reproduce several of these techniques for their studies.
+In this preliminary version of the package we present only one method, based on a seminal article in this literature:
+\emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+This is one of the seminal works in the nowcasting area. Some functions are adaptations and translations of this paper's \emph{replication files} avaible in MATLAB and RATS. One can found these \emph{replication files} in the following url:
+\url{https://www.newyorkfed.org/research/economists/giannone/pub}
 }
 \note{
 The authors would like to thank the support by the Getulio 
