@@ -9,7 +9,7 @@ Authors@R: c( person("Guilherme","Branco Gomes",email = "guilherme.branco@fgv.br
               person("Daiane", "Mattos", email = "daiane.mattos@fgv.br",role=c("aut"))
               )
 Maintainer: Guilherme Branco Gomes <guilherme.branco@fgv.br>
-Description: Methods and tools for 'forecast' the current state (nowcast) of Brazilian economic time series. It allows extract information in real time, creating a real time data base; estimate relationship between macroeconomic variables via estimation of dynamic factors; forecast time series in previous periods of reference; forecast time series in the current period of reference (nowcasting); recreate a data base simulating the information available in the past for evaluating forecasting models accuracy.  The econometric framework we follow is proposed in Giannone et al. (2008) <doi:10.1016/j.jmoneco.2008.05.010>.
+Description: Methods and tools for 'forecast' the current state (nowcast) of Brazilian economic time series. It allows: extract information in real time, creating a real time data base; estimate relationship between macroeconomic variables via dynamic factors; forecast time series in previous periods of reference; forecast time series in the current period of reference (nowcasting); recreate a data base simulating the information available in the past for evaluating forecasting models accuracy (pseudo real-time data base). The econometric framework and estimation method we follow is proposed in Giannone et al. (2008) <doi:10.1016/j.jmoneco.2008.05.010>.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

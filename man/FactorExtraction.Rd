@@ -36,5 +36,5 @@ FactorExtraction(x = NULL, q = NULL, r = NULL, p = NULL, A = NULL,
 \item{n.prevs}{Number of quarter previsions ahead.}
 }
 \description{
-Extract factors from a data set of time series.
+Extract factors from a data set of time series. Function translated from matlab and transformed from Giannone et al. (2008) replication files, available at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
 }

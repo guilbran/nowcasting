@@ -83,7 +83,6 @@
 # now<-nowcast(y = pib, vintage = mybase,legend=c(3,3,3,3),q=1,r=1,p=1)
 #' }
 #' @seealso \code{\link[nowcasting]{base_extraction}}
-#' @export
 
 
 nowcast <- function(y, regressors, legend, q = 2, r = 2, p = 1){
@@ -94,7 +93,7 @@ nowcast <- function(y, regressors, legend, q = 2, r = 2, p = 1){
   
   fatores <- fatores0$fator_final
   
-  prev <- aux_nowcast2(mestri(y),fatores)
+  prev <- aux_nowcast(mestri(y),fatores)
   
   return(list(main = prev$main, reg = prev$reg, factors = fatores0))
   

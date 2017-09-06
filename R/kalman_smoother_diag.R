@@ -1,13 +1,13 @@
 #' @title Kalman Smoother Diagonal
-#' @description Kalman Smoother Diagonal
-#' @param y xxx
+#' @description Kalman Smoother Diagonal. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at https://www.newyorkfed.org/research/economists/giannone/pub}.
+#' @param y Observed serie.
 #' @param A Matrix that update factors with VAR
 #' @param C Matrix that combine factors to explain the transformed data.
 #' @param Q Error variance in factor update.
 #' @param R Error variance in explain data from factors
-#' @param init_x xxx
-#' @param init_V xxx
-#' @param varagin xxx
+#' @param init_x Initial x
+#' @param init_V Initial V
+#' @param varagin Optional variables
 #' @import matlab
 #' @export
 

@@ -1,5 +1,5 @@
 #' @title Factor Extraction
-#' @description Extract factors from a data set of time series.
+#' @description Extract factors from a data set of time series. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at https://www.newyorkfed.org/research/economists/giannone/pub}.
 #' @param x Vintage transformada pela função \code{arrumarVintage}
 #' @param q Dynamic rank. Number of error terms. If not specified q = 2.
 #' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.

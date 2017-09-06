@@ -1,5 +1,4 @@
 #' @title Extract time series and create a base
-
 #' @description Create a time series matrix \code{mts} used to estimate the commmon factors.
 #' @param series_code Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
 #' @import xts

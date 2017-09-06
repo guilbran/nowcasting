@@ -24,5 +24,5 @@ kalman_filter_diag(y, A, C, Q, R, init_x, init_V, varagin)
 \item{varagin}{xxx}
 }
 \description{
-Kalman Filter Diagonal
+Kalman Filter Diagonal. Function translated from matlab and transformed from Giannone et al. (2008) replication files.
 }
