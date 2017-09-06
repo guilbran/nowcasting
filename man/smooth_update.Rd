@@ -29,5 +29,5 @@ smooth_update(xsmooth_future, Vsmooth_future, xfilt, Vfilt, Vfilt_future,
 \item{u}{xxx}
 }
 \description{
-Smooth update
+Smooth update. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
 }

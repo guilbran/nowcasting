@@ -24,5 +24,5 @@ kalman_update_diag(A, C, Q, R, y, x, V, varagin)
 \item{varagin}{xxx}
 }
 \description{
-Kalman update diagonal
+Kalman update diagonal. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
 }

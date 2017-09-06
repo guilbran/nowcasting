@@ -7,8 +7,6 @@
 kalman_filter_diag(y, A, C, Q, R, init_x, init_V, varagin)
 }
 \arguments{
-\item{y}{xxx}
-
 \item{A}{Matrix that update factors with VAR}
 
 \item{C}{Matrix that combine factors to explain the transformed data.}
@@ -17,12 +15,12 @@ kalman_filter_diag(y, A, C, Q, R, init_x, init_V, varagin)
 
 \item{R}{Error variance in explain data from factors}
 
-\item{init_x}{xxx}
+\item{init_x}{Initial x}
 
-\item{init_V}{xxx}
+\item{init_V}{Initial x}
 
-\item{varagin}{xxx}
+\item{varagin}{optional variables}
 }
 \description{
-Kalman Filter Diagonal. Function translated from matlab and transformed from Giannone et al. (2008) replication files.
+Kalman Filter Diagonal. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
 }
