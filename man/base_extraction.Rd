@@ -13,7 +13,7 @@ base_extraction(series_code)
 A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 }
 \description{
-Create a time series matrix \code{mts} used to estimate the commmon factors.
+Create a time series matrix \code{mts} used to estimate the common factors.
 }
 \examples{
 # Extracting GDP serie at real-time from Central Bank of Brasil data base
