@@ -7,7 +7,9 @@
 \title{Nowcasting Analysis and Create Real-Time Data Basis}
 \description{
 This package is an initiative of the Center for Statistical and Computational Methods (NMEC) belonging to the Brazilian Institute of Economics (IBRE) of the Getúlio Vargas Foundation (FGV). Our goal is to develop a real-time predictive measure of Brazilian GDP that helps IBRE researchers in their analysis about the Brazilian economy.
+
 The purpose of this package is to disseminate to the community of \code{R} users the statistical tools and techniques of 'nowcast' already known in the academic literature. One can find in this package a simple and practical way to reproduce several of these techniques for their studies.
+
 In this preliminary version of the package we present only one method, based on a seminal article in this literature:
 \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 This is one of the seminal works in the nowcasting area. Some functions are adaptations and translations of this paper's \emph{replication files} avaible in MATLAB and RATS. One can found these \emph{replication files} in the following url:
