@@ -14,7 +14,7 @@ bridge <- function(y,x){
   fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
                                                     substr(x[nrow(x),1],6,7))), frequency = 12)
   
-  fatoresTRI <- mestri(fatoresTS)
+  fatoresTRI <- monqua(fatoresTS)
   
 
   # estimação do modelo de regressão
