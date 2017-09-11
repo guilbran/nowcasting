@@ -1,10 +1,12 @@
 # read files
 base<-read.csv2('./outros/factor122807.2.csv')
-legend<-read.csv2('./outros/Legend.csv')
+legend<-read.csv2('V:/SUEP/Núcleo de Métodos Estatísticos e Computacionais/24 PIB Now/Modelos/Modelo Giannone/arquivos giannone/Legend.csv')
 giannoneetal2008 <- list(Base = base,Legenda = legend)
-
 save(giannoneetal2008,file = 'giannoneetal2008.rda')
 
+save(legend,file = 'legend_giannoneetal2008.rda')
+legend
+legend_giannoneetal2008
 
 # Transformation vector
 trans <- legends$Transformation
