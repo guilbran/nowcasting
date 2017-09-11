@@ -4,7 +4,9 @@ legend<-read.csv2('V:/SUEP/Núcleo de Métodos Estatísticos e Computacionais/24
 giannoneetal2008 <- list(Base = base,Legenda = legend)
 save(giannoneetal2008,file = 'giannoneetal2008.rda')
 
-save(legend,file = 'legend_giannoneetal2008.rda')
+legend_giannoneetal2008<-legend
+
+save(legend_giannoneetal2008,file = 'legend_giannoneetal2008.rda')
 legend
 legend_giannoneetal2008
 
