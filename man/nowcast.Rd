@@ -16,9 +16,9 @@ A \code{vector} where each coordinate is the transformation of the correspondent
 The transformation is specified as follow:
 \itemize{
 \item{transf = 0: the original serie is preserved;}
-\item{transf = 1: \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
-\item{transf = 2: \deqn{latex2}{X_t - X_{t-1}}}
-\item{transf = 3:\deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
+\item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
+\item{transf = 2: \deqn{X_t - X_{t-1}}}
+\item{transf = 3:\deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 }}
 
 \item{q}{Dynamic rank. Number of error terms. If not specified q = 2.}
@@ -37,7 +37,7 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 }
 \examples{
-# Giannone et al (2008) - Example
+#### Giannone et al (2008) - Example
 trans<-giannoneetal2008$Legenda$Transformation[-length(giannoneetal2008$Legenda$Transformation)]
 base<-giannoneetal2008$Base[,-dim(giannoneetal2008$Base)[2]]
 gdp<-giannoneetal2008$Base[,dim(giannoneetal2008$Base)[2]]
@@ -56,6 +56,7 @@ now$factors$fator_final
 ts.plot(now$factors$fator_final,col=1:2)
 ts.plot(cbind(now$main[,1],monqua(now$factors$fator_final)),col=c(1,2,4))
 
+#### Brazilian GDP estimation at Real Times
 # GDP index at market prices at quarterly frequency
 pib<-mestri(lag(base_extraction(22099),-2))
 
