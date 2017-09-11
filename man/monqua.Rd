@@ -17,15 +17,15 @@ It transforsms a monthly time series in a quarterly, selecting the last month to
 }
 \examples{
 # GDP index at market prices at quarterly frequency
-pib<-mestri(lag(base_extraction(22099),-2))
+pib<-monqua(lag(base_extraction(22099),-2))
 
 # Industrial production selecting only last month
-prod_ind<-mestri(base_extraction(21859))
+prod_ind<-monqua(base_extraction(21859))
 
 # Selecting only last month of matrix time series vintage:
-mestri_vintage<-mestri(vintage)
+mestri_vintage<-monqua(vintage)
 
 # Selecting only last month of first two columns of matrix time series vintage:
-mestri_vintage<-mestri(vintage[,1:2])
+mestri_vintage<-monqua(vintage[,1:2])
 
 }

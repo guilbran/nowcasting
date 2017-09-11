@@ -7,11 +7,12 @@
 #' @param legenda \code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 #' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 #' The transformation is specified as follow:
-#' # trans 0, the original serie is preserved.
-#' # trans 1 \deqn{latex1}{100*\frac{X_t - X_{t-1}}{X_{t-1}}} 
-#' # trans 2 \deqn{latex2}{X_t - X_{t-1}}
-#' # trans 3 \deqn{latex3}{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}
-#' @import zoo
+#' \itemize{
+#' \item{transf = 0: the original serie is preserved;}
+#' \item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
+#' \item{transf = 2: \deqn{X_t - X_{t-1}}}
+#' \item{transf = 3:\deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
+#' }#' @import zoo
 #' @importFrom stats filter
 #' @export
 

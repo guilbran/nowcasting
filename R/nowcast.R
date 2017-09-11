@@ -20,6 +20,7 @@
 #' \code{prev} contains the original serie, the estimation in the sample, the estimation out of the sample;
 #' \code{fatores} contains the common factors of vintage data set.
 #' @examples
+#' \dontrun{
 #' #### Giannone et al (2008) - Example
 #' trans<-giannoneetal2008$Legenda$Transformation[-length(giannoneetal2008$Legenda$Transformation)]
 #' base<-giannoneetal2008$Base[,-dim(giannoneetal2008$Base)[2]]
@@ -41,7 +42,7 @@
 #' 
 #' #### Brazilian GDP estimation at Real Times
 #' # GDP index at market prices at quarterly frequency
-#' pib<-mestri(lag(base_extraction(22099),-2))
+#' pib<-monqua(lag(base_extraction(22099),-2))
 #' 
 #' # Estimate the nowcasting based on dynamic factors extracted from vintage:
 #' # 1 dynamic factor
@@ -87,9 +88,8 @@
 #' # factor estimation
 #' now$fatores
 #' 
-#' \dontrun{
 #' # GDP index at market prices
-#' pib<-mestri(lag(base_extraction(22099),-2))
+#' pib<-monqua(lag(base_extraction(22099),-2))
 #' 
 #' # Creating real time data base with the series:
 #' # Exchange rate - Free - United States dollar (1);

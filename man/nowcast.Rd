@@ -37,6 +37,7 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
 }
 \examples{
+\dontrun{
 #### Giannone et al (2008) - Example
 trans<-giannoneetal2008$Legenda$Transformation[-length(giannoneetal2008$Legenda$Transformation)]
 base<-giannoneetal2008$Base[,-dim(giannoneetal2008$Base)[2]]
@@ -58,7 +59,7 @@ ts.plot(cbind(now$main[,1],monqua(now$factors$fator_final)),col=c(1,2,4))
 
 #### Brazilian GDP estimation at Real Times
 # GDP index at market prices at quarterly frequency
-pib<-mestri(lag(base_extraction(22099),-2))
+pib<-monqua(lag(base_extraction(22099),-2))
 
 # Estimate the nowcasting based on dynamic factors extracted from vintage:
 # 1 dynamic factor
@@ -104,9 +105,8 @@ now$prev
 # factor estimation
 now$fatores
 
-\dontrun{
 # GDP index at market prices
-pib<-mestri(lag(base_extraction(22099),-2))
+pib<-monqua(lag(base_extraction(22099),-2))
 
 # Creating real time data base with the series:
 # Exchange rate - Free - United States dollar (1);

@@ -7,6 +7,8 @@
 kalman_filter_diag(y, A, C, Q, R, init_x, init_V, varagin)
 }
 \arguments{
+\item{y}{Observed serie}
+
 \item{A}{Matrix that update factors with VAR}
 
 \item{C}{Matrix that combine factors to explain the transformed data.}

@@ -1,5 +1,6 @@
 #' @title Kalman Filter Diagonal
 #' @description Kalman Filter Diagonal. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
+#' @param y Observed serie
 #' @param A Matrix that update factors with VAR
 #' @param C Matrix that combine factors to explain the transformed data.
 #' @param Q Error variance in factor update.
@@ -7,7 +8,6 @@
 #' @param init_x Initial x
 #' @param init_V Initial x
 #' @param varagin optional variables
-#' @export
 
 kalman_filter_diag <- function(y, A, C, Q, R, init_x, init_V, varagin){
   

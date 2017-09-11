@@ -15,4 +15,4 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Imports: RCurl, httr, DBI, RMySQL, matlab, stringr, seasonal, corpcor, zoo, xts
+Imports: RCurl, httr, DBI, RMySQL, matlab, stringr, seasonal, corpcor, zoo, xts, lubridate
