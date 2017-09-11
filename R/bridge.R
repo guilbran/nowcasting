@@ -11,9 +11,9 @@ bridge <- function(y,x){
   # x: fatores (mensais - output da função FactorExtraction)
   
   # tranformar fatores mensais em trimestrais, selecionando o último fator
-  fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
-                                                    substr(x[nrow(x),1],6,7))), frequency = 12)
-  
+  # fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
+  #                                                   substr(x[nrow(x),1],6,7))), frequency = 12)
+  fatoresTS <- x
   fatoresTRI <- monqua(fatoresTS)
   
 

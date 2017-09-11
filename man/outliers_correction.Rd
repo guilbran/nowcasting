@@ -12,8 +12,10 @@ outliers_correction(x, k_ma = 3)
 \item{k_ma}{Moving average order.}
 }
 \description{
-This function operates in two stages. First, it substitutes missings and outliers for the median
+This function operates in two stages. First, it substitutes missings and outliers for the median.
 Outliers are definited as observations that its distance from median is more than 4 times the IQR (Interquartile Range).
 Second, a \code{k_ma} moving average is filtered in each serie, and its values are used to replace outliers and missings in the original data set.
 This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
+
+We made an important modifications: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers.
 }

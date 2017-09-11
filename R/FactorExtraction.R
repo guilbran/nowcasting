@@ -132,6 +132,11 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   fator_final <- data.frame(coluna1, fatores)
   colnames(fator_final) <- nomes_colunas
   
+  x<-fator_final
+  fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
+                                                    substr(x[nrow(x),1],6,7))), frequency = 12)
+  
+  
   fator_final
-  list(fator_final = fator_final,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
+  list(fator_final = fatoresTS,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
 }
