@@ -1,16 +1,6 @@
-#' @title Kalman update diagonal
-#' @description Kalman update diagonal. This function is a translation and modification of a function with the same name, written in MATLAB, and available in the replication files of the Giannone et al. (2008) <doi: 10.1016 / j.jmoneco.2008.05.010>. One can find this files at \url{https://www.newyorkfed.org/research/economists/giannone/pub}.
-#' @param A Matrix that update factors with VAR
-#' @param C Matrix that combine factors to explain the transformed data.
-#' @param Q Error variance in factor update.
-#' @param R Error variance in explain data from factors
-#' @param y xxx
-#' @param x xxx
-#' @param V xxx
-#' @param varagin xxx
 #' @import matlab
 #' @import corpcor
-#' @export
+
 
 kalman_update_diag <- function(A, C, Q, R, y, x, V, varagin){
   

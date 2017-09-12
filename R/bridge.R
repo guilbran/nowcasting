@@ -1,9 +1,5 @@
-#' @title Bridge Equation
-#' @description Bridge equation, estimate quarterly series from monthly series.
-#' @param y Dependent variable.
-#' @param x Independent variable.
 #' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
-#' @export
+
 
 bridge <- function(y,x){
   
