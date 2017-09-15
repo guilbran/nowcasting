@@ -7,7 +7,7 @@
 #' 
 #' In this preliminary version of the package we present only one method, based on a seminal article in this literature:
 #' \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
-#' This is one of the seminal works in the nowcasting area. Some functions are adaptations and translations of this paper's \emph{replication files} avaible in MATLAB and RATS. One can found these \emph{replication files} in the following url:
+#' This is one of the seminal works in the nowcasting area. Some functions are adaptations and translations of this paper's \emph{replication files} avaible in MATLAB and RATS. One can find these \emph{replication files} in the following url:
 #' \url{https://www.newyorkfed.org/research/economists/giannone/pub}
 #'
 #' @note The authors would like to thank the support by the Getulio 

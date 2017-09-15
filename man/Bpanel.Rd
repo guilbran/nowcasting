@@ -2,26 +2,27 @@
 % Please edit documentation in R/Bpanel.R
 \name{Bpanel}
 \alias{Bpanel}
-\title{Balanced pannel}
+\title{Balanced panel}
 \usage{
-Bpanel(base = NULL, legenda = NULL)
+Bpanel(base = NULL, trans = NULL, k_ma = 3)
 }
 \arguments{
 \item{base}{A time series matrix (mts) representing the vintage of interest.}
 
-\item{legenda}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+\item{trans}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
 A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 The transformation is specified as follow:
 \itemize{
 \item{transf = 0: the original serie is preserved;}
 \item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
 \item{transf = 2: \deqn{X_t - X_{t-1}}}
-\item{transf = 3:\deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
+\item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 }#' @import zoo}
 }
 \description{
 This function transforms the original time series to its stationary representation following
 the user specification. The monthly variables are agregated to represent quarterly quantities.
 The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
-In the end the missings and outliers are corrected.
+In the end, the missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
 }

@@ -4,22 +4,12 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, regressors, legend, q = 2, r = 2, p = 1)
+nowcast(y, regressors, q = 2, r = 2, p = 1)
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}
 
-\item{regressors}{A time series matrix (\code{mts}) representing the regressors of interest.}
-
-\item{legend}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
-A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
-The transformation is specified as follow:
-\itemize{
-\item{transf = 0: the original serie is preserved;}
-\item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
-\item{transf = 2: \deqn{X_t - X_{t-1}}}
-\item{transf = 3:\deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
-}}
+\item{regressors}{A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.}
 
 \item{q}{Dynamic rank. Number of error terms. If not specified q = 2.}
 
@@ -38,25 +28,6 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 }
 \examples{
 \dontrun{
-#### Giannone et al (2008) - Example
-trans<-giannoneetal2008$Legenda$Transformation[-length(giannoneetal2008$Legenda$Transformation)]
-base<-giannoneetal2008$Base[,-dim(giannoneetal2008$Base)[2]]
-gdp<-giannoneetal2008$Base[,dim(giannoneetal2008$Base)[2]]
-
-now<-nowcast(gdp,base,trans)
-
-# Main results:
-now$main
-ts.plot(now$main,col=1:3,main='Main results')
-
-# the results are not the same as in the reference paper cause we make some changes
-# in the outlier correction function.
-
-# Factors:
-now$factors$fator_final
-ts.plot(now$factors$fator_final,col=1:2)
-ts.plot(cbind(now$main[,1],monqua(now$factors$fator_final)),col=c(1,2,4))
-
 #### Brazilian GDP estimation at Real Times
 # GDP index at market prices at quarterly frequency
 pib<-monqua(lag(base_extraction(22099),-2))
