@@ -14,7 +14,7 @@
 #' \dontrun{
 #' #### Brazilian GDP estimation at Real Times
 #' # GDP index at market prices at quarterly frequency
-#' pib<-monqua(lag(base_extraction(22099),-2))
+#' pib<-monqua(lag(base_extraction(22099),-2)) 
 #' 
 #' # Estimate the nowcasting based on dynamic factors extracted from vintage:
 #' # 1 dynamic factor
