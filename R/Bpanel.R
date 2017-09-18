@@ -13,7 +13,8 @@
 #' \item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
 #' \item{transf = 2: \deqn{X_t - X_{t-1}}}
 #' \item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
-#' }#' @import zoo
+#' }
+#' @import zoo
 #' @importFrom stats filter
 #' @export
 
