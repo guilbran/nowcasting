@@ -4,7 +4,7 @@
 \alias{Bpanel}
 \title{Balanced panel}
 \usage{
-Bpanel(base = NULL, trans = NULL, k_ma = 3)
+Bpanel(base = NULL, trans = NULL, aggregate = T, k_ma = 3)
 }
 \arguments{
 \item{base}{A \code{mts} with the series to be transformed.}
@@ -21,6 +21,8 @@ The transformation is specified as follow:
 \item{transf = 2: \deqn{X_t - X_{t-1}}}
 \item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 }}
+
+\item{aggregate}{A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities.}
 
 \item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}
 }

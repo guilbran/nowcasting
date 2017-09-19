@@ -20,6 +20,7 @@
 #' \item{transf = 2: \deqn{X_t - X_{t-1}}}
 #' \item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
 #' }
+#' @param aggregate A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities.
 #' @param k_ma A \code{numeric} representing the degrre of the moving average correction.
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #' 
@@ -32,7 +33,7 @@
 #' @export
 
 
-Bpanel <- function(base = NULL, trans = NULL, k_ma=3){
+Bpanel <- function(base = NULL, trans = NULL, aggregate = T,k_ma=3){
   
   # base: data.frame da base de dados lida .csv
   # trans: data.frame da trans lida em .xlsx
@@ -94,14 +95,20 @@ Bpanel <- function(base = NULL, trans = NULL, k_ma=3){
   
   
   # transformação de diferença mensal/variação em trimestral
+  if (aggregate==T){
   X_temp <- data.frame(stats::filter(X, c(1,2,3,2,1), sides = 1))
   X_temp[,which(trans$transf==0)] <- X[,which(trans$transf==0)]
-  
   # remover dados que se perderam(?) após transformação trimestral
   X <- data.frame(X_temp [5:nrow(X_temp),])
   rownames(X) <- 1:nrow(X)
   dates <- data.frame(data = dates[5:nrow(X_temp),])
   time <- time[5:nrow(X_temp),]
+  }
+  X_temp<-X
+  X_temp[,which(trans$transf==0)] <- X[,which(trans$transf==0)]
+  dates <- data.frame(data = dates[1:nrow(X_temp),])
+  time <- time[1:nrow(X_temp),]
+
   
   # fazer a amostra iniciar sempre no primeiro mês do trimestre
   if(time[1,2] %% 3 == 2){ # se a amostra começa no segundo mês do trimestre

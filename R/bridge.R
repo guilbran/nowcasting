@@ -1,6 +1,5 @@
 #' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
 
-
 bridge <- function(y,x){
   
   # y: ts (trimestral)

@@ -4,7 +4,7 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, regressors, q = 2, r = 2, p = 1)
+nowcast(y, regressors, q = 2, r = 2, p = 1, method = "giannoneetal2008")
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}
@@ -16,6 +16,8 @@ nowcast(y, regressors, q = 2, r = 2, p = 1)
 \item{r}{Static rank (r>=q), i.e. number of factors. If not specified r = 2.}
 
 \item{p}{AR order of factors. If not specified p = 1.}
+
+\item{method}{giannoneetal2008 or banrun2007}
 }
 \value{
 A \code{list} containing two elements:
@@ -29,10 +31,25 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \emph{Giannone et al. 2008}
 }
 \examples{
+\dontrun{
 pib<-base_extraction(22099)
 now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
-now$prev
+now$main
 now$factors
+# Giannone et al. 2008
+pib<-base_extraction(22099)
+retpib2<-diff(diff(lag(pib,-2),3),12)
+base1<-Bpanel(vintage,rep(3,dim(vintage)[2]),aggregate = T)
+now1<-nowcast(retpib2,base1)
+now1$main
+summary(now1$reg)
+
+# Banbura e Runs 2007
+base2<-Bpanel(vintage,rep(3,dim(vintage)[2]),aggregate = F)
+now2<-nowcast(retpib2,base1,2,2,1,'banrun2007')
+now2$main
+summary(now2$reg)
+}
 }
 \references{
 Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
