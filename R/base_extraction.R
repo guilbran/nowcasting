@@ -1,5 +1,5 @@
-#' @title Extract time series and create a base
-#' @description Create a time series matrix \code{mts} used to estimate the common factors.
+#' @title Create a real time data base
+#' @description Create a time series matrix \code{mts} extracting information from Bacen (Banco Central do Brasil) API.
 #' @param series_code Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.
 #' @import xts
 #' @importFrom stats ts
@@ -8,11 +8,6 @@
 #' @examples 
 #' # Extracting GDP serie at real-time from Central Bank of Brasil data base
 #' gdp<-base_extraction(22099)
-#' 
-#' # Extracting Vehicles production (1373) serie at real-time from Central Bank of Brasil data base
-#' vei_prod<-base_extraction(1373)
-#' 
-#' 
 #' \dontrun{
 #' # Industrial production (21859) serie at real-time from Central Bank of Brasil data base
 #' ind_prod<-base_extraction(21859)

@@ -1,19 +1,8 @@
-#' @title Get series Bacen
-#' @description A function to extract BACEN series using their API
-#' @param x Bacen series numbers. Either an integer or a numeric vector.
-#' @param from A string specifying where the series shall start.
-#' @param to A string specifying where the series shall end.
-#' Defaults to not saving.
-#' @keywords bacen
-#' @author Fernando Teixeira \email{fernando.teixeira@fgv.br} and Jonatha Azevedo 
-#' \email{jonatha.costa@fgv.br}
-#' @import RCurl
-#' @import httr
-
+#' @import RCurl httr
 
 get.series.bacen<- function(x, from = "", to = ""){
-  
-  
+
+
   if (missing(x)){
     stop("Need to specify at least one serie.")
   }

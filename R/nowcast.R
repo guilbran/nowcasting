@@ -7,73 +7,17 @@
 #' @param q Dynamic rank. Number of error terms. If not specified q = 2.
 #' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p AR order of factors. If not specified p = 1.
-#' @return A \code{list} containing two \code{data.frame}:
-#' \code{prev} contains the original serie, the estimation in the sample, the estimation out of the sample;
-#' \code{fatores} contains the common factors of vintage data set.
+#' @return A \code{list} containing two elements:
+#' 
+#' A \code{data.frame} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
+#' 
+#' A \code{list} named \code{factors} contains the estimated factors and coeffients..
+#' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #' @examples
-#' \dontrun{
-#' #### Brazilian GDP estimation at Real Times
-#' # GDP index at market prices at quarterly frequency
-#' pib<-monqua(lag(base_extraction(22099),-2)) 
-#' 
-#' # Estimate the nowcasting based on dynamic factors extracted from vintage:
-#' # 1 dynamic factor
-#' # 1 static factor
-#' # 1 autoregressive lag
-#' now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 1,p = 1)
-#' # nowcasting results
+#' pib<-base_extraction(22099)
+#' now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
 #' now$prev
-#' # factor estimation
-#' now$fatores
-#' 
-#' # Estimate the nowcasting based on dynamic factors extracted from vintage:
-#' # 1 dynamic factor
-#' # 1 static factor
-#' # 2 autoregressive lag
-#' now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 1,p = 2)
-#' # nowcasting results
-#' now$prev
-#' # factor estimation
-#' now$fatores
-#' 
-#' # Estimate the nowcasting based on dynamic factors extracted from vintage:
-#' # 1 dynamic factor
-#' # 2 static factor
-#' # 1 autoregressive lag
-#' # induce stationarity in first diference (transf = 2)
-#' now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 1,r = 2,p = 1)
-#' ts.plot(now$prev,col=1:3)
-#' # nowcasting results
-#' now$prev
-#' # factor estimation
-#' now$fatores
-#' 
-#' # Estimate the nowcasting based on dynamic factors extracted from vintage:
-#' # 2 dynamic factor
-#' # 2 static factor
-#' # 1 autoregressive lag
-#' # induce stationarity in first diference (transf = 2)
-#' now<-nowcast(y = pib,vintage = vintage,legend = rep(3,7),q = 2,r = 2,p = 1)
-#' ts.plot(now$prev,col=1:3)
-#' # nowcasting results
-#' now$prev
-#' # factor estimation
-#' now$fatores
-#' 
-#' # GDP index at market prices
-#' pib<-monqua(lag(base_extraction(22099),-2))
-#' 
-#' # Creating real time data base with the series:
-#' # Exchange rate - Free - United States dollar (1);
-#' # Interest rate - CDI (12);
-#' # Vehicles production (1373);
-#' # Credit Sales Index (1453);
-#' # Retail sales (1455);
-#' # Current economic conditions index (4394);
-#' # Industrial production, general index (21859).
-#' mybase<-base_extraction(c(1453,1455,4394,21859))
-# now<-nowcast(y = pib, vintage = mybase,legend=c(3,3,3,3),q=1,r=1,p=1)
-#' }
+#' now$factors
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 

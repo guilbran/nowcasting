@@ -3,5 +3,5 @@
 .RData
 .Ruserdata
 packrat/lib*/
-appveyor
+appveyor.yml
 README.md

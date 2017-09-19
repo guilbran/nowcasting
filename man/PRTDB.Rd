@@ -7,7 +7,7 @@
 PRTDB(mts, delay, today = Sys.Date())
 }
 \arguments{
-\item{mts}{A matrix time series - \code{mts} - with the series to be transformed}
+\item{mts}{A matrix time series - \code{mts} - with the series to be transformed.}
 
 \item{delay}{A numeric vector with the delay in days the information is available after the reference month. Each element correspond to the series in the respective column in \code{mts}.}
 
@@ -17,5 +17,9 @@ PRTDB(mts, delay, today = Sys.Date())
 A \code{mts} with the series transformed.
 }
 \description{
-Create a pseudo real time data base, based on delays estipulates by the users, and data inputed by the
+Create a pseudo real time data base, based on data and delays of disclosure estipulated by the user.
+}
+\examples{
+# Pseudo Real Time Data Base from data base vintage
+PRTDB(vintage,1:dim(vintage)[2])
 }

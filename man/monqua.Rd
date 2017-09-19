@@ -16,12 +16,6 @@ The correpondent quarterly transformation or agregation.
 It transforsms a monthly time series in a quarterly, selecting the last month to represent the quarter. So its necessary to agregate the original serie before use this function.
 }
 \examples{
-# GDP index at market prices at quarterly frequency
-pib<-monqua(lag(base_extraction(22099),-2))
-
-# Industrial production selecting only last month
-prod_ind<-monqua(base_extraction(21859))
-
 # Selecting only last month of matrix time series vintage:
 mestri_vintage<-monqua(vintage)
 

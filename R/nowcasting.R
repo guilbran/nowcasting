@@ -6,7 +6,7 @@
 #' The purpose of this package is to disseminate to the community of \code{R} users the statistical tools and techniques of 'nowcast' already known in the academic literature. One can find in this package a simple and practical way to reproduce several of these techniques for their studies.
 #' 
 #' In this preliminary version of the package we present only one method, based on a seminal article in this literature:
-#' \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+#' \emph{Giannone et al. 2008}
 #' This is one of the seminal works in the nowcasting area. Some functions are adaptations and translations of this paper's \emph{replication files} avaible in MATLAB and RATS. One can find these \emph{replication files} in the following url:
 #' \url{https://www.newyorkfed.org/research/economists/giannone/pub}
 #'
@@ -16,7 +16,7 @@
 #' @author Daiane Mattos \email{daiane.mattos@fgv.br},
 #'         Guilherme Branco \email{guilherme.branco@fgv.br},
 #'         Pedro Costa Ferreira \email{pedro.guilherme@fgv.br}
-#'         
+#' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #'         
 #'
 #' @docType package

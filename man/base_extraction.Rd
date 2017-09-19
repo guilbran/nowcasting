@@ -2,7 +2,7 @@
 % Please edit documentation in R/base_extraction.R
 \name{base_extraction}
 \alias{base_extraction}
-\title{Extract time series and create a base}
+\title{Create a real time data base}
 \usage{
 base_extraction(series_code)
 }
@@ -13,16 +13,11 @@ base_extraction(series_code)
 A \code{mts} in the same specification required in argument \code{base} of function \code{nowcasting}
 }
 \description{
-Create a time series matrix \code{mts} used to estimate the common factors.
+Create a time series matrix \code{mts} extracting information from Bacen (Banco Central do Brasil) API.
 }
 \examples{
 # Extracting GDP serie at real-time from Central Bank of Brasil data base
 gdp<-base_extraction(22099)
-
-# Extracting Vehicles production (1373) serie at real-time from Central Bank of Brasil data base
-vei_prod<-base_extraction(1373)
-
-
 \dontrun{
 # Industrial production (21859) serie at real-time from Central Bank of Brasil data base
 ind_prod<-base_extraction(21859)

@@ -7,9 +7,12 @@
 Bpanel(base = NULL, trans = NULL, k_ma = 3)
 }
 \arguments{
-\item{base}{A time series matrix (mts) representing the vintage of interest.}
+\item{base}{A \code{mts} with the series to be transformed.}
 
-\item{trans}{\code{data.frame} or \code{vector}. A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+\item{trans}{\code{data.frame} or \code{vector}. 
+
+A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
+
 A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 The transformation is specified as follow:
 \itemize{
@@ -17,12 +20,25 @@ The transformation is specified as follow:
 \item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
 \item{transf = 2: \deqn{X_t - X_{t-1}}}
 \item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
-}#' @import zoo}
+}}
+
+\item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}
 }
 \description{
 This function transforms the original time series to its stationary representation following
 the user specification. The monthly variables are agregated to represent quarterly quantities.
 The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
-In the end, the missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+The missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone et al. 2008}.
+In the end the monthly series are aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
+
 We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
+}
+\examples{
+# Example from database vintage:
+Bpanel(vintage,rep(3,dim(vintage)[2]))
+}
+\references{
+Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
+
+Mariano, R. S., & Murasawa, Y. (2003). A new coincident index of business cycles based on monthly and quarterly series. Journal of applied Econometrics, 18(4), 427-443.
 }

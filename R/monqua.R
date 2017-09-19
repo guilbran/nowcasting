@@ -3,12 +3,6 @@
 #' @param x Variable in month frequency
 #' @return The correpondent quarterly transformation or agregation.
 #' @examples 
-#' # GDP index at market prices at quarterly frequency
-#' pib<-monqua(lag(base_extraction(22099),-2))
-#' 
-#' # Industrial production selecting only last month
-#' prod_ind<-monqua(base_extraction(21859))
-#' 
 #' # Selecting only last month of matrix time series vintage:
 #' mestri_vintage<-monqua(vintage)
 #' 
