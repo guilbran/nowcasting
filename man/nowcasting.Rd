@@ -4,7 +4,7 @@
 \name{nowcasting}
 \alias{nowcasting}
 \alias{nowcasting-package}
-\title{Nowcasting Analysis and Create Real-Time Data Basis}
+\title{Nowcast Analysis and Create Real-Time Data Basis}
 \description{
 This package is an initiative of the Center for Statistical and Computational Methods (NMEC) belonging to the Brazilian Institute of Economics (IBRE) of the Getúlio Vargas Foundation (FGV). Our goal is to develop a real-time predictive measure of Brazilian GDP that helps IBRE researchers in their analysis about the Brazilian economy.
 
