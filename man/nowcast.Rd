@@ -26,7 +26,7 @@ A \code{list} named \code{factors} contains the estimated factors and coeffients
 }
 \description{
 Estimate nowcasting and foreacasting for a quarterly time serie. The method is based on 
-\emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+\emph{Giannone et al. 2008}
 }
 \examples{
 pib<-base_extraction(22099)

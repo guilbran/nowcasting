@@ -1,7 +1,7 @@
 #' @title Nowcasting of a quarterly time serie using a dynamic factor.
 
 #' @description Estimate nowcasting and foreacasting for a quarterly time serie. The method is based on 
-#' \emph{Giannone, Domenico, Lucrezia Reichlin, and David Small. "Nowcasting: The real-time informational content of macroeconomic data." Journal of Monetary Economics 55.4 (2008): 665-676.}
+#' \emph{Giannone et al. 2008}
 #' @param y Stationary quarterly time-series 
 #' @param regressors A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.
 #' @param q Dynamic rank. Number of error terms. If not specified q = 2.
