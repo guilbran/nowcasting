@@ -45,7 +45,7 @@ nowcast <- function(y, regressors, q = 2, r = 2, p = 1,method='giannoneetal2008'
     prev <- bridge(monqua(y),fatores)
     return(list(main = prev$main, reg = prev$reg, factors = factors))
     
-  }else if(method=='banrun2007'){
+  }else if(method=='banrun2011'){
     factors <- FactorExtraction(regressors, q = q, r = r, p = p)
     fatores <- stats::filter(factors$fator_final, c(1,2,3,2,1), sides = 1)
     prev <- bridge(monqua(y),fatores)
