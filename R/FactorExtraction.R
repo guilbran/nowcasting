@@ -1,3 +1,5 @@
+#' @export
+
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 
                              A = NULL,C = NULL,Q = NULL,R = NULL,
                              initx = NULL, initV = NULL,
@@ -30,9 +32,12 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   #finalx <- x
   #x <- finalx[,1:(ncol(finalx)-1)]
   
-  coluna1 <- x[,1]
-  x <- x[,-1]
+  # coluna1 <- x[,1]
+  # x <- x[,-1]
   
+  datas<-zoo::as.Date(x)
+  # x<-data.frame(x)
+    
   # Base dimension
   TT <- nrow(x)
   N <- ncol(x)
@@ -110,14 +115,14 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
   fatores <-  t(xsmooth)
   
   nomes_colunas <- c("data", paste0("Fator",1:ncol(fatores)))
-  fator_final <- data.frame(coluna1, fatores)
+  fator_final <- data.frame(datas, fatores)
   colnames(fator_final) <- nomes_colunas
   
   x<-fator_final
-  fatoresTS <- stats::ts(x[,-1], end = as.numeric(c(substr(x[nrow(x),1],1,4),
-                                                    substr(x[nrow(x),1],6,7))), frequency = 12)
+  fatoresTS <- stats::ts(x[,-1], end=as.numeric(c(substr(datas[length(datas)],1,4),
+                                                  substr(datas[length(datas)],6,7)))
+                                                  ,frequency = 12)
   
   
-  fator_final
   list(fator_final = fatoresTS,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
 }
