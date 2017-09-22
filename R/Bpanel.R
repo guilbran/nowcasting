@@ -8,10 +8,7 @@
 #' We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
 #' 
 #' @param base A \code{mts} with the series to be transformed. 
-#' @param trans \code{data.frame} or \code{vector}. 
-#' 
-#' A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
-#' 
+#' @param trans
 #' A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
 #' The transformation is specified as follow:
 #' \itemize{

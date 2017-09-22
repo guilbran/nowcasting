@@ -9,19 +9,6 @@ Bpanel(base = NULL, trans = NULL, aggregate = T, k_ma = 3)
 \arguments{
 \item{base}{A \code{mts} with the series to be transformed.}
 
-\item{trans}{\code{data.frame} or \code{vector}. 
-
-A \code{data.frame} with two columns, the first one is the name, and the second is the transformation to let the series become stationary.
-
-A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
-The transformation is specified as follow:
-\itemize{
-\item{transf = 0: the original serie is preserved;}
-\item{transf = 1: \deqn{100*\frac{X_t - X_{t-1}}{X_{t-1}}}}
-\item{transf = 2: \deqn{X_t - X_{t-1}}}
-\item{transf = 3: \deqn{100*\frac{X_t - X_{t-12}}{X_{t-12}}  -  100*\frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
-}}
-
 \item{aggregate}{A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities.}
 
 \item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}
