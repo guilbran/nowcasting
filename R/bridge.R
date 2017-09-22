@@ -1,4 +1,5 @@
 #' @importFrom stats cov end fitted lm median na.omit predict quantile sd start ts tsp window as.ts frequency
+#' @import zoo
 
 bridge <- function(y,x){
   
@@ -18,19 +19,25 @@ bridge <- function(y,x){
   reg <- stats::lm(Y ~ ., data = na.omit(data.frame(dados)))
   fit <- stats::ts(fitted(reg), end = end(na.omit(dados)), frequency = 4)
   
-  Qmax <- max(which(is.na(dados[,1])))
+  Qmax <- max(which(!is.na(dados[,1])))
+  edge<-zoo::as.Date(dados)[Qmax]
   
   # previsão
-  newbase <- data.frame(dados[(Qmax-4):Qmax,-1])
+  newbase <- data.frame(dados[-(1:(Qmax-1)),-1])
   colnames(newbase) <- paste0("X",1:ncol(data.frame(fatoresTRI)))
   
   ## função auxiliar
-  tail.ts <- function(data,n) {
-    data <- as.ts(data)
-    window(data,start=tsp(data)[2]-(n-1)/frequency(data))
-  }
+  # tail.ts <- function(data,n) {
+  #   data <- as.ts(data)
+  #   window(data,start=tsp(data)[2]-(n-1)/frequency(data))
+  # }
   
-  prev <- stats::ts(predict(object = reg, newdata = newbase), start = start(tail.ts(dados,5)), frequency = 4) 
+  ano<-as.numeric(substr(edge,1,4))
+  tri<-as.numeric(substr(quarters(edge),2,2))
+  
+  prev <- stats::ts(predict(object = reg, newdata = newbase),
+                    start = c(ano,tri),
+                    frequency = 4) 
   
   dados_pib<-cbind(y,fit,prev)
 
