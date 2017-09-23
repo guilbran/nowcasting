@@ -9,6 +9,16 @@ Bpanel(base = NULL, trans = NULL, aggregate = T, k_ma = 3)
 \arguments{
 \item{base}{A \code{mts} with the series to be transformed.}
 
+\item{trans}{A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
+The transformation is specified as follow:
+\itemize{
+\item{transf = 0: the original serie is preserved;}
+\item{transf = 1: \deqn{\frac{X_t - X_{t-1}}{X_{t-1}}}}
+\item{transf = 2: \deqn{X_t - X_{t-1}}}
+\item{transf = 3: \deqn{\frac{X_t - X_{t-12}}{X_{t-12}}  -  \frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
+\item{transf = 4: \deqn{(X_t - X_{t-12})  -  (X_{t-1} - X_{t-13})}}
+}}
+
 \item{aggregate}{A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities.}
 
 \item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}

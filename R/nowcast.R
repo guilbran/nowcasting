@@ -42,13 +42,13 @@ nowcast <- function(y, regressors, q = 2, r = 2, p = 1,method='giannoneetal2008'
   if(method=='giannoneetal2008'){
     factors <- FactorExtraction(regressors, q = q, r = r, p = p)
     fatores <- factors$fator_final
-    prev <- bridge(monqua(y),fatores)
+    prev <- bridge(y,fatores)
     # return(list(main = prev$main, reg = prev$reg, factors = factors))
     
   }else if(method=='banrun2011'){
     factors <- FactorExtraction(regressors, q = q, r = r, p = p)
     fatores <- stats::filter(factors$fator_final, c(1,2,3,2,1), sides = 1)
-    prev <- bridge(monqua(y),fatores)
+    prev <- bridge(y,fatores)
     
     aux_month<-prev$reg$coefficients*cbind(rep(1,dim(factors$fator_final)[1]),factors$fator_final)
     monthgdp<-ts(rowSums(aux_month),start=start(factors$fator_final),freq=12)
