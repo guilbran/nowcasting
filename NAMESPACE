@@ -3,7 +3,7 @@
 export(Bpanel)
 export(PRTDB)
 export(base_extraction)
-export(monqua)
+export(month2qtr)
 export(nowcast)
 import(RCurl)
 import(corpcor)

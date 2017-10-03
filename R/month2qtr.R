@@ -4,10 +4,10 @@
 #' @return The correpondent quarterly transformation or agregation.
 #' @examples 
 #' # Selecting only last month of matrix time series vintage:
-#' mestri_vintage<-monqua(vintage)
+#' mestri_vintage<-month2qtr(vintage)
 #' 
 #' # Selecting only last month of first two columns of matrix time series vintage:
-#' mestri_vintage<-monqua(vintage[,1:2])
+#' mestri_vintage<-month2qtr(vintage[,1:2])
 #' 
 #' @import zoo
 #' @export
@@ -15,7 +15,7 @@
 # função que pega uma série mensal e transforma em trimestral selecionando o 
 # último mês de cada trimestre como o valor do trimestre
 
-monqua <- function(x){
+month2qtr <- function(x){
   data <- zoo::as.Date(x)
   ano_inicial <- as.numeric(substr(data[1],1,4))
   meses <- substr(data,6,7)
