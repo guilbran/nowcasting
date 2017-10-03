@@ -7,7 +7,7 @@
 #' \item \code{Base} is a \code{mts} with 193 series and 312 observations;
 #' \item \code{Legenda} is a \code{data.frame} with specifications of the series in Base.
 #' }
-#' @description Dataset available for replication the results in \emph{Giannone et al. 2008}. 
+#' @description Dataset available to replicate the results in \emph{Giannone et al. 2008}. 
 #' @usage giannoneetal2008
 #' @source This dataset is available as \emph{replication files} of the seminal work \emph{Giannone 2008}.
 #'  One can find these \emph{replication files} in the following url: \url{https://www.newyorkfed.org/research/economists/giannone/pub}

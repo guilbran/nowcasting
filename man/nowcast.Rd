@@ -17,7 +17,7 @@ nowcast(y, regressors, q = 2, r = 2, p = 1, method = "giannoneetal2008")
 
 \item{p}{AR order of factors. If not specified p = 1.}
 
-\item{method}{giannoneetal2008 or banrun2007}
+\item{method}{giannoneetal2008 or banrun2011}
 }
 \value{
 A \code{list} containing two elements:

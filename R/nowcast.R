@@ -7,7 +7,7 @@
 #' @param q Dynamic rank. Number of error terms. If not specified q = 2.
 #' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p AR order of factors. If not specified p = 1.
-#' @param method giannoneetal2008 or banrun2007
+#' @param method giannoneetal2008 or banrun2011
 #' @return A \code{list} containing two elements:
 #' 
 #' A \code{data.frame} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
