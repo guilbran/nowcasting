@@ -16,7 +16,7 @@
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #' @examples
 #' \dontrun{
-#' pib<-base_etraction(22099)
+#' pib<-base_extraction(22099)
 #' now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
 #' now$main
 #' now$factors
