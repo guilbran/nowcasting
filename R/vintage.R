@@ -1,4 +1,4 @@
-#' @name  vintage
+#' @name  BRGDP
 #' @title Real Time Data Base Extracted in 17/08/2017
 #' @docType data
 #' @format    The format is:

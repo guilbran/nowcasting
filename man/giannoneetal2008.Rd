@@ -18,7 +18,7 @@ This dataset is available as \emph{replication files} of the seminal work \emph{
 giannoneetal2008
 }
 \description{
-Dataset available for replication the results in \emph{Giannone et al. 2008}.
+Dataset available to replicate the results in \emph{Giannone et al. 2008}.
 }
 \examples{
 #### Giannone et al (2008) - Example
