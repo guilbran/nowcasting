@@ -4,12 +4,12 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, regressors, q = 2, r = 2, p = 1, method = "giannoneetal2008")
+nowcast(y, x, q = 2, r = 2, p = 1, method = "giannoneetal2008")
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}
 
-\item{regressors}{A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.}
+\item{x}{A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.}
 
 \item{q}{Dynamic rank. Number of error terms. If not specified q = 2.}
 
@@ -32,7 +32,7 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 }
 \examples{
 \dontrun{
-pib<-base_extraction(22099)
+pib<-base_etraction(22099)
 now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
 now$main
 now$factors
