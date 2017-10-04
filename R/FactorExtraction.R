@@ -1,3 +1,4 @@
+
 FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL, 
                              A = NULL,C = NULL,Q = NULL,R = NULL,
                              initx = NULL, initV = NULL,

@@ -37,7 +37,7 @@
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 
-nowcast <- function(y, x, q = 2, r = 2, p = 1,method='giannoneetal2008'){
+nowcast <- function(y, x, q = 2, r = 2, p = 1,method='GRS2008'){
 
   if(method=='GRS2008'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
@@ -77,6 +77,6 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='giannoneetal2008'){
     monthgdp<-NULL
   }
   
-  return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x))
+  return(list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x,monthgdp = monthgdp))
   
 }
