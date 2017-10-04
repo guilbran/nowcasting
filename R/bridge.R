@@ -23,7 +23,8 @@ bridge <- function(y,x){
   edge<-zoo::as.Date(dados)[Qmax]
   
   # previsão
-  newbase <- data.frame(dados[-(1:(Qmax-1)),-1])
+  # newbase <- data.frame(dados[-(1:(Qmax-1)),-1])
+  newbase <- data.frame(dados[-(1:Qmax),-1])
   colnames(newbase) <- paste0("X",1:ncol(data.frame(fatoresTRI)))
   
   ## função auxiliar
@@ -32,8 +33,10 @@ bridge <- function(y,x){
   #   window(data,start=tsp(data)[2]-(n-1)/frequency(data))
   # }
   
-  ano<-as.numeric(substr(edge,1,4))
-  tri<-as.numeric(substr(quarters(edge),2,2))
+  # ano<-as.numeric(substr(edge,1,4))
+  # tri<-as.numeric(substr(quarters(edge),2,2))
+  ano<-as.numeric(substr(edge+months(3),1,4))
+  tri<-as.numeric(substr(quarters(edge+months(3)),2,2))
   
   prev <- stats::ts(predict(object = reg, newdata = newbase),
                     start = c(ano,tri),
@@ -43,6 +46,7 @@ bridge <- function(y,x){
 
   colnames(dados_pib) <- c("y", "in","out")
   
+
   # RETORNAR PREVISÃO DENTRO E FORA DA AMOSTRA
   list(main = dados_pib,reg = reg)
 }

@@ -33,22 +33,12 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 \examples{
 \dontrun{
 pib<-base_extraction(22099)
-now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
-now$main
-now$factors
-# Giannone et al. 2008
-pib<-base_extraction(22099)
-retpib2<-diff(diff(lag(pib,-2),3),12)
-base1<-Bpanel(vintage,rep(3,dim(vintage)[2]),aggregate = T)
-now1<-nowcast(retpib2,base1)
-now1$main
-summary(now1$reg)
+retpib2<-month2qtr(diff(diff(lag(pib,-2),3),12))
+base1<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = T)
+now1<-nowcast(retpib2,base1,1,1,1,method = 'GRS2008')
 
-# Banbura e Runs 2007
-base2<-Bpanel(vintage,rep(3,dim(vintage)[2]),aggregate = F)
-now2<-nowcast(retpib2,base1,2,2,1,'banrun2007')
-now2$main
-summary(now2$reg)
+base2<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = F)
+now2<-nowcast(retpib2,base2,2,2,1,'BR2011')
 }
 }
 \references{
