@@ -7,7 +7,7 @@
 #' @param q Dynamic rank. Number of error terms. If not specified q = 2.
 #' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p AR order of factors. If not specified p = 1.
-#' @param method giannoneetal2008 or banrun2011
+#' @param method GRS2008 for Giannone et al. 2008; BR2011 for Banbura and Runstler 2011;
 #' @return A \code{list} containing two elements:
 #' 
 #' A \code{data.frame} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
@@ -39,25 +39,25 @@
 
 nowcast <- function(y, x, q = 2, r = 2, p = 1,method='giannoneetal2008'){
 
-  if(method=='giannoneetal2008'){
+  if(method=='GRS2008'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
-    fatores <- factors$fator_final
+    fatores <- factors$dynamic_factors
     prev <- bridge(y,fatores)
     # return(list(main = prev$main, reg = prev$reg, factors = factors))
     
-  }else if(method=='banrun2011'){
+  }else if(method=='BR2011'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
-    fatores <- stats::filter(factors$fator_final, c(1,2,3,2,1), sides = 1)
+    fatores <- stats::filter(factors$dynamic_factors, c(1,2,3,2,1), sides = 1)
     prev <- bridge(y,fatores)
     
-    aux_month<-prev$reg$coefficients*cbind(rep(1,dim(factors$fator_final)[1]),factors$fator_final)
-    monthgdp<-ts(rowSums(aux_month),start=start(factors$fator_final),freq=12)
+    aux_month<-prev$reg$coefficients*cbind(rep(1,dim(factors$dynamic_factors)[1]),factors$dynamic_factors)
+    monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
     
     # return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors))
   }
 
   # voltar da padronização
-  fit<-factors$fator_final%*%t(factors$eigen$vectors[,1:r])
+  fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
   colnames(fit)<-colnames(x)
   x <- x
   z <- x

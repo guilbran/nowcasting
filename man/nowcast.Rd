@@ -17,7 +17,7 @@ nowcast(y, x, q = 2, r = 2, p = 1, method = "giannoneetal2008")
 
 \item{p}{AR order of factors. If not specified p = 1.}
 
-\item{method}{giannoneetal2008 or banrun2011}
+\item{method}{GRS2008 for Giannone et al. 2008; BR2011 for Banbura and Runstler 2011;}
 }
 \value{
 A \code{list} containing two elements:
@@ -32,7 +32,7 @@ Estimate nowcasting and foreacasting for a quarterly time serie. The method is b
 }
 \examples{
 \dontrun{
-pib<-base_etraction(22099)
+pib<-base_extraction(22099)
 now<-nowcast(lag(pib,-2),Bpanel(vintage,rep(3,dim(vintage)[2])))
 now$main
 now$factors
