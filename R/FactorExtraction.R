@@ -122,5 +122,5 @@ FactorExtraction <- function(x = NULL,q = NULL,r = NULL,p = NULL,
                                                   ,frequency = 12)
   
   
-  list(fator_final = fatoresTS,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
+  list(dynamic_factors = fatoresTS,A = A,C = C,Q = Q,R =  R,initx =  initx,initV =  initV,eigen = a)
 }
