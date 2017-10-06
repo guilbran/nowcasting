@@ -81,14 +81,14 @@ Bpanel <- function(base = NULL, trans = NULL, aggregate = T,k_ma=3){
   SerOk <- colSums(is.na(base1)) < dim(base1)[1]/3
   base2 <- base1[, which(SerOk)]
   
-  # if (sum(!SerOk)>0){
-  # warning(paste(sum(!SerOk),'serie(s) ruled out due to lack in observations (more than 1/3 is NA).'))
-  # }
-  
-  seriesdeletadas<-toString(colnames(base1[, which(!SerOk)]))
   if (sum(!SerOk)>0){
-  warning(paste(seriesdeletadas,'was(were) ruled out due to lack in observations (more than 1/3 is NA).'))
+  warning(paste(sum(!SerOk),'serie(s) ruled out due to lack in observations (more than 1/3 is NA).'))
   }
+  
+  seriesdeletadas<-colnames(base1[, which(!SerOk)])
+  # if (sum(!SerOk)>0){
+  # warning(paste(seriesdeletadas,'was(were) ruled out due to lack in observations (more than 1/3 is NA).'))
+  # }
   
   
   # substituir missings e outliers 
