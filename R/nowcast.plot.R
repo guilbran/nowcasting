@@ -6,9 +6,9 @@
 #' \dontrun{
 #' trans <- USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]
 #' base <- USGDP$Base[,-dim(USGDP$Base)[2]]
-#' gdp <- USGDP$Base[,dim(USGDP$Base)[2]]
+#' gdp <- month2qtr(USGDP$Base[,dim(USGDP$Base)[2]])
 #' base <- Bpanel(base = base, trans = trans)
-#' now <- nowcast(y = gdp, regressors = base, q = 2, r = 3)
+#' now <- nowcast(y = gdp, x = base, q = 2, r = 3)
 #' 
 #' nowcast.plot(now, type = "fcst")
 #' nowcast.plot(now, type = "factors")
@@ -65,9 +65,9 @@ nowcast.plot <- function(out, type = "fcst"){
   }else if(type == "factors"){
     
     par(mar=c(5.1, 4.1, 4.1, 6), xpd = F)
-    n <- ncol(data.frame(out$factors$fator_final))
-    ts.plot(out$factors$fator_final, col = c(1,"orangered","blue"), lty = c(1,2,3), gpars = list(bty = "l"))
-    anos <- unique(as.numeric(substr(as.Date(out$factors$fator_final),1,4)))
+    n <- ncol(data.frame(out$factors$dynamic_factors))
+    ts.plot(out$factors$dynamic_factors, col = c(1,"orangered","blue"), lty = c(1,2,3), gpars = list(bty = "l"))
+    anos <- unique(as.numeric(substr(as.Date(out$factors$dynamic_factors),1,4)))
     grid()
     par(xpd = T)
     title(main = list("Estimated Factors", font = 1, cex = 1))

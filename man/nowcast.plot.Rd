@@ -18,9 +18,9 @@ Make plot to visualize the output of nowcast function
 \dontrun{
 trans <- USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]
 base <- USGDP$Base[,-dim(USGDP$Base)[2]]
-gdp <- USGDP$Base[,dim(USGDP$Base)[2]]
+gdp <- month2qtr(USGDP$Base[,dim(USGDP$Base)[2]])
 base <- Bpanel(base = base, trans = trans)
-now <- nowcast(y = gdp, regressors = base, q = 2, r = 3)
+now <- nowcast(y = gdp, x = base, q = 2, r = 3)
 
 nowcast.plot(now, type = "fcst")
 nowcast.plot(now, type = "factors")
