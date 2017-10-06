@@ -27,8 +27,7 @@ A \code{data.frame} named \code{main} contains the original serie, the estimatio
 A \code{list} named \code{factors} contains the estimated factors and coeffients..
 }
 \description{
-Estimate nowcasting and foreacasting for a quarterly time serie. The method is based on 
-\emph{Giannone et al. 2008}
+Estimate nowcasting and foreacasting for a quarterly time serie.
 }
 \examples{
 \dontrun{
