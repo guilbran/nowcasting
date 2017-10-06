@@ -57,14 +57,13 @@ Bpanel <- function(base = NULL, trans = NULL, aggregate = T,k_ma=3){
     }
   }
   
-  temp
-  
+ 
   
   # transformação de diferença mensal/variação em trimestral
   if (aggregate==T){
   base1<-stats::filter(base1, c(1,2,3,2,1), sides = 1)
   }
-  
+  colnames(base1)<-colnames(base)
   # fazer a amostra iniciar sempre no primeiro mês do trimestre (Por que?)
   # if(time[1,2] %% 3 == 2){ # se a amostra começa no segundo mês do trimestre
   #   X <- data.frame(X[3:nrow(X),])
@@ -82,9 +81,15 @@ Bpanel <- function(base = NULL, trans = NULL, aggregate = T,k_ma=3){
   SerOk <- colSums(is.na(base1)) < dim(base1)[1]/3
   base2 <- base1[, which(SerOk)]
   
+  # if (sum(!SerOk)>0){
+  # warning(paste(sum(!SerOk),'serie(s) ruled out due to lack in observations (more than 1/3 is NA).'))
+  # }
+  
+  seriesdeletadas<-toString(colnames(base1[, which(!SerOk)]))
   if (sum(!SerOk)>0){
-  warning(paste(sum(!SerOk),'serie(s) ruled out due to lack in observations (more than 1/3 is NA).'))
+  warning(paste(seriesdeletadas,'was(were) ruled out due to lack in observations (more than 1/3 is NA).'))
   }
+  
   
   # substituir missings e outliers 
   base3 <- base2*NA
