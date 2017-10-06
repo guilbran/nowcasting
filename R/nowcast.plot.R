@@ -1,3 +1,21 @@
+#' @title Plot for nowcast output function
+#' @description Make plot to visualize the output of nowcast function
+#' @param out Output of function nowcast
+#' @param type Type of the function
+#' @examples
+#' \dontrun{
+#' trans <- USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]
+#' base <- USGDP$Base[,-dim(USGDP$Base)[2]]
+#' gdp <- USGDP$Base[,dim(USGDP$Base)[2]]
+#' base <- Bpanel(base = base, trans = trans)
+#' now <- nowcast(y = gdp, regressors = base, q = 2, r = 3)
+#' 
+#' nowcast.plot(now, type = "fcst")
+#' nowcast.plot(now, type = "factors")
+#' nowcast.plot(now, type = "eigenvalues")
+#' nowcast.plot(now, type = "eigenvectors")
+#' }
+#' @export
 
 nowcast.plot <- function(out, type = "fcst"){
   
@@ -59,13 +77,3 @@ nowcast.plot <- function(out, type = "fcst"){
   }
 }
 
-# trans <- giannoneetal2008$Legenda$Transformation[-length(giannoneetal2008$Legenda$Transformation)]
-# base <- giannoneetal2008$Base[,-dim(giannoneetal2008$Base)[2]]
-# gdp <- giannoneetal2008$Base[,dim(giannoneetal2008$Base)[2]]
-# base <- Bpanel(base = base, trans = trans)
-# now <- nowcast(y = gdp, regressors = base, q = 2, r = 3)
-# 
-# nowcast.plot(now, type = "fcst")
-# nowcast.plot(now, type = "factors")
-# nowcast.plot(now, type = "eigenvalues")
-# nowcast.plot(now, type = "eigenvectors")
