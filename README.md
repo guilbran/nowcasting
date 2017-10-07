@@ -7,4 +7,4 @@
 # nowcasting
 GDP forecasting in real time (nowcasting)
 
-The backend of this package are based on Giannone et al. (2008) and Giannone et al. (2011) replication files.
+The backend functions of this package are based on Giannone et al. (2008) and Giannone et al. (2011) replication files.
