@@ -49,15 +49,15 @@ nowcast.plot <- function(out, type = "fcst"){
 
   }else if(type == "eigenvectors"){
     
-    par(mar = c(5.1,4.1,4.1,5.1), xpd = T)
+    par(mar = c(5.1,4.1,4.1,6), xpd = F)
     vec <- out$factors$eigen$vectors[,1]
     pvec <- (out$factors$eigen$vectors[,1]^2)*100
     color <- ifelse(vec >= 0, "dodgerblue", "orangered")
     plot(pvec, main = "",  bty = "l", xaxt = "n", type = "h", ylab = "weight (%)", xlab = "variable", col = color)
-    axis(1, at = seq(1,length(vec),2), labels = seq(1,length(vec),2), las=1, cex = 0.7)
+    axis(1, at = seq(1,length(vec),1), labels = seq(1,length(vec),1), las=1, cex = 0.7)
     title(main = list("Variable Percentual Weight in Factor 1", font = 1, cex = 0.9))
-    
-    text(y = max(pvec)*1.1, x = length(pvec)*1.1, labels = "signal weights:", col = 1, cex = 0.8)
+    par(xpd = T)
+    text(y = max(pvec)*1.08, x = length(pvec)*1.1, labels = "signal weights:", col = 1, cex = 0.8)
     text(y = max(pvec), x = length(pvec)*1.1, labels = "positive", col = "dodgerblue", cex = 0.8)
     text(y = max(pvec)*0.92, x = length(pvec)*1.1, labels = "negative", col = "orangered", cex = 0.8)
 
@@ -71,7 +71,7 @@ nowcast.plot <- function(out, type = "fcst"){
     grid()
     par(xpd = T)
     title(main = list("Estimated Factors", font = 1, cex = 1))
-    legend("topright", inset = -0.15, legend = paste("Factor", 1:n), bty = "n",
+    legend("topright", inset = -0.11, legend = paste("Factor", 1:n), bty = "n",
            col = c(1,"orangered","blue"), lty = c(1,2,3), cex = 0.9)
 
   }
