@@ -7,13 +7,21 @@
 #' trans <- USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]
 #' base <- USGDP$Base[,-dim(USGDP$Base)[2]]
 #' gdp <- month2qtr(USGDP$Base[,dim(USGDP$Base)[2]])
-#' base <- Bpanel(base = base, trans = trans)
-#' now <- nowcast(y = gdp, x = base, q = 2, r = 3)
+#' x <- Bpanel(base = base, trans = trans)
+#' now <- nowcast(y = gdp, x = x, q = 2, r = 3,method = 'GRS2008')
 #' 
 #' nowcast.plot(now, type = "fcst")
 #' nowcast.plot(now, type = "factors")
 #' nowcast.plot(now, type = "eigenvalues")
 #' nowcast.plot(now, type = "eigenvectors")
+#' 
+#' x2 <- Bpanel(base = base, trans = trans,aggregate = F)
+#' now2 <- nowcast(y = gdp, x = x2, q = 2, r = 3,method = 'BR2011')
+#' 
+#' nowcast.plot(now2, type = "fcst")
+#' nowcast.plot(now2, type = "factors")
+#' nowcast.plot(now2, type = "eigenvalues")
+#' nowcast.plot(now2, type = "eigenvectors")
 #' }
 #' @export
 
