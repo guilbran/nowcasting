@@ -4,7 +4,7 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, x, q = 2, r = 2, p = 1, method = "GRS2008")
+nowcast(y, x, q = 2, r = 2, p = 1, method = "2sq")
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}
@@ -17,7 +17,7 @@ nowcast(y, x, q = 2, r = 2, p = 1, method = "GRS2008")
 
 \item{p}{AR order of factors. If not specified p = 1.}
 
-\item{method}{GRS2008 for Giannone et al. 2008; BR2011 for Banbura and Runstler 2011;}
+\item{method}{2sq: Two stages quarterly for Giannone et al. 2008; 2sm: Two stages monthly for Banbura and Runstler 2011; EM: Expected Maximization Giannone et al 2011}
 }
 \value{
 A \code{list} containing two elements:
@@ -34,10 +34,13 @@ Estimate nowcasting and foreacasting for a quarterly time serie.
 pib<-base_extraction(22099)
 retpib2<-month2qtr(diff(diff(lag(pib,-2),3),12))
 base1<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = T)
-now1<-nowcast(retpib2,base1,1,1,1,method = 'GRS2008')
+now1<-nowcast(retpib2,base1,1,1,1,method = '2sq')
 
 base2<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = F)
-now2<-nowcast(retpib2,base2,2,2,1,'BR2011')
+now2<-nowcast(retpib2,base2,2,2,1,'2sm')
+
+now3<-nowcast(retpib2,base2,1,1,1,'EM')
+
 }
 }
 \references{
