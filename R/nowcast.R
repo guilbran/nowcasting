@@ -46,7 +46,7 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
     
     # return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors))
   }else if(method=='EM'){
-    X<-cbind(base1,qtr2month(y))
+    X<-cbind(x,qtr2month(y))
     Par<-list(r=rep(r,3),p=p,max_iter=3,i_idio=c(rep(T,dim(x)[2]),F),
               Rconstr = matrix(c(
                 c(2,3,2,1),
