@@ -4,7 +4,7 @@
 \alias{RTDB}
 \title{Re-create Real Time Data Base}
 \usage{
-RTDB(series_code, vintage)
+RTDB(series_code, vintage = Sys.Date())
 }
 \arguments{
 \item{series_code}{Vector with the series encoding follow the Bacen (Banco Central do Brasil) standards.}
