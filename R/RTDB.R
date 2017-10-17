@@ -9,14 +9,14 @@
 #' @references Central Bank of Brazil
 #' @export
 
-RTDB<-function(series_code,vintage){
+RTDB<-function(series_code,vintage = Sys.Date()){
 
   # library(DBI)
   # library(RMySQL)
 
   # series_code<-c(1,12)
   # vintage<-Sys.Date()
-  # v_ind<-as.character(vintage)
+  v_ind<-as.character(vintage)
 
   # SQL<-paste("SELECT * FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
   
