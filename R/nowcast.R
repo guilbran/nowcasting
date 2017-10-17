@@ -41,7 +41,7 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
     fatores <- stats::filter(factors$dynamic_factors, c(1,2,3,2,1), sides = 1)
     prev <- bridge(y,fatores)
     
-    aux_month<-prev$reg$coefficients*cbind(rep(1,dim(factors$dynamic_factors)[1]),factors$dynamic_factors)
+    aux_month<-prev$reg$coefficients*cbind(rep(1,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
     monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
     
     # return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors))
