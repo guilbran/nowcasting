@@ -63,7 +63,7 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
     monthgdp<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
     
     Y<-cbind(y,month2qtr(monthgdp),month2qtr(monthgdp))
-     Y[is.na(Y[,1]),2]<-NA
+    Y[is.na(Y[,1]),2]<-NA
     Y[!is.na(Y[,1]),3]<-NA
     colnames(Y)<-c('y','in','out')
     

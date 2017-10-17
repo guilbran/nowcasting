@@ -109,7 +109,7 @@ remNaNs_spline <-function(X,options){
 }
 
 InitCond<-function(xNaN,r,p,blocks,optNaN,R_mat,q,nQ,i_idio){
-  
+
   x<-xNaN
   Rcon<-R_mat
   
@@ -206,7 +206,7 @@ InitCond<-function(xNaN,r,p,blocks,optNaN,R_mat,q,nQ,i_idio){
     Z <- FF[,(r_i+1):(r_i*(p+1))]
     A_i = t(zeros(r_i*ppC,r_i*ppC))
     A_temp = solve(t(Z)%*%Z)%*%t(Z)%*%z
-    A_i[1:r_i,1:r_i*p] <- t(A_temp)
+    A_i[1:r_i,1:(r_i*p)] <- t(A_temp)
     A_i[(r_i+1):dim(A_i)[1],1:(r_i*(ppC-1))] <- eye(r_i*(ppC-1))
     
     ##########################
@@ -454,7 +454,7 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
   
   # y=y_est
   
-  message('EMstep antes dos parâmetros')
+  # message('EMstep antes dos parâmetros')
   
   n <- size(y,1)
   TT <- size(y,2)
@@ -478,12 +478,12 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
   Q_new <- Q
   V_0_new <- V_0
   
-  message('EMstep antes loop 1:nb')
+  # message('EMstep antes loop 1:nb')
   
   
   for(i in 1:n_b){
     
-    message(i)
+    # message(i)
     
     r_i <- r[i]
     rp <- r_i*p
@@ -495,7 +495,7 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
     A_i <- A[(rp1+1):(rp1+r_i*ppC), (rp1+1):(rp1+r_i*ppC)]
     Q_i <- Q[(rp1+1):(rp1+r_i*ppC), (rp1+1):(rp1+r_i*ppC)]
     
-    if(r_i==1){
+    if(rp==1){
     EZZ <- t(Zsmooth[(rp1+1):(rp1+rp),2:ncol(Zsmooth)]) %*% Zsmooth[(rp1+1):(rp1+rp),2:ncol(Zsmooth)] +
       sum(Vsmooth[(rp1+1):(rp1+rp),(rp1+1):(rp1+rp),2:dim(Vsmooth)[3]])  # E(Z'Z)
     EZZ_BB <- t(Zsmooth[(rp1+1):(rp1+rp),1:(ncol(Zsmooth)-1)]) %*% Zsmooth[(rp1+1):(rp1+rp),1:(ncol(Zsmooth)-1)] + 
@@ -511,24 +511,24 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
     EZZ_FB <- (Zsmooth[(rp1+1):(rp1+rp),2:ncol(Zsmooth)]) %*% t(Zsmooth[(rp1+1):(rp1+rp),1:(ncol(Zsmooth)-1)]) + 
       apply(VVsmooth[(rp1+1):(rp1+rp),(rp1+1):(rp1+rp),],c(1,2),sum) #E(Z'Z_(-1))
     }
-    message('após EZZ-.')
+    # message('após EZZ-.')
     
     
 
     A_i[1:r_i,1:rp] <- EZZ_FB[1:r_i,1:rp] %*% solve(EZZ_BB[1:rp,1:rp])
-    Q_i[1:r_i,1:r_i] <- (EZZ[1:r_i,1:r_i] - A_i[1:r_i,1:rp] %*% t(EZZ_FB[1:r_i,1:rp])) / TT
+    Q_i[1:r_i,1:r_i] <- (EZZ[1:r_i,1:r_i] - A_i[1:r_i,1:rp] %*% t(matrix(EZZ_FB[1:r_i,1:rp],r_i,rp))) / TT
     
-    message('depois de Q_i')
+    # message('depois de Q_i')
     
     A_new[(rp1+1):(rp1+r_i*ppC),(rp1+1):(rp1+r_i*ppC)] <- A_i 
     Q_new[(rp1+1):(rp1+r_i*ppC),(rp1+1):(rp1+r_i*ppC)] <- Q_i;
     V_0_new[(rp1+1):(rp1+r_i*ppC),(rp1+1):(rp1+r_i*ppC)] <- Vsmooth[(rp1+1):(rp1+r_i*ppC),(rp1+1):(rp1+r_i*ppC),1]
     
-    message('depois de V_0_new')
+    # message('depois de V_0_new')
     
   }
   
-  message('EMstep depois loop 1:nb')
+  # message('EMstep depois loop 1:nb')
   
   rp1 <- sum(r)*ppC
   niM <- sum(i_idio[1:nM])
@@ -554,7 +554,7 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
   # LOADINGS
   C_new <- C
   
-  message('EMstep antes Blocks')
+  # message('EMstep antes Blocks')
   
   # Blocks
   bl <- unique(blocks)
@@ -564,7 +564,7 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
   R_con <- NULL
   q_con <- NULL
   
-  message('EMstep antes segundo loop 1:nb')
+  # message('EMstep antes segundo loop 1:nb')
   
   for(i in 1:n_b){
     bl_idxQ <- cbind(bl_idxQ, repmat(bl[,i],1,r[i]*ppC))
@@ -577,7 +577,7 @@ EMstep <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, Z_0 = NULL,
     q_con <- rbind(q_con, zeros(r[i]*size(R_mat,1),1))
   }
   
-  message('EMstep depois segundo loop 1:nb')
+  # message('EMstep depois segundo loop 1:nb')
   
   bl_idxM <- bl_idxM == 1
   bl_idxQ <- bl_idxQ == 1
