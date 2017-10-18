@@ -870,7 +870,7 @@ MissData <- function(y,C,R){
 }
 
 # %%%  Replication files for:
-#   %%%  ""Nowcasting", 2010, (by Marta Banbura, Domenico Giannone and Lucrezia Reichlin), 
+# %%%  ""Nowcasting", 2010, (by Marta Banbura, Domenico Giannone and Lucrezia Reichlin), 
 # %%% in Michael P. Clements and David F. Hendry, editors, Oxford Handbook on Economic Forecasting.
 # %%%
 # %%% The software can be freely used in applications. 
