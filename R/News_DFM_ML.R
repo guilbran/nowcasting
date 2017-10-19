@@ -8,17 +8,19 @@
 #' @import R.matlab matlab zoo
 #' @export
 
-# library(R.matlab)
-# library(matlab)
-# library(zoo)
-# R_new <- readMat("arquivos pra fç EMstep/R_new.mat")
-# R_new <- R_new$R.new[,,1]
-# X_old <- data.frame(read.csv("arquivos pra fç EMstep/X_old.csv", header = F))
-# X_new <- data.frame(read.csv("arquivos pra fç EMstep/X_new.csv", header = F))
+library(R.matlab)
+library(matlab)
+library(zoo)
+R_new <- readMat("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/R_new.mat")
+R_new <- R_new$R.new[,,1]
+X_old <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_old.csv", header = F))
+X_new <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_new.csv", header = F))
 # 
-# Q = R_new
-# t_fcst = 192
-# v_news = NULL 
+Q = R_new
+t_fcst = 185
+v_news = NULL
+
+v_news<-names(X_new)[colSums(!(is.na(X_new)==is.na(X_old)))==1]
 
 News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_news = NULL){
   
@@ -32,7 +34,8 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
   gainSer <- NULL
   
   #if(!is.null(v_news)){
-  if(!is.nan(X_new[t_fcst,v_news])){
+  # if(!is.nan(X_new[t_fcst,v_news])){
+  if(!is.na(X_new[t_fcst,v_news])){
     Res_old <- para_const(X_old, Q, 0)
     temp <- X_new[t_fcst,v_news] - Res_old$X_sm[t_fcst,v_news]
     singlenews[,v_news] <- temp
@@ -146,3 +149,4 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
               gainT = gain, serGainT = gainSer, Actual = actual, Fcst = fore, Filt = filt))
   
 }
+
