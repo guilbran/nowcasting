@@ -347,7 +347,8 @@ EM_DFM_SS_block_idioQARMA_restrMQ<-function(X,Par){
   ### Standardise X
   Mx = colMeans(X,na.rm=T)
   Wx = sapply(1:N,function(x) sd(X[,x],na.rm = T))
-  xNaN = (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
+  # xNaN = (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
+  xNaN <- (X-kronecker(Mx,rep(1,TT)))/kronecker(Wx,rep(1,TT))
   
   ### Initial conditions
   
@@ -427,7 +428,8 @@ EM_DFM_SS_block_idioQARMA_restrMQ<-function(X,Par){
   
   Res<-list()
   
-  Res$X_sm <- repmat(Wx,TT,1)*x_sm+repmat(Mx,TT,1)
+  # Res$X_sm <- repmat(Wx,TT,1)*x_sm+repmat(Mx,TT,1)
+  Res$X_sm <- kronecker(Wx,rep(1,TT))*x_sm + kronecker(Mx,rep(1,TT))
   Res$FF <- Zsmooth[2:dim(Zsmooth)[1],]
   
   #--------------------------------------------------------------------------
@@ -951,13 +953,8 @@ para_const <- function(X = NULL, P = NULL, lag = NULL){
   nomes<-names(X_old)
   
   #% Standardise x
-  xNaN <- (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
-  
-  colMeans(xNaN,na.rm = T)
-  
-  X-repmat(Mx,TT,1)
-  X-Mx[25]
-  
+  # xNaN <- (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
+  xNaN<-(X-kronecker(Mx,rep(1,TT)))/kronecker(Wx,rep(1,TT))
   
   y <- t(xNaN)
   
@@ -970,8 +967,8 @@ para_const <- function(X = NULL, P = NULL, lag = NULL){
   
   Zsmooth <- t(Zsmooth)
   x_sm <- Zsmooth[2:nrow(Zsmooth),] %*% t(C)
-  X_sm <- matlab::repmat(Wx,TT,1) %*% x_sm + matlab::repmat(Mx,TT,1)
-  # X_sm <- kronecker(Wx,rep(1,TT)) * x_sm + kronecker(Mx,rep(1,TT))
+  # X_sm <- matlab::repmat(Wx,TT,1) %*% x_sm + matlab::repmat(Mx,TT,1)
+  X_sm <- kronecker(Wx,rep(1,TT)) * x_sm + kronecker(Mx,rep(1,TT))
   
   # %--------------------------------------------------------------------------
   # %   Loading the structure with the results
