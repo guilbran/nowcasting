@@ -948,30 +948,44 @@ para_const <- function(X = NULL, P = NULL, lag = NULL){
   # %--------------------------------------------------------------------------
   TT <- nrow(X)
   N <- ncol(X)
+  nomes<-names(X_old)
   
   #% Standardise x
   xNaN <- (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
+  
+  colMeans(xNaN,na.rm = T)
+  
+  X-repmat(Mx,TT,1)
+  X-Mx[25]
+  
   
   y <- t(xNaN)
   
   #%final run of the Kalman filter
   out <- runKF_lag(y, A, C, Q, R, Z_0, V_0, lag)
-  Zsmooth <- out$Zsmooth
-  P <- out$P
+  # Zsmooth <- out$Zsmooth
+  # P <- out$P
+  Zsmooth <- out$xsmooth
+  P <- out$Vsmooth
   
   Zsmooth <- t(Zsmooth)
   x_sm <- Zsmooth[2:nrow(Zsmooth),] %*% t(C)
-  X_sm <- repmat(Wx,TT,1) %*% x_sm + repmat(Mx,TT,1)
+  X_sm <- matlab::repmat(Wx,TT,1) %*% x_sm + matlab::repmat(Mx,TT,1)
+  # X_sm <- kronecker(Wx,rep(1,TT)) * x_sm + kronecker(Mx,rep(1,TT))
   
   # %--------------------------------------------------------------------------
   # %   Loading the structure with the results
   # %--------------------------------------------------------------------------
   
-  Res$P <- P
-  Res$X_sm <- X_sm
+  X_sm<-as.data.frame(X_sm)
+  names(X_sm)<-nomes
+  Res<-list(X_sm=X_sm,P=P)
+  
+  # Res$P <- P
+  # Res$X_sm <- X_sm
   
   # output
-  return(list(Res = Res))
+  return(Res)
 }
 
 runKF_lag <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, x_0 = NULL, Sig_0 = NULL, k = NULL){
@@ -1002,8 +1016,6 @@ runKF_lag <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, x_0 = NU
 }
 
 SKF_lag <-function(Y,Z,R,TT,Q,A_0,P_0){
-  
-  
   # %______________________________________________________________________
   # % Kalman filter for stationary systems with time-varying system matrices
   # % and missing data.
@@ -1073,7 +1085,8 @@ SKF_lag <-function(Y,Z,R,TT,Q,A_0,P_0){
       
       
       PZ  <- P%*%t(Z_t)
-      iF  <- ginv(Z_t%*%PZ + R_t)
+      # iF  <- ginv(Z_t%*%PZ + R_t)
+      iF  <- solve(Z_t%*%PZ + R_t)
       PZF <- PZ%*%iF
       
       V <- y_t - Z_t%*%A

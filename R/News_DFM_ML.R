@@ -13,11 +13,14 @@ library(matlab)
 library(zoo)
 R_new <- readMat("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/R_new.mat")
 R_new <- R_new$R.new[,,1]
+names(R_new)[1]<-'X_sm'
+names(R_new)[9]<-'Z_0'
+names(R_new)[10]<-'V_0'
 X_old <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_old.csv", header = F))
 X_new <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_new.csv", header = F))
 # 
 Q = R_new
-t_fcst = 185
+t_fcst = 186
 v_news = NULL
 
 v_news<-names(X_new)[colSums(!(is.na(X_new)==is.na(X_old)))==1]
@@ -29,7 +32,8 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
   N <- ncol(X_new)
   gList <- unique(unlist(Q$Groups))
   groupnews <- zeros(1,length(gList))
-  singlenews <- zeros(1,N)
+  singlenews <- data.frame(zeros(1,N))
+  names(singlenews)<-names(X_new)
   gain <- NULL
   gainSer <- NULL
   
@@ -38,8 +42,8 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
   if(!is.na(X_new[t_fcst,v_news])){
     Res_old <- para_const(X_old, Q, 0)
     temp <- X_new[t_fcst,v_news] - Res_old$X_sm[t_fcst,v_news]
-    singlenews[,v_news] <- temp
-    groupnews[, gList %in% Q$Groups[v_news]] <- temp
+    singlenews[v_news] <- temp
+    # groupnews[, gList %in% Q$Groups[v_news]] <- temp
     y_old <- Res_old$X_sm[t_fcst,v_news]
     y_new <- X_new[t_fcst,v_news]
   }else{
