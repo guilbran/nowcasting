@@ -21,11 +21,10 @@ X_old <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription
 X_new <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_new.csv", header = F))
 # 
 Q = R_new
-t_fcst = 187   # Qual a data do forecast?
+t_fcst = 187   # Qual a data do nowcast?
 # v_news = NULL
 v_news<-"V25" # Qual a série de interesse? Pode ser um vetor?
 
-News_DFM_ML(X_old,X_new,Q,t_fcst,v_news)
 
 News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_news = NULL){
   
@@ -174,3 +173,38 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
   
 }
 
+
+t_fcst = 187   # Qual a data do nowcast?
+v_news<-c("V1","V2") # Qual a série de interesse? Pode ser um vetor?
+
+news<-News_DFM_ML(X_old,X_new,Q,t_fcst,v_news)
+
+news1<-News_DFM_ML(X_old,X_new,Q,t_fcst,"V1")
+news2<-News_DFM_ML(X_old,X_new,Q,t_fcst,"V2")
+
+news$OldFcst
+news$NewFcst
+news$SerNews
+
+news1$NewFcst
+news2$NewFcst
+
+news$SerNews
+news1$SerNews
+
+news$gainT
+news1$gainT
+news2$gainT
+
+news$Actual
+news1$Actual
+news2$Actual
+
+
+cbind(news$Fcst,
+news1$Fcst,
+news2$Fcst)
+
+cbind(news$Filt,
+news1$Filt,
+news2$Filt)
