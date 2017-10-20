@@ -992,13 +992,16 @@ runKF_lag <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, x_0 = NU
   
   if(k > 0){
     C <- cbind(C, zeros(n,k*r))
-    A <- bdiag(A,zeros(k*r))
+    # A <- bdiag(A,zeros(k*r))
+    A <- magic::adiag(A,zeros(k*r))
     A[(r+1):nrow(A), 1:(k*r)] <- eye(k*r)
-    Q <- bdiag(Q,zeros(k*r))
+    # Q <- bdiag(Q,zeros(k*r))
+    Q <- magic::adiag(Q,zeros(k*r))
     x <- zeros(k*r,1)
-    colnames(x) <- colnames(x_0)
+    # colnames(x) <- colnames(x_0)
     x_0 <- rbind(x_0,x)
-    Sig_0 <- bdiag(Sig_0,zeros(k*r,k*r))
+    # Sig_0 <- bdiag(Sig_0,zeros(k*r,k*r))
+    Sig_0 <- magic::adiag(Sig_0,zeros(k*r,k*r))
   }
   
   S <- SKF_lag(y,C,R,A,Q, x_0, Sig_0)
