@@ -4,7 +4,7 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, x, q = 2, r = 2, p = 1, method = "2sq")
+nowcast(y, x, q = 2, r = 2, p = 1, method = "2sq", blocks = NULL)
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}

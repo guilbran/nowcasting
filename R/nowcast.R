@@ -6,11 +6,17 @@
 #' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.
 #' @param p AR order of factors. If not specified p = 1.
 #' @param method 2sq: Two stages quarterly for Giannone et al. 2008; 2sm: Two stages monthly for Banbura and Runstler 2011; EM: Expected Maximization Giannone et al 2011
+#' @param blocks only for EM method. Select which factors impact the variables (global, nominal or real).
 #' @return A \code{list} containing two elements:
 #' 
-#' A \code{data.frame} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
+#' A \code{mts} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
 #' 
-#' A \code{list} named \code{factors} contains the estimated factors and coeffients..
+#' A \code{list} named \code{factors} contains the estimated factors and coeffients.
+#' 
+#' A \code{mts} named \code{fore_x} contains the output of all regressors.
+#' 
+#' A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP. 
+#' 
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #' @examples
 #' \dontrun{
@@ -28,7 +34,7 @@
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 
-nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
+nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
 
   if(method=='2sq'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
@@ -46,8 +52,14 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
     
     # return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors))
   }else if(method=='EM'){
+    # y1<-qtr2month(y)
+    # y1[rep(which(!is.na(y1)),each=2)-c(2,1)]<-rep(y1[!is.na(y1)],each=2)
+    # X<-cbind(x,y1)
     X<-cbind(x,qtr2month(y))
-    Par<-list(r=rep(r,3),p=p,max_iter=3,i_idio=c(rep(T,dim(x)[2]),F),
+    if(is.null(blocks)){
+      blocks<-matrix(rep(1,dim(X)[2]*3),dim(X)[2],3)
+    }
+    Par<-list(r=rep(r,3),p=p,max_iter=500,i_idio=c(rep(T,dim(x)[2]),F),
               Rconstr = matrix(c(
                 c(2,3,2,1),
                 c(-1,0,0,0),
@@ -56,18 +68,24 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq'){
                 c(0,0,0,-1))
                 ,4,5),
               q = matrix(rep(0,4),4,1),nQ = 1,
-              blocks = matrix(rep(1,dim(x)[2]*3),dim(x)[2],3))
+              blocks = blocks)
     Res<-EM_DFM_SS_block_idioQARMA_restrMQ(X,Par)
     factors<-list(dynamic_factors = Res$FF,A = Res$A, C = Res$C, Q = Res$Q, R = Res$R, initx = Res$Z_0,
             initV = Res$V_0)
-    monthgdp<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
-    
-    Y<-cbind(y,month2qtr(monthgdp),month2qtr(monthgdp))
+    # fore_x<-ts(Res$X_sm[,-dim(Res$X_sm)[2]],start=start(X),frequency = 12)
+    fore_x<-ts(Res$X_sm,start=start(X),frequency = 12)
+    yprev<-month2qtr(ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12))
+    Y<-cbind(y,yprev,yprev)
     Y[is.na(Y[,1]),2]<-NA
     Y[!is.na(Y[,1]),3]<-NA
     colnames(Y)<-c('y','in','out')
     
-    return(list(main = Y,factors = factors,fore_x = ts(Res$X_sm[,-dim(Res$X_sm)[2]],start=start(X),frequency = 12),
+    ind<-c(1:r,1:r+r*5,1:r+r*5*2,dim(Res$C)[2]-4)
+    monthgdp<-ts(Res$Mx[length(Res$Mx)]/9+Res$FF[,ind]%*%Res$C[7,ind]*Res$Wx[length(Res$Wx)],start=start(X),frequency = 12)
+    # Essa é uma medida trimestral do PIB acumulado nos últimos três meses
+    # monthgdp<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
+    
+    return(list(main = Y,factors = factors,fore_x = fore_x,
                 monthgdp = monthgdp))
   }
 
