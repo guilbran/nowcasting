@@ -1,12 +1,194 @@
-# %%%  Replication files for:
-# %%%  ""Nowcasting", 2010, (by Marta Banbura, Domenico Giannone and Lucrezia Reichlin), 
-# %%% in Michael P. Clements and David F. Hendry, editors, Oxford Handbook on Economic Forecasting.
-# %%%
-# %%% The software can be freely used in applications. 
-# %%% Users are kindly requested to add acknowledgements to published work and 
-# %%% to cite the above reference in any resulting publications
-#' @import R.matlab matlab zoo
-#' @export
+# #' @import R.matlab matlab zoo Matrix
+# #' @export 
+
+
+# Auxiliar functions ------------------------------------------------------
+
+para_const <- function(X = NULL, P = NULL, lag = NULL){
+  
+  Z_0 <- P$Z_0
+  V_0 <- P$V_0
+  A <- P$A
+  C <- P$C
+  Q <- P$Q
+  R <- P$R
+  Mx <- P$Mx
+  Wx <- P$Wx
+  
+  # %--------------------------------------------------------------------------
+  # % Preparation of the data
+  # %--------------------------------------------------------------------------
+  TT <- nrow(X)
+  N <- ncol(X)
+  nomes<-names(X_old)
+  
+  #% Standardise x
+  # xNaN <- (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
+  xNaN<-(X-kronecker(Mx,rep(1,TT)))/kronecker(Wx,rep(1,TT))
+  
+  y <- t(xNaN)
+  
+  #%final run of the Kalman filter
+  out <- runKF_lag(y, A, C, Q, R, Z_0, V_0, lag)
+  # Zsmooth <- out$Zsmooth
+  # P <- out$P
+  Zsmooth <- out$xsmooth
+  P <- out$Vsmooth
+  
+  Zsmooth <- t(Zsmooth)
+  x_sm <- Zsmooth[2:nrow(Zsmooth),] %*% t(C)
+  # X_sm <- matlab::repmat(Wx,TT,1) %*% x_sm + matlab::repmat(Mx,TT,1)
+  X_sm <- kronecker(Wx,rep(1,TT)) * x_sm + kronecker(Mx,rep(1,TT))
+  
+  # %--------------------------------------------------------------------------
+  # %   Loading the structure with the results
+  # %--------------------------------------------------------------------------
+  
+  X_sm<-as.data.frame(X_sm)
+  names(X_sm)<-nomes
+  Res<-list(X_sm=X_sm,P=P)
+  
+  # Res$P <- P
+  # Res$X_sm <- X_sm
+  
+  # output
+  return(Res)
+}
+
+runKF_lag <- function(y = NULL, A = NULL, C = NULL, Q = NULL, R = NULL, x_0 = NULL, Sig_0 = NULL, k = NULL){
+  
+  n <- nrow(C)
+  r <- ncol(C)
+  
+  if(k > 0){
+    C <- cbind(C, zeros(n,k*r))
+    # A <- bdiag(A,zeros(k*r))
+    A <- magic::adiag(A,zeros(k*r))
+    A[(r+1):nrow(A), 1:(k*r)] <- eye(k*r)
+    # Q <- bdiag(Q,zeros(k*r))
+    Q <- magic::adiag(Q,zeros(k*r))
+    x <- zeros(k*r,1)
+    # colnames(x) <- colnames(x_0)
+    x_0 <- rbind(x_0,x)
+    # Sig_0 <- bdiag(Sig_0,zeros(k*r,k*r))
+    Sig_0 <- magic::adiag(Sig_0,zeros(k*r,k*r))
+  }
+  
+  S <- SKF_lag(y,C,R,A,Q, x_0, Sig_0)
+  S <- FIS(y,C,R,A,Q,S)
+  
+  xsmooth <- S$AmT[1:r,]
+  Vsmooth <- S$PmT
+  
+  # output
+  return(list(xsmooth = xsmooth, Vsmooth = Vsmooth))
+  
+}
+
+SKF_lag <-function(Y,Z,R,TT,Q,A_0,P_0){
+  # %______________________________________________________________________
+  # % Kalman filter for stationary systems with time-varying system matrices
+  # % and missing data.
+  # %
+  # % The model is        y_t   = Z * a_t + eps_t       
+  # %                     a_t+1 = TT * a_t + u_t       
+  # %
+  # %______________________________________________________________________
+  # % INPUT  
+  # %        Y         Data                                 (nobs x n)  
+  # % OUTPUT 
+  # %        S.Am       Predicted state vector  A_t|t-1      (nobs x m)  
+  # %        S.AmU      Filtered  state vector  A_t|t        (nobs+1 x m)  
+  # %        S.Pm       Predicted covariance of A_t|t-1      (nobs x m x m)  
+  # %        S.PmU      Filtered  covariance of A_t|t        (nobs+1 x m x m)  
+  # %        S.loglik   Value of likelihood function
+  # 
+  # % Output structure & dimensions
+  
+  n <- dim(Z)[1]
+  m <- dim(Z)[2]
+  nobs  <- size(Y,2)
+  
+  S<-list()
+  S$Am <- array(NA,c(m,nobs))
+  S$Pm <- array(NA,c(m,m,nobs))
+  S$AmU <- array(NA,c(m,nobs+1))
+  S$PmU <- array(NA,c(m,m,nobs+1))
+  S$loglik <- 0
+  
+  
+  # ______________________________________________________________________
+  Au <- A_0;  # A_0|0;
+  Pu <- P_0;  # P_0|0
+  
+  S$AmU[,1]    = Au;
+  S$PmU[,,1]  = Pu;
+  
+  
+  
+  for(t in 1:nobs){
+    #       t
+    # A = A_t|t-1   & P = P_t|t-1
+    
+    A <- TT%*%Au;
+    P <- TT%*%Pu%*%t(TT) + Q;
+    P <-  0.5*(P+t(P))
+    
+    # handling the missing data
+    res_MissData <- MissData(Y[,t],Z,R)
+    
+    y_t <- res_MissData$y
+    Z_t <- res_MissData$C
+    R_t <- res_MissData$R
+    L_t <- res_MissData$L
+    
+    # if(is.null(y_t)){
+    if(sum(is.na(y_t))==length(y_t)){
+      Au <- A
+      Pu <- P
+    } else {
+      
+      
+      if(!is.matrix(Z_t)){
+        Z_t<-t(as.matrix(Z_t))
+      }
+      
+      
+      PZ  <- P%*%t(Z_t)
+      # iF  <- ginv(Z_t%*%PZ + R_t)
+      iF  <- solve(Z_t%*%PZ + R_t)
+      PZF <- PZ%*%iF
+      
+      V <- y_t - Z_t%*%A
+      Au <- A  + PZF%*%V
+      Pu <- P  - PZF%*%t(PZ)
+      Pu <-  0.5*(Pu+t(Pu))
+      
+    }
+    
+    S$Am[,t] <- A
+    S$Pm[,,t] <- P
+    
+    # Au = A_t|t   & Pu = P_t|t
+    
+    S$AmU[,t+1] <- Au
+    S$PmU[,,t+1] <- Pu
+    S$loglik <- S$loglik + 0.5*(log(det(iF))  - t(V)%*%iF%*%V)
+  } # t
+  
+  if(sum(is.na(y_t))==length(y_t)){
+    S$KZ <- zeros(m,m)
+  }else{
+    S$KZ <- PZF%*%Z_t
+  }
+  
+  return(S)
+  
+}
+
+
+
+# Main function -----------------------------------------------------------
 
 library(R.matlab)
 library(matlab)
@@ -42,9 +224,7 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
   fore <- NULL
   filt <- NULL
   
-  #if(!is.null(v_news)){
-  # if(!is.nan(X_new[t_fcst,v_news])){
-  # if(!is.na(X_new[t_fcst,v_news])){
+  ### Na nova vintage saiu a informação da variável que estou fazendo forecast na data de interesse?
   if(sum(as.numeric(!is.na(X_new[t_fcst,v_news])))>0){    # Caso permita um vetor como série de interesse
     Res_old <- para_const(X_old, Q, 0)
     temp <- X_new[t_fcst,v_news] - Res_old$X_sm[t_fcst,v_news]
@@ -174,37 +354,19 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
 }
 
 
-t_fcst = 187   # Qual a data do nowcast?
-v_news<-c("V1","V2") # Qual a série de interesse? Pode ser um vetor?
+t_fcst = 188   # Qual a data do nowcast?
+v_news<-c("V25") # Qual a série de interesse? Pode ser um vetor?
 
 news<-News_DFM_ML(X_old,X_new,Q,t_fcst,v_news)
 
-news1<-News_DFM_ML(X_old,X_new,Q,t_fcst,"V1")
-news2<-News_DFM_ML(X_old,X_new,Q,t_fcst,"V2")
+# O que é cada output?
 
-news$OldFcst
-news$NewFcst
-news$SerNews
-
-news1$NewFcst
-news2$NewFcst
-
-news$SerNews
-news1$SerNews
-
+news$OldFcst      # forecast feita com a vintage antiga
+news$NewFcst      # gorecast feita com a vintage nova
+news$GroupNews    # ??
+news$SerNews      # Peso de cada série na resivão final
 news$gainT
-news1$gainT
-news2$gainT
-
+news$serGainT
 news$Actual
-news1$Actual
-news2$Actual
-
-
-cbind(news$Fcst,
-news1$Fcst,
-news2$Fcst)
-
-cbind(news$Filt,
-news1$Filt,
-news2$Filt)
+news$Fcst
+news$Filt
