@@ -37,16 +37,49 @@ Estimate nowcasting and foreacasting for a quarterly time serie.
 }
 \examples{
 \dontrun{
-pib<-base_extraction(22099)
-retpib2<-month2qtr(diff(diff(lag(pib,-2),3),12))
-base1<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = T)
-now1<-nowcast(retpib2,base1,1,1,1,method = '2sq')
+# nowcast function examples:
 
-base2<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]),aggregate = F)
-now2<-nowcast(retpib2,base2,2,2,1,'2sm')
+### Method 2sq
+### This is two stages quarterly, based on Giannone et al. (2008)
+pib<-BRGDP[,8]
+y<-month2qtr(diff(diff(pib,3),12))
+x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = T)
+q<-1
+r<-1
+p<-1
+now_2sq<-nowcast(y,x,q,r,p,method = '2sq')
+# outputs
+nowcast.plot(now_2sq)
+summary(now_2sq$reg)
+nowcast.plot(now_2sq,type = 'factors')
 
-now3<-nowcast(retpib2,base2,1,1,1,'EM')
 
+### Method 2sm
+### This is two stages monthly, based on Giannone et al. (2008) and Banbura and Runstler (2011)
+pib<-BRGDP[,8]
+y<-month2qtr(diff(diff(pib,3),12))
+x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
+q<-1
+r<-2
+p<-1
+now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
+# outputs
+nowcast.plot(now_2sm)
+summary(now_2sm$reg)
+nowcast.plot(now_2sm,type = 'factors')
+ts.plot(now_2sm$monthgdp)
+
+
+### Method EM
+y<-month2qtr(diff(diff(pib,3),12))
+x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
+q=1
+r=2
+p=1
+now_em<-nowcast(y,x,q,r,p,'EM')
+# outputs
+nowcast.plot(now_em)
+ts.plot(now_em$monthgdp)
 }
 }
 \references{
