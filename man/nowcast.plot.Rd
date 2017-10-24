@@ -9,7 +9,7 @@ nowcast.plot(out, type = "fcst")
 \arguments{
 \item{out}{Output of function nowcast}
 
-\item{type}{Type of the function}
+\item{type}{'fcst', 'factors', 'eigenvalues' or 'eigenvectors'}
 }
 \description{
 Make plot to visualize the output of nowcast function

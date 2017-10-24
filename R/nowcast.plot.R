@@ -1,7 +1,7 @@
 #' @title Plot for nowcast output function
 #' @description Make plot to visualize the output of nowcast function
 #' @param out Output of function nowcast
-#' @param type Type of the function
+#' @param type 'fcst', 'factors', 'eigenvalues' or 'eigenvectors'
 #' @examples
 #' \dontrun{
 #' trans <- USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]

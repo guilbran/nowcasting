@@ -18,13 +18,19 @@ nowcast(y, x, q = 2, r = 2, p = 1, method = "2sq", blocks = NULL)
 \item{p}{AR order of factors. If not specified p = 1.}
 
 \item{method}{2sq: Two stages quarterly for Giannone et al. 2008; 2sm: Two stages monthly for Banbura and Runstler 2011; EM: Expected Maximization Giannone et al 2011}
+
+\item{blocks}{only for EM method. Select which factors impact the variables (global, nominal or real).}
 }
 \value{
 A \code{list} containing two elements:
 
-A \code{data.frame} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
+A \code{mts} named \code{main} contains the original serie, the estimation in the sample, the estimation out of the sample;
 
-A \code{list} named \code{factors} contains the estimated factors and coeffients..
+A \code{list} named \code{factors} contains the estimated factors and coeffients.
+
+A \code{mts} named \code{fore_x} contains the output of all regressors.
+
+A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP.
 }
 \description{
 Estimate nowcasting and foreacasting for a quarterly time serie.

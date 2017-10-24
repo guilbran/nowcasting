@@ -40,7 +40,25 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
     fatores <- factors$dynamic_factors
     prev <- bridge(y,fatores)
-    # return(list(main = prev$main, reg = prev$reg, factors = factors))
+
+    # voltar da padronização
+    fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
+    colnames(fit)<-colnames(x)
+    x <- x
+    z <- x
+    s <- apply(z, MARGIN = 2, FUN = sd,na.rm=T)
+    M <- apply(z, MARGIN = 2, FUN = mean,na.rm=T)
+    for(i in 1:dim(x)[2]){
+      z[,i] <- (x[,i] - M[i])/s[i]
+    }
+    x1<-fit
+    fore_x<-x[,colnames(x) %in% colnames(fit)]
+    for(i in colnames(fit)){
+      x1[,i]<-s[i]*fit[,i]+M[i]
+      fore_x[is.na(fore_x[,i]),i] <- x1[is.na(fore_x[,i]),i]
+    }
+ 
+    res<-list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x)
     
   }else if(method=='2sm'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
@@ -50,7 +68,26 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
     aux_month<-prev$reg$coefficients*cbind(rep(1,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
     monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
     
-    # return(list(monthgdp=monthgdp,main = prev$main, reg = prev$reg, factors = factors))
+    # voltar da padronização
+    fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
+    colnames(fit)<-colnames(x)
+    x <- x
+    z <- x
+    s <- apply(z, MARGIN = 2, FUN = sd,na.rm=T)
+    M <- apply(z, MARGIN = 2, FUN = mean,na.rm=T)
+    for(i in 1:dim(x)[2]){
+      z[,i] <- (x[,i] - M[i])/s[i]
+    }
+    x1<-fit
+    fore_x<-x[,colnames(x) %in% colnames(fit)]
+    for(i in colnames(fit)){
+      x1[,i]<-s[i]*fit[,i]+M[i]
+      fore_x[is.na(fore_x[,i]),i] <- x1[is.na(fore_x[,i]),i]
+    }
+    
+    res<-list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x,monthgdp = monthgdp)
+    
+    
   }else if(method=='EM'){
     # y1<-qtr2month(y)
     # y1[rep(which(!is.na(y1)),each=2)-c(2,1)]<-rep(y1[!is.na(y1)],each=2)
@@ -85,31 +122,11 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
     # Essa é uma medida trimestral do PIB acumulado nos últimos três meses
     # monthgdp<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
     
-    return(list(main = Y,factors = factors,fore_x = fore_x,
-                monthgdp = monthgdp))
+    res <- list(main = Y,factors = factors,fore_x = fore_x, monthgdp = monthgdp)
+    
   }
 
-  # voltar da padronização
-  fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
-  colnames(fit)<-colnames(x)
-  x <- x
-  z <- x
-  s <- apply(z, MARGIN = 2, FUN = sd,na.rm=T)
-  M <- apply(z, MARGIN = 2, FUN = mean,na.rm=T)
-  for(i in 1:dim(x)[2]){
-    z[,i] <- (x[,i] - M[i])/s[i]
-  }
-  x1<-fit
-  fore_x<-x[,colnames(x) %in% colnames(fit)]
-  for(i in colnames(fit)){
-    x1[,i]<-s[i]*fit[,i]+M[i]
-    fore_x[is.na(fore_x[,i]),i] <- x1[is.na(fore_x[,i]),i]
-  }
-  
-  if(!(exists('monthgdp'))){
-    monthgdp<-NULL
-  }
-  
-  return(list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x,monthgdp = monthgdp))
+
+  return(res)
   
 }
