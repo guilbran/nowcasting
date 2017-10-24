@@ -348,7 +348,7 @@ EM_DFM_SS_block_idioQARMA_restrMQ<-function(X,Par){
   Mx = colMeans(X,na.rm=T)
   Wx = sapply(1:N,function(x) sd(X[,x],na.rm = T))
   # xNaN = (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)
-  xNaN <- (X-kronecker(Mx,rep(1,TT)))/kronecker(Wx,rep(1,TT))
+  xNaN <- (X-kronecker(t(Mx),rep(1,TT)))/kronecker(t(Wx),rep(1,TT))
   
   ### Initial conditions
   
@@ -429,7 +429,7 @@ EM_DFM_SS_block_idioQARMA_restrMQ<-function(X,Par){
   Res<-list()
   
   # Res$X_sm <- repmat(Wx,TT,1)*x_sm+repmat(Mx,TT,1)
-  Res$X_sm <- kronecker(Wx,rep(1,TT))*x_sm + kronecker(Mx,rep(1,TT))
+  Res$X_sm <- kronecker(t(Wx),rep(1,TT))*x_sm + kronecker(t(Mx),rep(1,TT))
   Res$FF <- Zsmooth[2:dim(Zsmooth)[1],]
   
   #--------------------------------------------------------------------------

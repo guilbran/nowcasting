@@ -186,26 +186,24 @@ SKF_lag <-function(Y,Z,R,TT,Q,A_0,P_0){
   
 }
 
-
-
 # Main function -----------------------------------------------------------
 
-library(R.matlab)
-library(matlab)
-library(zoo)
-library(Matrix)
-R_new <- readMat("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/R_new.mat")
-R_new <- R_new$R.new[,,1]
-names(R_new)[1]<-'X_sm'
-names(R_new)[9]<-'Z_0'
-names(R_new)[10]<-'V_0'
-X_old <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_old.csv", header = F))
-X_new <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_new.csv", header = F))
-# 
-Q = R_new
-t_fcst = 187   # Qual a data do nowcast?
-# v_news = NULL
-v_news<-"V25" # Qual a série de interesse? Pode ser um vetor?
+# library(R.matlab)
+# library(matlab)
+# library(zoo)
+# library(Matrix)
+# R_new <- readMat("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/R_new.mat")
+# R_new <- R_new$R.new[,,1]
+# names(R_new)[1]<-'X_sm'
+# names(R_new)[9]<-'Z_0'
+# names(R_new)[10]<-'V_0'
+# X_old <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_old.csv", header = F))
+# X_new <- data.frame(read.csv("C:/Users/guilherme.branco/Desktop/EM-transcription/arquivos pra fç EMstep/X_new.csv", header = F))
+# # 
+# Q = R_new
+# t_fcst = 187   # Qual a data do nowcast?
+# # v_news = NULL
+# v_news<-"V25" # Qual a série de interesse? Pode ser um vetor?
 
 
 News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_news = NULL){
@@ -354,19 +352,19 @@ News_DFM_ML <- function(X_old = NULL, X_new = NULL, Q = NULL, t_fcst = NULL, v_n
 }
 
 
-t_fcst = 188   # Qual a data do nowcast?
-v_news<-c("V25") # Qual a série de interesse? Pode ser um vetor?
-
-news<-News_DFM_ML(X_old,X_new,Q,t_fcst,v_news)
-
-# O que é cada output?
-
-news$OldFcst      # forecast feita com a vintage antiga
-news$NewFcst      # gorecast feita com a vintage nova
-news$GroupNews    # ??
-news$SerNews      # Peso de cada série na resivão final
-news$gainT
-news$serGainT
-news$Actual
-news$Fcst
-news$Filt
+# t_fcst = 188   # Qual a data do nowcast?
+# v_news<-c("V25") # Qual a série de interesse? Pode ser um vetor?
+# 
+# news<-News_DFM_ML(X_old,X_new,Q,t_fcst,v_news)
+# 
+# # O que é cada output?
+# 
+# news$OldFcst      # forecast feita com a vintage antiga
+# news$NewFcst      # gorecast feita com a vintage nova
+# news$GroupNews    # ??
+# news$SerNews      # Peso de cada série na resivão final
+# news$gainT
+# news$serGainT
+# news$Actual
+# news$Fcst
+# news$Filt
