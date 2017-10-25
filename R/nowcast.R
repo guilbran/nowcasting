@@ -1,10 +1,10 @@
 #' @title Nowcasting of a quarterly time serie using a dynamic factor.
-#' @description Estimate nowcasting and foreacasting for a quarterly time serie.
+#' @description Estimate nowcasting and foreacasting for a quarterly time serie. For more details read the Vignettes.
 #' @param y Stationary quarterly time-series 
 #' @param x A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.
-#' @param q Dynamic rank. Number of error terms. If not specified q = 2.
-#' @param r Static rank (r>=q), i.e. number of factors. If not specified r = 2.
-#' @param p AR order of factors. If not specified p = 1.
+#' @param q Dynamic rank. Number of error terms.
+#' @param r Static rank or number of factors (r>=q) for methods 2sq and 2sm.
+#' @param p AR order of factors.
 #' @param method 2sq: Two stages quarterly for Giannone et al. 2008; 2sm: Two stages monthly for Banbura and Runstler 2011; EM: Expected Maximization Giannone et al 2011
 #' @param blocks only for EM method. Select which factors impact the variables (global, nominal or real).
 #' @return A \code{list} containing two elements:

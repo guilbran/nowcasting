@@ -2,7 +2,7 @@
 % Please edit documentation in R/PRTDB.R
 \name{PRTDB}
 \alias{PRTDB}
-\title{Pseudo Real time data base}
+\title{Pseudo Real Time Data Base}
 \usage{
 PRTDB(mts, delay, vintage = Sys.Date())
 }

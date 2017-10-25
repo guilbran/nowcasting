@@ -1,4 +1,4 @@
-#' @title Pseudo Real time data base
+#' @title Pseudo Real Time Data Base
 #' @description Create a pseudo real time data base, based on data and delays of disclosure estipulated by the user.
 #' @param mts A matrix time series - \code{mts} - with the series to be transformed.
 #' @param delay A numeric vector with the delay in days the information is available after the reference month. Each element correspond to the series in the respective column in \code{mts}. 

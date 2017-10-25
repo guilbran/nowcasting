@@ -1,5 +1,5 @@
-#' @title Quarterly to monthly deagregation
-#' @description It transforsms a quarterly time series in a monthly, selecting the last month to represent the quarter.
+#' @title Quarterly to monthly desagregation
+#' @description It transforsms a quarterly time series in a monthly. To the last month of the monthly \code{ts} is set the value of the quarterly \code{ts}.
 #' @param x Variable in quarterly frequency
 #' @return The correpondent monthly transformation or agregation.
 #' @examples 
@@ -7,7 +7,6 @@
 #' mestri_vintage<-month2qtr(BRGDP[,dim(BRGDP)[2]])
 #' 
 #' qtr2month(mestri_vintage)
-#' 
 #' 
 #' @import zoo
 #' @export

@@ -12,11 +12,11 @@ nowcast(y, x, q = NULL, r = NULL, p = NULL, method = "2sq",
 
 \item{x}{A time series matrix (\code{mts}) representing the regressors of interest. The series must be stationary.}
 
-\item{q}{Dynamic rank. Number of error terms. If not specified q = 2.}
+\item{q}{Dynamic rank. Number of error terms.}
 
-\item{r}{Static rank (r>=q), i.e. number of factors. If not specified r = 2.}
+\item{r}{Static rank or number of factors (r>=q) for methods 2sq and 2sm.}
 
-\item{p}{AR order of factors. If not specified p = 1.}
+\item{p}{AR order of factors.}
 
 \item{method}{2sq: Two stages quarterly for Giannone et al. 2008; 2sm: Two stages monthly for Banbura and Runstler 2011; EM: Expected Maximization Giannone et al 2011}
 
@@ -34,7 +34,7 @@ A \code{mts} named \code{fore_x} contains the output of all regressors.
 A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP.
 }
 \description{
-Estimate nowcasting and foreacasting for a quarterly time serie.
+Estimate nowcasting and foreacasting for a quarterly time serie. For more details read the Vignettes.
 }
 \examples{
 \dontrun{

@@ -4,33 +4,46 @@
 \alias{Bpanel}
 \title{Balanced panel}
 \usage{
-Bpanel(base = NULL, trans = NULL, aggregate = T, k_ma = 3)
+Bpanel(base = NULL, trans = NULL, aggregate = F, k_ma = 3)
 }
 \arguments{
 \item{base}{A \code{mts} with the series to be transformed.}
 
-\item{trans}{A \code{vector} where each coordinate is the transformation of the correspondent coordinate in the \code{mts} of the previous argument. 
-The transformation is specified as follow:
+\item{trans}{A \code{vector} where each coordinate is a code for the transformation of the correspondent coordinate in the \code{base} argument. 
+The transformation is specified by codes, as follows:
 \itemize{
 \item{transf = 0: the original serie is preserved;}
-\item{transf = 1: \deqn{\frac{X_t - X_{t-1}}{X_{t-1}}}}
-\item{transf = 2: \deqn{X_t - X_{t-1}}}
-\item{transf = 3: \deqn{\frac{X_t - X_{t-12}}{X_{t-12}}  -  \frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
-\item{transf = 4: \deqn{(X_t - X_{t-12})  -  (X_{t-1} - X_{t-13})}}
+
+\item{transf = 1: monthly rate of change
+
+\deqn{\frac{X_t - X_{t-1}}{X_{t-1}}}}
+
+\item{transf = 2: monthly difference
+
+\deqn{X_t - X_{t-1}}}
+
+\item{transf = 3: monthly difference of year-over-year rate of change
+
+\deqn{\frac{X_t - X_{t-12}}{X_{t-12}}  -  \frac{X_{t-1} - X_{t-13}}{X_{t-13}}}}
+
+\item{transf = 4:  monthly difference of year difference
+
+\deqn{(X_t - X_{t-12})  -  (X_{t-1} - X_{t-13})}}
 }}
 
-\item{aggregate}{A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities.}
+\item{aggregate}{A \code{bolean} representing if you want aggregate the monthly variables to represent quarterly quantities. If \code{TRUE} the aggregation is made following the approximation of \emph{Mariano and Murasawsa 2003}.}
 
 \item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}
 }
 \description{
-This function transforms the original monthly time series to its stationary representation following
-the user specification.
+This function transforms the original monthly time series to its stationary representation following the user specification.
 The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
-The missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone et al. 2008}.
-In the end, the monthly series can be aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
 
-We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
+The missings and outliers are ``corrected'' following the same method avaible in the \emph{replication files} of \emph{Giannone et al. 2008}.
+Outliers are defined as observations that lies more than 4 IQR from median. All missings and outliers are replaced by the median. A centered moving average of degree \code{k_ma} is calculated, forming a new panel. Then the missings and outliers are replaced by their equivalent observations on this new panel.
+We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} in (\code{USGDP}) are slightly different than those found here.
+
+In the end, the monthly series can be aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003} approximation.
 }
 \examples{
 # Example from database BRGDP:
@@ -39,5 +52,5 @@ Bpanel(BRGDP,rep(3,dim(BRGDP)[2]))
 \references{
 Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 
-Mariano, R. S., & Murasawa, Y. (2003). A new coincident index of business cycles based on monthly and quarterly series. Journal of applied Econometrics, 18(4), 427-443.
+Mariano, R. S., & Murasawa, Y. (2003). A new coincident index of business cycles based on monthly and quarterly series. Journal of applied Econometrics, 18(4), 427-443.<doi:10.1002/jae.695>
 }

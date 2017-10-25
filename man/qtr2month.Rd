@@ -2,7 +2,7 @@
 % Please edit documentation in R/qtr2month.r
 \name{qtr2month}
 \alias{qtr2month}
-\title{Quarterly to monthly deagregation}
+\title{Quarterly to monthly desagregation}
 \usage{
 qtr2month(x)
 }
@@ -13,13 +13,12 @@ qtr2month(x)
 The correpondent monthly transformation or agregation.
 }
 \description{
-It transforsms a quarterly time series in a monthly, selecting the last month to represent the quarter.
+It transforsms a quarterly time series in a monthly. To the last month of the monthly \code{ts} is set the value of the quarterly \code{ts}.
 }
 \examples{
 # Selecting only last month of matrix time series BRGDP:
 mestri_vintage<-month2qtr(BRGDP[,dim(BRGDP)[2]])
 
 qtr2month(mestri_vintage)
-
 
 }

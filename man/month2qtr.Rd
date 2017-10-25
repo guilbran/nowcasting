@@ -9,17 +9,14 @@ month2qtr(x)
 \arguments{
 \item{x}{Variable in month frequency}
 }
-\value{
-The correpondent quarterly transformation or agregation.
-}
 \description{
-It transforsms a monthly time series in a quarterly, selecting the last month to represent the quarter. So its necessary to agregate the original serie before use this function.
+It transforsms a monthly time series in a quarterly one, selecting the last value of the last month of the quarter to represent it.
 }
 \examples{
 # Selecting only last month of matrix time series BRGDP:
-mestri_vintage<-month2qtr(BRGDP)
+month2qtr(BRGDP)
 
-# Selecting only last month of first two columns of matrix time series BRGDP:
-mestri_vintage<-month2qtr(BRGDP[,1:2])
+# Vehicle production in the quarter from vehicle production in the month
+month2qtr(stats::filter(BRGDP[,3],c(1,1,1),sides=1))
 
 }
