@@ -6,7 +6,7 @@
 #' # Selecting only last month of matrix time series BRGDP:
 #' mestri_vintage<-month2qtr(BRGDP[,dim(BRGDP)[2]])
 #' 
-#' qtr2month(mestri_vintage)
+#' qtr2month(mestri_vintage) 
 #' 
 #' @import zoo
 #' @export
