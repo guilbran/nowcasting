@@ -3,11 +3,11 @@
 #' @param x Variable in month frequency
 #' @return The correpondent quarterly transformation or agregation.
 #' @examples 
-#' # Selecting only last month of matrix time series vintage:
-#' mestri_vintage<-month2qtr(vintage)
+#' # Selecting only last month of matrix time series BRGDP:
+#' mestri_vintage<-month2qtr(BRGDP)
 #' 
-#' # Selecting only last month of first two columns of matrix time series vintage:
-#' mestri_vintage<-month2qtr(vintage[,1:2])
+#' # Selecting only last month of first two columns of matrix time series BRGDP:
+#' mestri_vintage<-month2qtr(BRGDP[,1:2])
 #' 
 #' @import zoo
 #' @export

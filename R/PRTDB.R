@@ -5,8 +5,8 @@
 #' @param vintage The day where the data is supposed to be collected.
 #' @return A \code{mts} with the series transformed.
 #' @examples 
-#' # Pseudo Real Time Data Base from data base vintage
-#' PRTDB(vintage,1:dim(vintage)[2])
+#' # Pseudo Real Time Data Base from data base BRGDP
+#' PRTDB(BRGDP,1:dim(BRGDP)[2])
 #' @import zoo lubridate
 #' @export
 

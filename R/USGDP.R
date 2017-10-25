@@ -12,26 +12,4 @@
 #' @source This dataset is available as \emph{replication files} of the seminal work \emph{Giannone 2008}.
 #'  One can find these \emph{replication files} in the following url: \url{https://www.newyorkfed.org/research/economists/giannone/pub}
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
-#' @examples 
-#' #### Giannone et al (2008) - Example
-#' trans<-USGDP$Legenda$Transformation[-length(USGDP$Legenda$Transformation)]
-#' base<-USGDP$Base[,-dim(USGDP$Base)[2]]
-#' gdp<-USGDP$Base[,dim(USGDP$Base)[2]]
-#' 
-#' # Balanced Panel
-#' base<-Bpanel(base = base,trans = trans)
-#' 
-#' # Estimation of nowcast
-#' now<-nowcast(y = gdp,regressors = base)
-#' 
-#' # Main results:
-#' now$main
-#' ts.plot(now$main,col=1:3,main='Main results')
-#' 
-#' # the results are not the same as in the reference paper because we make some changes
-#' # in the outlier correction function.
-#' 
-#' # Factors:
-#' now$factors$fator_final
-#' ts.plot(now$factors$fator_final,col=1:2,main='Factors')
 NULL

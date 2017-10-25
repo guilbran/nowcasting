@@ -9,10 +9,4 @@
 #' @description Matrix time series containing:Exchange rate - Free - United States dollar (1); Interest rate - CDI (12); Vehicles production (1373); Credit Sales Index (1453); Retail sales (1455); Current economic conditions index (4394); Industrial production, general index (21859). 
 #' @usage BRGDP
 #' @keywords datasets
-#' @examples 
-#' # Select all time series
-#' BRGDP
-#' # Select only the first time series
-#' BRGDP[,1]
-
 NULL

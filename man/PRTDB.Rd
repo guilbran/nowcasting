@@ -20,6 +20,6 @@ A \code{mts} with the series transformed.
 Create a pseudo real time data base, based on data and delays of disclosure estipulated by the user.
 }
 \examples{
-# Pseudo Real Time Data Base from data base vintage
-PRTDB(vintage,1:dim(vintage)[2])
+# Pseudo Real Time Data Base from data base BRGDP
+PRTDB(BRGDP,1:dim(BRGDP)[2])
 }

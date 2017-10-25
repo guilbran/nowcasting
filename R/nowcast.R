@@ -27,7 +27,6 @@
 #' \dontrun{
 #' # nowcast function examples:
 #' ### Method 2sq
-#' ### This is two stages quarterly method, based on Giannone et al. (2008)
 #' pib<-BRGDP[,8]
 #' y<-month2qtr(diff(diff(pib,3),12))
 #' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = T)
@@ -35,29 +34,17 @@
 #' r<-2
 #' p<-1
 #' now_2sq<-nowcast(y,x,q,r,p,method = '2sq')
-#' # outputs
-#' nowcast.plot(now_2sq)
-#' summary(now_2sq$reg)
-#' nowcast.plot(now_2sq,type = 'factors')
+#'
 #' ### Method 2sm
-#' ### This is two stages monthly method, based on Giannone et al. (2008) and Bańbura and Runstler (2011)
 #' pib<-BRGDP[,8]
 #' y<-month2qtr(diff(diff(pib,3),12))
 #' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
 #' now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
-#' # outputs
-#' nowcast.plot(now_2sm)
-#' summary(now_2sm$reg)
-#' nowcast.plot(now_2sm,type = 'factors')
-#' ts.plot(now_2sm$monthgdp)
+#'
 #' ### Method EM
-#' ### This is EM estimation method, based on Bańbura et al. (2011)
 #' y<-month2qtr(diff(diff(pib,3),12))
 #' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
 #' now_em<-nowcast(y,x,q,r,p,'EM')
-#' # outputs
-#' nowcast.plot(now_em)
-#' ts.plot(now_em$monthgdp)
 #' }
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export

@@ -2,3 +2,7 @@
 ^\.Rproj\.user$
 ^packrat/
 ^\.Rprofile$
+^\.gitignore
+^\appveyor.yml
+^\.appveyor.yml
+^appveyor\.yml$
