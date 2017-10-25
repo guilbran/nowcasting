@@ -18,57 +18,56 @@
 #' A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP. 
 #' 
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
+#' 
+#' Bańbura, M., & Rünstler, G. (2011). A look into the factor model black box: publication lags and the role of hard and soft data in forecasting GDP. International Journal of Forecasting, 27(2), 333-346. <doi:10.1016/j.ijforecast.2010.01.011>
+#' 
+#' Bańbura M., Giannone, D. & Reichlin, L. (2011). Nowcasting, in Michael P. Clements and David F. Hendry, editors, Oxford Handbook on Economic Forecasting, pages 193-224, January 2011. <doi:10.1093/oxfordhb/9780195398649.001.0001>
+#' 
 #' @examples
 #' \dontrun{
-#'# nowcast function examples:
-#'
-#'### Method 2sq
-#'### This is two stages quarterly, based on Giannone et al. (2008)
-#'pib<-BRGDP[,8]
-#'y<-month2qtr(diff(diff(pib,3),12))
-#'x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = T)
-#'q<-1
-#'r<-1
-#'p<-1
-#'now_2sq<-nowcast(y,x,q,r,p,method = '2sq')
-#'# outputs
-#'nowcast.plot(now_2sq)
-#'summary(now_2sq$reg)
-#'nowcast.plot(now_2sq,type = 'factors')
-#'
-#'
-#'### Method 2sm
-#'### This is two stages monthly, based on Giannone et al. (2008) and Banbura and Runstler (2011)
-#'pib<-BRGDP[,8]
-#'y<-month2qtr(diff(diff(pib,3),12))
-#'x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
-#'q<-1
-#'r<-2
-#'p<-1
-#'now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
-#'# outputs
-#'nowcast.plot(now_2sm)
-#'summary(now_2sm$reg)
-#'nowcast.plot(now_2sm,type = 'factors')
-#'ts.plot(now_2sm$monthgdp)
-#'
-#'
-#'### Method EM
-#'y<-month2qtr(diff(diff(pib,3),12))
-#'x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
-#'q=1
-#'r=2
-#'p=1
-#'now_em<-nowcast(y,x,q,r,p,'EM')
-#'# outputs
-#'nowcast.plot(now_em)
-#'ts.plot(now_em$monthgdp)
+#' # nowcast function examples:
+#' ### Method 2sq
+#' ### This is two stages quarterly method, based on Giannone et al. (2008)
+#' pib<-BRGDP[,8]
+#' y<-month2qtr(diff(diff(pib,3),12))
+#' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = T)
+#' q<-1
+#' r<-2
+#' p<-1
+#' now_2sq<-nowcast(y,x,q,r,p,method = '2sq')
+#' # outputs
+#' nowcast.plot(now_2sq)
+#' summary(now_2sq$reg)
+#' nowcast.plot(now_2sq,type = 'factors')
+#' ### Method 2sm
+#' ### This is two stages monthly method, based on Giannone et al. (2008) and Bańbura and Runstler (2011)
+#' pib<-BRGDP[,8]
+#' y<-month2qtr(diff(diff(pib,3),12))
+#' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
+#' now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
+#' # outputs
+#' nowcast.plot(now_2sm)
+#' summary(now_2sm$reg)
+#' nowcast.plot(now_2sm,type = 'factors')
+#' ts.plot(now_2sm$monthgdp)
+#' ### Method EM
+#' ### This is EM estimation method, based on Bańbura et al. (2011)
+#' y<-month2qtr(diff(diff(pib,3),12))
+#' x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
+#' now_em<-nowcast(y,x,q,r,p,'EM')
+#' # outputs
+#' nowcast.plot(now_em)
+#' ts.plot(now_em$monthgdp)
 #' }
 #' @seealso \code{\link[nowcasting]{base_extraction}}
 #' @export
 
-nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
+nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL){
 
+  if(is.null(q) & is.null(r) & is.null(p)){
+    warnings('Parameters q,r and p must be specified.')
+  }
+  
   if(method=='2sq'){
     factors <- FactorExtraction(x, q = q, r = r, p = p)
     fatores <- factors$dynamic_factors
@@ -100,8 +99,8 @@ nowcast <- function(y, x, q = 2, r = 2, p = 1,method='2sq',blocks=NULL){
     
     # aux_month<-prev$reg$coefficients*cbind(rep(1,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
     # monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
-    aux_fator_month<-cbind(rep(1/9,length(zoo::as.Date(now_2sm$factors$dynamic_factors))),now_2sm$factors$dynamic_factors)
-    monthgdp<-ts(aux_fator_month%*%now_2sm$reg$coefficients,start=start(now_2sm$factors$dynamic_factors),freq=12)
+    aux_fator_month<-cbind(rep(1/9,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
+    monthgdp<-ts(aux_fator_month%*%prev$coefficients,start=start(factors$dynamic_factors),frequency=12)
     
     # voltar da padronização
     fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])

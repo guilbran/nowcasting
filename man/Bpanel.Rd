@@ -24,17 +24,17 @@ The transformation is specified as follow:
 \item{k_ma}{A \code{numeric} representing the degrre of the moving average correction.}
 }
 \description{
-This function transforms the original time series to its stationary representation following
-the user specification. The monthly variables are agregated to represent quarterly quantities.
+This function transforms the original monthly time series to its stationary representation following
+the user specification.
 The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
 The missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone et al. 2008}.
-In the end the monthly series are aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
+In the end, the monthly series can be aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
 
 We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
 }
 \examples{
-# Example from database vintage:
-Bpanel(vintage,rep(3,dim(vintage)[2]))
+# Example from database BRGDP:
+Bpanel(BRGDP,rep(3,dim(BRGDP)[2]))
 }
 \references{
 Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>

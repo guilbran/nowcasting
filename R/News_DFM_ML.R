@@ -20,7 +20,7 @@ para_const <- function(X = NULL, P = NULL, lag = NULL){
   # %--------------------------------------------------------------------------
   TT <- nrow(X)
   N <- ncol(X)
-  nomes<-names(X_old)
+  nomes<-names(X)
   
   #% Standardise x
   # xNaN <- (X-repmat(Mx,TT,1))/repmat(Wx,TT,1)

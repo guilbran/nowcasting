@@ -17,6 +17,6 @@ qtr2month<-function(x){
   datas<-seq(data[1],data[length(data)],by = 'months')
   out_x<-ts(rep(NA,length(datas)),start=  as.numeric(c(substr(as.Date(x)[1],1,4),substr(as.Date(x)[1],6,7))),frequency = 12)
   out_x[datas %in% data] <- x
-  out_x<-lag(out_x,-2)
+  out_x<-stats::lag(out_x,-2)
   return(out_x)
 }

@@ -1,9 +1,9 @@
 #' @title Balanced panel
-#' @description This function transforms the original time series to its stationary representation following
-#' the user specification. The monthly variables are agregated to represent quarterly quantities.
+#' @description This function transforms the original monthly time series to its stationary representation following
+#' the user specification.
 #' The time series with more than 1/3 missings, i.e. \code{NA}s are deleted.
 #' The missings and outliers are corrected following the same method avaible in the \emph{replication files} of \emph{Giannone et al. 2008}.
-#' In the end the monthly series are aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
+#' In the end, the monthly series can be aggregated to quarterly quantities following the \emph{Mariano and Murasawsa 2003}.
 #' 
 #' We've made an important modifications on the \emph{outlier_correction} function found in the above mentioned files: Here the median of an even-sized sample is calculated by the mean of the two most central values, rather than using the largest of those numbers. Because of this modification the results obtained with the original \emph{replication files} are slightly different than those found here.
 #' 
@@ -23,8 +23,8 @@
 #' 
 #' Mariano, R. S., & Murasawa, Y. (2003). A new coincident index of business cycles based on monthly and quarterly series. Journal of applied Econometrics, 18(4), 427-443.
 #' @examples 
-#' # Example from database vintage:
-#' Bpanel(vintage,rep(3,dim(vintage)[2]))
+#' # Example from database BRGDP:
+#' Bpanel(BRGDP,rep(3,dim(BRGDP)[2]))
 #' @import zoo
 #' @importFrom stats filter
 #' @export
@@ -41,13 +41,13 @@ Bpanel <- function(base = NULL, trans = NULL, aggregate = T,k_ma=3){
   for(j in 1:dim(base)[2]){
     base1[,j]<-NA
     if(trans[j] == 1){  # TAXA DE VARIAÇÃO MENSAL
-      temp <- diff(base[,j])/lag(base[,j],-1)
+      temp <- diff(base[,j])/stats::lag(base[,j],-1)
       base1[-1,j] <- temp
     }else if(trans[j] == 2){ # DIFERENÇA MENSAL
       temp <- diff(base[,j])
       base1[-1,j] <- temp
     }else if(trans[j] == 3){ # DIFERENÇA MENSAL DA TAXA DE VARIAÇÃO ANUAL
-      temp <- diff(diff(base[,j],12)/lag(base[,j],-12))
+      temp <- diff(diff(base[,j],12)/stats::lag(base[,j],-12))
       base1[-c(1:13),j] <- temp
     }else if(trans[j] == 4){ # DIFERENÇA MENSAL DA DIFERENÇA ANUAL
       temp <- diff(diff(base[,j],12))

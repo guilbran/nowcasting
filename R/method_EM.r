@@ -33,7 +33,7 @@ remNaNs_spline <-function(X,options){
       t1 = min(which(!isnanx))
       t2 = max(which(!isnanx))
       
-      x1<-spline(x[t1:t2],xout = 1:(t2-t1+1))
+      x1<-stats::spline(x[t1:t2],xout = 1:(t2-t1+1))
       xx<-x1$y
       x[t1:t2]<-x1$y
       isnanx<-is.na(x)
@@ -70,7 +70,7 @@ remNaNs_spline <-function(X,options){
       t1 = min(which(!isnanx))
       t2 = max(which(!isnanx))
       
-      x1<-spline(x[t1:t2],xout = 1:(t2-t1+1))
+      x1<-stats::spline(x[t1:t2],xout = 1:(t2-t1+1))
       xx<-x1$y
       x[t1:t2]<-x1$y
       isnanx<-is.na(x)
@@ -91,7 +91,7 @@ remNaNs_spline <-function(X,options){
       t1 = min(which(!isnanx))
       t2 = max(which(!isnanx))
       
-      x1<-spline(x[t1:t2],xout = 1:(t2-t1+1))
+      x1<-stats::spline(x[t1:t2],xout = 1:(t2-t1+1))
       xx<-x1$y
       x[t1:t2]<-x1$y
       isnanx<-is.na(x)
@@ -240,7 +240,7 @@ InitCond<-function(xNaN,r,p,blocks,optNaN,R_mat,q,nQ,i_idio){
   }
   
   
-  R = diag(diag(var(resNaN,na.rm = T)))
+  R = diag(diag(stats::var(resNaN,na.rm = T)))
   
   eyeN = eye(N)
   eyeN<-eyeN[,i_idio]
@@ -268,7 +268,7 @@ InitCond<-function(xNaN,r,p,blocks,optNaN,R_mat,q,nQ,i_idio){
     res_i<-res_i[!is.na(res_i)]
     
     BM[i,i] = solve(t(res_i[1:(length(res_i)-1)])%*%res_i[1:(length(res_i)-1)])%*%t(res_i[1:(length(res_i)-1)])%*%res_i[2:length(res_i)] 
-    SM[i,i] = var(res_i[2:length(res_i)]-res_i[1:(length(res_i)-1)]*BM[i,i])
+    SM[i,i] = stats::var(res_i[2:length(res_i)]-res_i[1:(length(res_i)-1)]*BM[i,i])
     # SM[i,i] = var(res_i[2:length(res_i)]-res_i[1:(length(res_i)-1)]*B[i,i])
     # ATENÇÃO: Aqui os autores usam B[i,i], porém esse valor é 0. Então eu uso BM[i,i]
   }

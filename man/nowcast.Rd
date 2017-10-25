@@ -4,7 +4,8 @@
 \alias{nowcast}
 \title{Nowcasting of a quarterly time serie using a dynamic factor.}
 \usage{
-nowcast(y, x, q = 2, r = 2, p = 1, method = "2sq", blocks = NULL)
+nowcast(y, x, q = NULL, r = NULL, p = NULL, method = "2sq",
+  blocks = NULL)
 }
 \arguments{
 \item{y}{Stationary quarterly time-series}
@@ -38,44 +39,34 @@ Estimate nowcasting and foreacasting for a quarterly time serie.
 \examples{
 \dontrun{
 # nowcast function examples:
-
 ### Method 2sq
-### This is two stages quarterly, based on Giannone et al. (2008)
+### This is two stages quarterly method, based on Giannone et al. (2008)
 pib<-BRGDP[,8]
 y<-month2qtr(diff(diff(pib,3),12))
 x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = T)
 q<-1
-r<-1
+r<-2
 p<-1
 now_2sq<-nowcast(y,x,q,r,p,method = '2sq')
 # outputs
 nowcast.plot(now_2sq)
 summary(now_2sq$reg)
 nowcast.plot(now_2sq,type = 'factors')
-
-
 ### Method 2sm
-### This is two stages monthly, based on Giannone et al. (2008) and Banbura and Runstler (2011)
+### This is two stages monthly method, based on Giannone et al. (2008) and BaÅ„bura and Runstler (2011)
 pib<-BRGDP[,8]
 y<-month2qtr(diff(diff(pib,3),12))
 x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
-q<-1
-r<-2
-p<-1
 now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
 # outputs
 nowcast.plot(now_2sm)
 summary(now_2sm$reg)
 nowcast.plot(now_2sm,type = 'factors')
 ts.plot(now_2sm$monthgdp)
-
-
 ### Method EM
+### This is EM estimation method, based on BaÅ„bura et al. (2011)
 y<-month2qtr(diff(diff(pib,3),12))
 x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
-q=1
-r=2
-p=1
 now_em<-nowcast(y,x,q,r,p,'EM')
 # outputs
 nowcast.plot(now_em)
@@ -84,6 +75,10 @@ ts.plot(now_em$monthgdp)
 }
 \references{
 Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
+
+Bańbura, M., & Rünstler, G. (2011). A look into the factor model black box: publication lags and the role of hard and soft data in forecasting GDP. International Journal of Forecasting, 27(2), 333-346. <doi:10.1016/j.ijforecast.2010.01.011>
+
+Bańbura M., Giannone, D. & Reichlin, L. (2011). Nowcasting, in Michael P. Clements and David F. Hendry, editors, Oxford Handbook on Economic Forecasting, pages 193-224, January 2011. <doi:10.1093/oxfordhb/9780195398649.001.0001>
 }
 \seealso{
 \code{\link[nowcasting]{base_extraction}}

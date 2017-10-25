@@ -7,12 +7,12 @@
 #'..$ : NULL
 #'..$ : chr [1:7] "serie1" "serie12" "serie1373" "serie1453" ... 
 #' @description Matrix time series containing:Exchange rate - Free - United States dollar (1); Interest rate - CDI (12); Vehicles production (1373); Credit Sales Index (1453); Retail sales (1455); Current economic conditions index (4394); Industrial production, general index (21859). 
-#' @usage vintage
+#' @usage BRGDP
 #' @keywords datasets
 #' @examples 
 #' # Select all time series
-#' vintage
+#' BRGDP
 #' # Select only the first time series
-#' vintage[,1]
+#' BRGDP[,1]
 
 NULL
