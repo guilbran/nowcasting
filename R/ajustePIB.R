@@ -4,3 +4,4 @@
 #   round(ajuste$series$d11,2)
 # }
 
+# just testing on Ubuntu 16.04
