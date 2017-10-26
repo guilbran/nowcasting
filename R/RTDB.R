@@ -24,7 +24,7 @@ RTDB<-function(series_code = NULL,vintage = NULL){
   conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
   dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
   DBI::dbDisconnect(conn)
-  dados1<-data.frame(series_code=gsub(dados0[3:(dim(dados0)[1]-1),],'serie',''))
+  dados1<-data.frame(series_code=substr(dados0[3:(dim(dados0)[1]-1),],6,50))
   return(dados1)
   }else{
     return_try<-tryCatch({
@@ -53,9 +53,8 @@ RTDB<-function(series_code = NULL,vintage = NULL){
           dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
           DBI::dbDisconnect(conn)
           dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
-          message(
-            writeLines(c('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
-                         paste('But, I return (invisible) the first vintage values:',vintage_cod[1],':)'))))
+          message('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
+                         paste('\nBut, I return (invisible) the first vintage values:',vintage_cod[1],':)'))
           invisible(dados1)
           
         }else{
@@ -66,9 +65,8 @@ RTDB<-function(series_code = NULL,vintage = NULL){
         dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
         DBI::dbDisconnect(conn)
         dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
-        message(
-          writeLines(c('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
-                       paste('But, I return (invisible) the last vintage available:',vintage_cod[ind_previous],':)'))))
+        message('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
+                       paste('\nBut, I return (invisible) the last vintage available:',vintage_cod[ind_previous],':)'))
         invisible(dados1)
         }
       }else{
