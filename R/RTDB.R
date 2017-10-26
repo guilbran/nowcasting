@@ -9,25 +9,59 @@
 #' @references Central Bank of Brazil
 #' @export
 
-RTDB<-function(series_code,vintage = Sys.Date()){
+
+RTDB<-function(series_code = NULL,vintage = NULL){
 
   # library(DBI)
   # library(RMySQL)
-
-  # series_code<-c(1,12)
-  # vintage<-Sys.Date()
+  # series_code<-22099
+  # vintage<-as.Date('2017-10-26')
+  
   v_ind<-as.character(vintage)
 
-  # SQL<-paste("SELECT * FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
-  
-  SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
+  if(is.null(series_code) & is.null(vintage)){
+  SQL<-"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='pibnow' AND `TABLE_NAME`='dbvintage'"
   conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
-  dados = DBI::dbGetQuery(conn = conn,statement = SQL)
+  dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
   DBI::dbDisconnect(conn)
-
-  dados<-ts(dados[,-1],start=as.numeric(c(substr(dados[1,1],1,4),substr(dados[1,1],6,7))),frequency=12)
-  
-  return(dados)
+  dados1<-data.frame(COLUMN_NAMES=dados0[3:(dim(dados0)[1]-1),])
+  return(dados1)
+  }else{
+    return_try<-tryCatch({
+                SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
+                conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
+                dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
+                DBI::dbDisconnect(conn)},
+                error = function(err) {
+                    return(FALSE)
+      })
+    
+    if(return_try==FALSE){
+    warnings('Sorry, this serie(s) is(are) not available.')
+    }else{
+      if(nrow(dados0)==0){
+        SQL<-paste("SELECT vintage_cod FROM dbvintage")
+        conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
+        dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
+        DBI::dbDisconnect(conn)
+        
+        vintage_cod<-as.Date(unique(dados0)[,1])
+        if(as.Date(vintage)<vintage_cod[1]){
+          message(
+            writeLines(c('Sorry, we do not have this vintage for this(ese) serie(s) yet :(',
+                         paste('Try vintages:',vintage_cod[1],':)'))))  
+        }else{
+        ind_previous<-max(which(vintage_cod<as.Date(vintage)))
+        message(
+          writeLines(c('Sorry, we do not have this vintage for this(ese) serie(s) yet :(',
+                       paste('Try vintages:',vintage_cod[ind_previous],'or',vintage_cod[ind_previous+1],':)'))))
+        }
+      }else{
+          dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
+          return(dados1)
+        }
+    }
+  }
 }
 
 

@@ -19,6 +19,6 @@ It transforsms a quarterly time series in a monthly. To the last month of the mo
 # Selecting only last month of matrix time series BRGDP:
 mestri_vintage<-month2qtr(BRGDP[,dim(BRGDP)[2]])
 
-qtr2month(mestri_vintage)
+qtr2month(mestri_vintage) 
 
 }
