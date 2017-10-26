@@ -15,17 +15,26 @@ RTDB<-function(series_code = NULL,vintage = NULL){
   # library(DBI)
   # library(RMySQL)
   # series_code<-666
-  # vintage<-as.Date('2017-10-26')
+  vintage<-as.Date('2017-04-11')
   
   v_ind<-as.character(vintage)
 
   if(is.null(series_code) & is.null(vintage)){
-  SQL<-"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='pibnow' AND `TABLE_NAME`='dbvintage'"
-  conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
-  dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
-  DBI::dbDisconnect(conn)
-  dados1<-data.frame(series_code=substr(dados0[3:(dim(dados0)[1]-1),],6,50))
-  return(dados1)
+    SQL<-"SELECT `COLUMN_NAME` FROM `INFORMATION_SCHEMA`.`COLUMNS` WHERE `TABLE_SCHEMA`='pibnow' AND `TABLE_NAME`='dbvintage'"
+    conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
+    dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
+    DBI::dbDisconnect(conn)
+    dados1<-data.frame(series_code=substr(dados0[3:(dim(dados0)[1]-1),],6,50))
+    return(dados1)
+  }else if(is.null(series_code)){
+    SQL<-paste("SELECT * FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
+    conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
+    dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
+    DBI::dbDisconnect(conn)
+    dados0 <- dados0[!colSums(is.na(dados0))==dim(dados0)[1]]
+    dados0<-names(dados0)
+    dados1<-data.frame(series_code=substr(dados0[3:(length(dados0)-1)],6,50))
+    return(dados1)
   }else{
     return_try<-tryCatch({
                 SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
@@ -58,17 +67,17 @@ RTDB<-function(series_code = NULL,vintage = NULL){
           invisible(dados1)
           
         }else{
-        ind_previous<-max(which(vintage_cod<as.Date(vintage)))
-        v_ind<-vintage_cod[ind_previous]
-        SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
-        conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
-        dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
-        DBI::dbDisconnect(conn)
-        dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
-        message('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
-                       paste('\nBut, I return (invisible) the last vintage available:',vintage_cod[ind_previous],':)'))
-        invisible(dados1)
-        }
+          ind_previous<-max(which(vintage_cod<as.Date(vintage)))
+          v_ind<-vintage_cod[ind_previous]
+          SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
+          conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)
+          dados0 <- DBI::dbGetQuery(conn = conn,statement = SQL)
+          DBI::dbDisconnect(conn)
+          dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
+          message('Sorry, this vintage is not available for this(ese) serie(s) yet :(',
+                         paste('\nBut, I return (invisible) the last vintage available:',vintage_cod[ind_previous],':)'))
+          invisible(dados1)
+          }
       }else{
           dados1<-ts(dados0[,-1],start=as.numeric(c(substr(dados0[1,1],1,4),substr(dados0[1,1],6,7))),frequency=12)
           return(dados1)
