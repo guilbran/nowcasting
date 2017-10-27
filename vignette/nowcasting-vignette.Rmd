@@ -1,0 +1,68 @@
+---
+title: "Nowcasting Package: how to use?"
+author: "Guilherme Branco Gomes"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This package contains a collection of function to estimate forecasts for the near futures or the recent past, in other words nowcasting. The econometric framework is a model of state spaces with maney variables and commom components, the Dynamic Factor Model.
+In this first version we focus on the problem when the variable of interest is a quarterly time series and the regressor are monthly time series.
+
+## Dynamic Factor Model
+
+This model can be specified in a space state representation:
+$$X_t = C F_t + e_t$$
+$$ F_{t} = \sum_{k=1}^p (A_{j}L^kF_t) + Bu_t$$
+where:
+
+* $X_t$ is a vector with $n$ observable series, $F_t$ is a vector with $r$ latent series called commom factors;
+* $e_t$ is a vector of $n$ idiosyncratic component, u_t is a vector of $q$ commom shocks;
+* $C$ is a $n \times r$ matrix, $A_j$ is a $r \times r$ matrix, $L$ is the lag operator, $B$ is a $r\times q$ matrix.
+
+For more details about the specifications of this model see the survey (Stock and Watson 2011)
+
+
+## Mixed Frequency
+
+How treat mixed frequency, when we are interest in quarterly estimation using monthly variables.
+Murasawa e Mariano 2003 approximation, bridge equation and EM
+
+## Models
+
+Little words about each method of estimation
+
+### Two Stages - with quarterly factors
+
+### Two Stages - with monthly factors
+
+### Expected Maximization
+
+
+## Data extraction and annalysis
+
+BRGDP
+
+```{r, echo=FALSE, results='asis'}
+BRGDP<-nowcasting::BRGDP
+datas<-zoo::as.Date(BRGDP)
+df<-data.frame(nowcasting::BRGDP)
+row.names(df)<-datas
+knitr::kable(data.frame(df),row.names = T)
+```
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
