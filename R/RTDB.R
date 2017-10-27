@@ -4,8 +4,10 @@
 #' @param vintage The vintage encoded by the day of the extraction
 #' @import DBI RMySQL
 #' @examples
-#' # Extracting GDP serie at real-time from Central Bank of Brasil data base
-#' gdp<-base_extraction(22099)
+#' # Show series available:
+#' RTDB()
+#' # Show vintages available for a serie:
+#' RTDB(series_code=1)
 #' @references Central Bank of Brazil
 #' @export
 
@@ -102,7 +104,7 @@ RTDB<-function(series_code = NULL,vintage = NULL){
           # temounaotem
           # vintage_cod<-as.Date(rownames(temounaotem))
           vintage_cod<-as.Date(rownames(temounaotem)[!temounaotem[,colnames(temounaotem)==paste0('serie',series_code)]])
-          if(as.Date(vintage)<vintage_cod){  # Se a vintage é anterior à primeira vintage
+          if(as.Date(vintage)<vintage_cod[1]){  # Se a vintage é anterior à primeira vintage
             # v_ind<-vintage_cod[1]
             # SQL<-paste("SELECT", paste0('X,',paste0("serie",series_code,collapse = ',')) ,"FROM dbvintage WHERE vintage_cod =",paste0("\'",v_ind,"\'"))
             # conn = dbConnect(MySQL(),db="pibnow",user="pibnow_user",password="123456",host="200.20.164.178",port=3306)

@@ -15,8 +15,10 @@ RTDB(series_code = NULL, vintage = NULL)
 Create a time series matrix \code{mts} replicating the information available in a given date.
 }
 \examples{
-# Extracting GDP serie at real-time from Central Bank of Brasil data base
-gdp<-base_extraction(22099)
+# Show series available:
+RTDB()
+# Show vintages available for a serie:
+RTDB(series_code=1)
 }
 \references{
 Central Bank of Brazil
