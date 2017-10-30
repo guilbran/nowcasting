@@ -27,3 +27,5 @@ install.packages(nowcasting)
 - Create functions to estimate the importance of news;
 
 - Optimize the estimation using other Kalman Filter packages as fkf for instance
+
+- Class output to use plot() instead of nowcast.plot().
