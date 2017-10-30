@@ -87,7 +87,7 @@ basemonth[is.na(basemonth)]<-NA
 year<-as.numeric(substr(row.names(basemonth)[1],1,4))
 month<-as.numeric(substr(row.names(basemonth)[1],6,7))
 mybase<-stats::ts(basemonth,start=c(year,month),freq=12)
-return(invisible(mybase))
+return(mybase)
 
 }
 
