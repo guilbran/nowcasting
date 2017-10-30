@@ -2,7 +2,7 @@
 % Please edit documentation in R/RTDB.R
 \name{RTDB}
 \alias{RTDB}
-\title{Re-create Real Time Data Base}
+\title{Create Real Time Data Base}
 \usage{
 RTDB(series_code = NULL, vintage = NULL)
 }
