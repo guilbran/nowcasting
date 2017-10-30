@@ -1,5 +1,5 @@
 #' @name  BRGDP
-#' @title Real Time Data Base Extracted in 17/08/2017
+#' @title Real Time Data Base Extracted in 03/10/2017
 #' @docType data
 #' @format    The format is:
 #'Time-Series [1:278, 1:7] from 1994 to 2018: 0.933 0.899 0.865 0.846 0.842 ...
