@@ -20,7 +20,7 @@ $$ F_{t} = \sum_{k=1}^p (A_{j}L^kF_t) + Bu_t$$
 where:
 
 * $X_t$ is a vector with $n$ observable series, $F_t$ is a vector with $r$ latent series called commom factors;
-* $e_t$ is a vector of $n$ idiosyncratic component, u_t is a vector of $q$ commom shocks;
+* $e_t$ is a vector of $n$ idiosyncratic component, $u_t$ is a vector of $q$ commom shocks;
 * $C$ is a $n \times r$ matrix, $A_j$ is a $r \times r$ matrix, $L$ is the lag operator, $B$ is a $r\times q$ matrix.
 
 For more details about the specifications of this model see the survey (Stock and Watson 2011)
@@ -44,25 +44,86 @@ Little words about each method of estimation
 
 ## Data extraction and annalysis
 
-BRGDP
+### BRGDP
+
+This is a panel containning a piece of the information for Brazilian economic activity extracted in 17/08/2017. It is available for practice and offline examples. The time series are encoded as in the [Brazilian Central Bank Time Series Management System v2.1](https://www3.bcb.gov.br/sgspub/).
+
+* United States dollar (1); 
+* Interest rate - CDI (12); 
+* Vehicles production (1373); 
+* Credit Sales Index (1453); 
+* Retail sales (1455); 
+* Current economic conditions index (4394); 
+* Industrial production, general index (21859)
+* Quarterly GDP - observed data - GDP at market prices (22099)
+
+Example of some series:
 
 ```{r, echo=FALSE, results='asis'}
 BRGDP<-nowcasting::BRGDP
 datas<-zoo::as.Date(BRGDP)
-df<-data.frame(nowcasting::BRGDP)
+df<-data.frame(BRGDP)
 row.names(df)<-datas
-knitr::kable(data.frame(df),row.names = T)
+knitr::kable(tail(data.frame(df[,5:8]),7),row.names = T)
 ```
 
-## More Examples
+### USGDP
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+This dataset contain informations for US economy available in [replication files](https://www.newyorkfed.org/research/economists/giannone/pub) of the seminal paper. It is a list with 2 data.frames.
+
+#### USGDP$Base
+
+It contains the time series with its values. Example of some series:
 
 ```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+USGDP<-nowcasting::USGDP
+datas<-zoo::as.Date(USGDP$Base)
+df<-data.frame(USGDP$Base)
+row.names(df)<-datas
+knitr::kable(tail(data.frame(df[,1:5]),5),row.names = T)
 ```
 
-Also a quote using `>`:
+#### USGDP$Legenda
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+It contains the legend with the specifications of the model and the series. Example of some series:
+
+```{r, echo=FALSE, results='asis'}
+USGDP<-nowcasting::USGDP
+df<-USGDP$Legenda
+knitr::kable(tail(data.frame(df[,1:5]),5),row.names = T)
+```
+
+### Ba
+
+
+### month2qtr
+
+This function transforms monthly in quarterly time series only choosing the value of the last month of the quarter to represent it.
+
+Example:
+
+```{r}
+gdp_month<-BRGDP[,'serie22099']
+window(gdp_month,c(2016,1),frequency=12)
+```
+
+```{r}
+gdp_qtr<-nowcasting::month2qtr(gdp_month)
+window(gdp_qtr,c(2016,1),frequency=4)
+```
+
+### qtr2month
+
+This function transforms quarterly in monthly time series doing the opposite process of `month2qtr` function.
+
+Example:
+
+```{r}
+gdp_month2<-nowcasting::qtr2month(gdp_qtr)
+window(gdp_month2,c(2016,1),frequency=12)
+```
+
+
+
+
+
