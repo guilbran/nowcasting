@@ -61,7 +61,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     prev <- bridge(y,fatores)
 
     # voltar da padronização
-    fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
+    fit<-factors$dynamic_factors[,1:r]%*%t(factors$eigen$vectors[,1:r])
     colnames(fit)<-colnames(x)
     x <- x
     z <- x
@@ -90,7 +90,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     month_y<-ts(aux_fator_month%*%prev$reg$coefficients,start=start(factors$dynamic_factors),frequency=12)
     
     # voltar da padronização
-    fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
+    fit<-factors$dynamic_factors[,1:r]%*%t(factors$eigen$vectors[,1:r])
     colnames(fit)<-colnames(x)
     x <- x
     z <- x

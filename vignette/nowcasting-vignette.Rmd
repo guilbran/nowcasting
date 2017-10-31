@@ -105,10 +105,16 @@ p<-1
 now_em<-nowcast(y,x,q,r,p,'EM')
 ```
 
+Inside the sample the fit is perfect using this method.
+
 ```{r,fig.width=7,fig.height=4}
-# ts.plot(now_em$monthgdp)
+window(now_em$main,start=c(2017,1),frequency=4)
+nowcast.plot(now_em)
 ```
 
+```{r,fig.width=7,fig.height=4}
+nowcast.plot(now_em,type = 'month_y')
+```
 
 ## Data extraction and tranformation
 
