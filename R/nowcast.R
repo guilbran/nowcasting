@@ -15,7 +15,7 @@
 #' 
 #' A \code{mts} named \code{fore_x} contains the output of all regressors.
 #' 
-#' A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP. 
+#' A \code{mts} named \code{month_y} contains the a monthly measure for GDP. 
 #' 
 #' @references Giannone, D., Reichlin, L., & Small, D. (2008). Nowcasting: The real-time informational content of macroeconomic data. Journal of Monetary Economics, 55(4), 665-676.<doi:10.1016/j.jmoneco.2008.05.010>
 #' 
@@ -85,9 +85,9 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     prev <- bridge(y,fatores)
     
     # aux_month<-prev$reg$coefficients*cbind(rep(1,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
-    # monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
+    # month_y<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
     aux_fator_month<-cbind(rep(1/9,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
-    monthgdp<-ts(aux_fator_month%*%prev$reg$coefficients,start=start(factors$dynamic_factors),frequency=12)
+    month_y<-ts(aux_fator_month%*%prev$reg$coefficients,start=start(factors$dynamic_factors),frequency=12)
     
     # voltar da padronização
     fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
@@ -106,7 +106,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
       fore_x[is.na(fore_x[,i]),i] <- x1[is.na(fore_x[,i]),i]
     }
     
-    res<-list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x,monthgdp = monthgdp)
+    res<-list(main = prev$main, reg = prev$reg, factors = factors,fore_x = fore_x,month_y = month_y)
     
     
   }else if(method=='EM'){
@@ -139,11 +139,11 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     colnames(Y)<-c('y','in','out')
     
     ind<-c(1:r,1:r+r*5,1:r+r*5*2,dim(Res$C)[2]-4)
-    monthgdp<-ts(Res$Mx[length(Res$Mx)]/9+Res$FF[,ind]%*%Res$C[7,ind]*Res$Wx[length(Res$Wx)],start=start(X),frequency = 12)
+    month_y<-ts(Res$Mx[length(Res$Mx)]/9+Res$FF[,ind]%*%Res$C[7,ind]*Res$Wx[length(Res$Wx)],start=start(X),frequency = 12)
     # Essa é uma medida trimestral do PIB acumulado nos últimos três meses
-    # monthgdp<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
+    # month_y<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
     
-    res <- list(main = Y,factors = factors,fore_x = fore_x, monthgdp = monthgdp)
+    res <- list(main = Y,factors = factors,fore_x = fore_x, month_y = month_y)
     
   }
 

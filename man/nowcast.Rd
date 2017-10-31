@@ -31,7 +31,7 @@ A \code{list} named \code{factors} contains the estimated factors and coeffients
 
 A \code{mts} named \code{fore_x} contains the output of all regressors.
 
-A \code{mts} named \code{monthgdp} contains the a monthly measure for GDP.
+A \code{mts} named \code{month_y} contains the a monthly measure for GDP.
 }
 \description{
 Estimate nowcasting and foreacasting for a quarterly time serie. For more details read the Vignettes.
