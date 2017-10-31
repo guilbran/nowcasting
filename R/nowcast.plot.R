@@ -94,7 +94,7 @@ nowcast.plot <- function(out, type = "fcst"){
          ylim = c(0-1.1*max(abs(range(YY[,2],na.rm = T))),0+1.1*max(abs(range(YY[,2],na.rm = T)))))
     graphics::axis(2, ylim=c(0,1),col="black",las=1)  ## las=1 makes horizontal labels
     graphics::mtext("y unit",side=2,line=2.5)
-    graphics::box()
+    # graphics::box()
     ## Allow a second plot on the same graph
     graphics::par(new=TRUE,xpd=F)
     ## Plot the second plot and put axis scale on right

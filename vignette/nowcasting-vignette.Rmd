@@ -88,9 +88,7 @@ q<-1
 r<-2
 p<-1
 now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
-
 nowcast.plot(now_2sm,type = 'month_y')
-
 ```
 
 
