@@ -24,12 +24,12 @@ The standard model is the Dynamic Factor Model[^1]. This model can be specified 
 [^1]:For more details see *Stock and Watson (2011).*
 
 $$X_t = C F_t + e_t$$
-$$ F_{t} = \sum_{k=1}^p (A_{j}L^kF_t) + Bu_t$$
+$$ F_{t} = \sum_{j=1}^p (A_{j}L^kF_t) + Bu_t$$
 where:
 
 * $X_t$ is a vector with $n$ observable and stationaty series, $F_t$ is a vector with $r$ latent series called commom factors;
 * $e_t$ is a vector of $n$ idiosyncratic component, $u_t$ is a vector of $q$ commom shocks;
-* $C$ is a $n \times r$ matrix, $A_j$ is a $r \times r$ matrix, $L$ is the lag operator, $B$ is a $r\times q$ matrix.
+* $C$ is a $n \times r$ matrix, $A_j$ is a $r \times r$ matrix for $j=1,2,...,p$, and $L$ is the lag operator, $B$ is a $r\times q$ matrix.
 
 ## Models and visualization
 
@@ -162,8 +162,8 @@ This is a function to create real time data base from series available in [Brazi
 #### Collecting information now:
 
 ```{r}
-# br_gdp<-base_extraction(series_code = 22099)
-# window(br_gdp,start = c(2016,1),frequency = 12)
+br_gdp<-base_extraction(series_code = 22099)
+window(br_gdp,start = c(2016,1),frequency = 12)
 ```
 
 #### What information was available yesterday?
@@ -171,7 +171,7 @@ This is a function to create real time data base from series available in [Brazi
 We can answer this question for a limited set of time series. To take a look at those use the function `RTDB` with no argument.
 
 ```{r}
-# head(RTDB())
+head(RTDB())
 ```
 
 Calling the information of a specific *vintage*.[^2]:
@@ -179,20 +179,20 @@ Calling the information of a specific *vintage*.[^2]:
 [^2]: Here a *vintage* is the day when the information was gathered.
 
 ```{r}
-# serie1<-RTDB(series_code = 1,vintage ='2017-10-30')
-# window(serie1,start = c(2017,1),frequency = 12)
+serie1<-RTDB(series_code = 1,vintage ='2017-10-30')
+window(serie1,start = c(2017,1),frequency = 12)
 ```
 
 For which *vintages* this serie is available:
 
 ```{r}
-# tail(RTDB(series_code = 1))
+tail(RTDB(series_code = 1))
 ```
 
 Which *series* were available in a specific *vintage*:
 
 ```{r}
-# head(RTDB(vintage ='2017-04-04'))
+head(RTDB(vintage ='2017-04-04'))
 ```
 
 #### Pseudo RTDB
@@ -227,7 +227,7 @@ The transformation is specified by codes, as follows:
 
 * transf = 1: monthly rate of change
 
-$$\frac{X_t - X_{t-1}}{X_t=1}$$
+$$\frac{X_t - X_{t-1}}{X_{t-1}}$$
 
 * transf = 2: monthly difference
 
@@ -243,7 +243,7 @@ $$(X_t - X_{t-12}) - (X_{t-1} - X_{t-13})$$
 
 ```{r}
 bpanel<-Bpanel(BRGDP,rep(4,dim(BRGDP)[2]))
-window(bpanel,start=c(2017,1),frequency=12)
+window(bpanel,start=c(2017,1),end=c(2018,1),frequency=12)
 ```
 
 

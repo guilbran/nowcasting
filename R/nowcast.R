@@ -87,7 +87,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     # aux_month<-prev$reg$coefficients*cbind(rep(1,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
     # monthgdp<-ts(rowSums(aux_month),start=start(factors$dynamic_factors),freq=12)
     aux_fator_month<-cbind(rep(1/9,length(zoo::as.Date(factors$dynamic_factors))),factors$dynamic_factors)
-    monthgdp<-ts(aux_fator_month%*%prev$coefficients,start=start(factors$dynamic_factors),frequency=12)
+    monthgdp<-ts(aux_fator_month%*%prev$reg$coefficients,start=start(factors$dynamic_factors),frequency=12)
     
     # voltar da padronização
     fit<-factors$dynamic_factors%*%t(factors$eigen$vectors[,1:r])
