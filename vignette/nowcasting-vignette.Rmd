@@ -24,7 +24,7 @@ The standard model is the Dynamic Factor Model[^1]. This model can be specified 
 [^1]:For more details see *Stock and Watson (2011).*
 
 $$X_t = C F_t + e_t$$
-$$ F_{t} = \sum_{j=1}^p (A_{j}L^kF_t) + Bu_t$$
+$$ F_{t} = \sum_{j=1}^p (A_{j}L^jF_t) + Bu_t$$
 where:
 
 * $X_t$ is a vector with $n$ observable and stationaty series, $F_t$ is a vector with $r$ latent series called commom factors;
@@ -82,10 +82,18 @@ nowcast.plot(now_2sq,type='factors')
 The factors are estimared in a monthly frequency, these factors are aggregated in a quarterly quantity, and the *bridge equation* is estimated.
 
 This method permits to create a monthly measure of a quarterly variable
-```{r}
+```{r,fig.width=7,fig.height=4}
 x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
-# now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
+q<-1
+r<-2
+p<-1
+now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
+
+nowcast.plot(now_2sm,type = 'month_y')
+
 ```
+
+
 
 ### Expected Maximization
 
@@ -93,11 +101,14 @@ No need of *bridge equation*, series of all frequencies can used to estimate the
 
 ```{r}
 x<-Bpanel(BRGDP[,-8],rep(4,dim(BRGDP)[2]),aggregate = F)
+q<-1
+r<-2
+p<-1
 now_em<-nowcast(y,x,q,r,p,'EM')
 ```
 
 ```{r,fig.width=7,fig.height=4}
-ts.plot(now_em$monthgdp)
+# ts.plot(now_em$monthgdp)
 ```
 
 
@@ -171,7 +182,7 @@ window(br_gdp,start = c(2016,1),frequency = 12)
 We can answer this question for a limited set of time series. To take a look at those use the function `RTDB` with no argument.
 
 ```{r}
-head(RTDB())
+# head(RTDB())
 ```
 
 Calling the information of a specific *vintage*.[^2]:
@@ -179,20 +190,20 @@ Calling the information of a specific *vintage*.[^2]:
 [^2]: Here a *vintage* is the day when the information was gathered.
 
 ```{r}
-serie1<-RTDB(series_code = 1,vintage ='2017-10-30')
-window(serie1,start = c(2017,1),frequency = 12)
+# serie1<-RTDB(series_code = 1,vintage ='2017-10-30')
+# window(serie1,start = c(2017,1),frequency = 12)
 ```
 
 For which *vintages* this serie is available:
 
 ```{r}
-tail(RTDB(series_code = 1))
+# tail(RTDB(series_code = 1))
 ```
 
 Which *series* were available in a specific *vintage*:
 
 ```{r}
-head(RTDB(vintage ='2017-04-04'))
+# head(RTDB(vintage ='2017-04-04'))
 ```
 
 #### Pseudo RTDB
