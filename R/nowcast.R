@@ -61,7 +61,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     prev <- bridge(y,fatores)
 
     # voltar da padronização
-    fit<-factors$dynamic_factors[,1:r]%*%t(factors$eigen$vectors[,1:r])
+    fit<-matrix(factors$dynamic_factors,ncol = r*p)[,1:r]%*%t(factors$eigen$vectors[,1:r])
     colnames(fit)<-colnames(x)
     x <- x
     z <- x
@@ -90,7 +90,7 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     month_y<-ts(aux_fator_month%*%prev$reg$coefficients,start=start(factors$dynamic_factors),frequency=12)
     
     # voltar da padronização
-    fit<-factors$dynamic_factors[,1:r]%*%t(factors$eigen$vectors[,1:r])
+    fit<-matrix(factors$dynamic_factors,ncol = r*p)[,1:r]%*%t(factors$eigen$vectors[,1:r])
     colnames(fit)<-colnames(x)
     x <- x
     z <- x
@@ -142,6 +142,8 @@ nowcast <- function(y, x, q = NULL, r = NULL, p = NULL,method='2sq',blocks=NULL)
     month_y<-ts(Res$Mx[length(Res$Mx)]/9+Res$FF[,ind]%*%Res$C[7,ind]*Res$Wx[length(Res$Wx)],start=start(X),frequency = 12)
     # Essa é uma medida trimestral do PIB acumulado nos últimos três meses
     # month_y<-ts(Res$X_sm[,dim(Res$X_sm)[2]],start=start(X),frequency = 12)
+    fore_x = fore_x[,-dim(fore_x)[2]]
+    colnames(fore_x)<-colnames(x)
     
     res <- list(main = Y,factors = factors,fore_x = fore_x, month_y = month_y)
     

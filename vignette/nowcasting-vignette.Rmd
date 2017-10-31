@@ -14,7 +14,7 @@ library(nowcasting)
 ```
 
 
-This package contains a collection of function to estimate forecasts for the near futures or the recent past, in other words nowcasting. The econometric framework is a model of state spaces with maney variables and commom components, the Dynamic Factor Model.
+This package contains a collection of function to estimate forecasts for the near futures or the recent past, in other words nowcasting. The econometric framework is a model of state spaces with many variables and commom components, the Dynamic Factor Model.
 In this first version we focus on the problem when the variable of interest is a quarterly time series and the regressor are monthly time series.
 
 ## Theoretical framework:
@@ -91,8 +91,6 @@ now_2sm<-nowcast(y,x,q,r,p,method = '2sm')
 nowcast.plot(now_2sm,type = 'month_y')
 ```
 
-
-
 ### Expected Maximization
 
 No need of *bridge equation*, series of all frequencies can used to estimate the factor jointly.
@@ -105,15 +103,23 @@ p<-1
 now_em<-nowcast(y,x,q,r,p,'EM')
 ```
 
-Inside the sample the fit is perfect using this method.
+All the three methods return forecasts and nowcasts for the explanatory variables.
 
-```{r,fig.width=7,fig.height=4}
-window(now_em$main,start=c(2017,1),frequency=4)
-nowcast.plot(now_em)
+```{r, echo=FALSE, results='asis'}
+datas<-zoo::as.Date(x)
+df<-data.frame(x)
+row.names(df)<-datas
+ind<-which(rownames(df)==as.Date('2017-10-01'))
+df1<-df[(ind-6):ind,]
+knitr::kable(df1,row.names = T)
 ```
 
-```{r,fig.width=7,fig.height=4}
-nowcast.plot(now_em,type = 'month_y')
+```{r, echo=FALSE, results='asis'}
+df<-now_em$fore_x
+row.names(df)<-as.character(datas)
+ind<-which(rownames(df)==as.Date('2017-10-01'))
+df1<-df[(ind-6):ind,]
+knitr::kable(df1,row.names = T)
 ```
 
 ## Data extraction and tranformation

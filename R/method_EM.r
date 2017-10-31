@@ -393,7 +393,7 @@ EM_DFM_SS_block_idioQARMA_restrMQ<-function(X,Par){
   
   while ((num_iter < max_iter) & !converged){
     
-    message(num_iter)
+    # message(num_iter)
 
     res_EMstep = EMstep(y_est, A, C, Q, R, Z_0, V_0, r,p,R_mat,q,nQ,i_idio,blocks)
     # res_EMstep <- list(C_new, R_new, A_new, Q_new, Z_0, V_0, loglik)
