@@ -87,7 +87,7 @@ nowcast.plot <- function(out, type = "fcst"){
     Y<-stats::ts(rep(out$main[,1],each=3),end=end(qtr2month(out$main[,1])),frequency = 12)
     YY<-cbind(out$month_y,Y)
     ## add extra space to right margin of plot within frame
-    par(mar=c(5, 4, 4, 5.7) + 0.1,xpd=F)
+    graphics::par(mar=c(5, 4, 4, 5.7) + 0.1,xpd=F)
     ## Plot first set of data and draw its axis
     graphics::plot(zoo::as.Date(YY), YY[,2], type='l', axes=FALSE, xlab="", ylab="", 
          col="black",lty=1,
