@@ -20,7 +20,7 @@ devtools::install_github('guilbran/nowcasting')
 ```
 CRAN
 ```R
-install.packages(nowcasting)
+install.packages('nowcasting')
 ```
 ## To do
 
